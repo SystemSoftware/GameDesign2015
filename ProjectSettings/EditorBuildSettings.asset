@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/empty.unity
+    path: Assets/root.unity
   - enabled: 1
     path: Assets/T1/T1.unity
   - enabled: 1
