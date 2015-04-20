@@ -3,25 +3,19 @@ using System.Collections;
 
 public class T2Controller : Controller {
 
-	Transform shipTransform;
 
 
 	public float idealDistance = 50.0f,
 					idealYOffset = 10.0f;
 	
 	// Use this for initialization
-	void Start () {
-		foreach (Transform child in transform)
-		{
-			shipTransform = child;
-			break;
-		}
-
+	protected new void Start () {
+        base.Start();
 
 	}
 
 
-	protected override void OnAssignCamera()
+	protected override void OnAssignCameraAndControl()
 	{ 
 		float w = myCamera.rect.width/4,
 			h = myCamera.rect.height / 4;

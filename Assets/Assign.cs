@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Assign : MonoBehaviour {
 
@@ -23,7 +24,11 @@ public class Assign : MonoBehaviour {
 			playerShip = null;
 		}
 
-		playerShip = (GameObject)Instantiate(targetType, Vector3.zero, Quaternion.identity);
+        Vector3 position;
+        Quaternion orientation;
+        Level.GetSpawnPoint(inputNumber, out position, out orientation);
+
+		playerShip = (GameObject)Instantiate(targetType, position, orientation);
 
 		var scripts = playerShip.GetComponents<MonoBehaviour>();
 		for (int i = 0; i < scripts.Length; i++)
@@ -32,17 +37,15 @@ public class Assign : MonoBehaviour {
 			Controller controller = data as Controller;
 			if (controller != null)
 			{
-				controller.horizontalAxis = "Horizontal"+inputNumber;
-				controller.verticalAxis = "Vertical"+inputNumber;
-                controller.accelerate = "Accelerate" + inputNumber;
-				controller.otherAxis = "Other"+inputNumber;
-				controller.AssignCamera(GetComponent<Camera>());
+				controller.AssignCameraAndControl(GetComponent<Camera>(),inputNumber);
 
 			}
 		}
 
+        Level.UpdateShipList("ship spawned: "+inputNumber);
 	}
 
+ 
 	
 	// Update is called once per frame
 	void Update () {

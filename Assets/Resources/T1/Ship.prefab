@@ -718,11 +718,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 0}
+  controlIndex: 0
   accelerate: 
-  brake: 
   custom: 
   horizontalAxis: Horizontal
   verticalAxis: Vertical
+  otherAxis: 
   idealDistance: 20
   idealYOffset: 5
 --- !u!114 &11409508
@@ -1131,7 +1132,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4289647103
       minMaxState: 0
     startSize:
       scalar: 2
@@ -1337,10 +1338,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4289449215
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 2158940671
+          rgba: 2164260863
         key2:
           serializedVersion: 2
           rgba: 1090519040
@@ -2174,7 +2175,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4289647103
       minMaxState: 0
     startSize:
       scalar: 2
@@ -2380,10 +2381,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4289449215
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 2158940671
+          rgba: 2164260863
         key2:
           serializedVersion: 2
           rgba: 1090519040
@@ -3217,7 +3218,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4289647103
       minMaxState: 0
     startSize:
       scalar: 2
@@ -3423,10 +3424,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4289449215
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 2158940671
+          rgba: 2164260863
         key2:
           serializedVersion: 2
           rgba: 1090519040
@@ -5303,7 +5304,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4289647103
       minMaxState: 0
     startSize:
       scalar: 2
@@ -5509,10 +5510,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4289449215
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 2158940671
+          rgba: 2164260863
         key2:
           serializedVersion: 2
           rgba: 1090519040
@@ -6346,7 +6347,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4289647103
       minMaxState: 0
     startSize:
       scalar: 2
@@ -6552,10 +6553,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4289449215
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 2158940671
+          rgba: 2164260863
         key2:
           serializedVersion: 2
           rgba: 1090519040
@@ -7389,7 +7390,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4289647103
       minMaxState: 0
     startSize:
       scalar: 2
@@ -7595,10 +7596,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4289449215
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 2158940671
+          rgba: 2164260863
         key2:
           serializedVersion: 2
           rgba: 1090519040

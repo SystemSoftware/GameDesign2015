@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class T2_EngineDriver : MonoBehaviour {
+public class T2EngineDriver : MonoBehaviour {
 
 
 	public float	maxLifetime = 0.2f,
@@ -15,6 +15,12 @@ public class T2_EngineDriver : MonoBehaviour {
 	{
 		sys = this.GetComponent<ParticleSystem>();
 		force = this.GetComponent<ConstantForce>();
+        if (sys != null)
+        {
+            if (Level.overrideDriveColor)
+                sys.startColor = Level.driveColor;
+        }
+
 	}
 
 	protected class Axes
@@ -95,7 +101,7 @@ public class T2_EngineDriver : MonoBehaviour {
 
 			if (force != null)
 			{
-				force.enabled = f != 0f;
+                force.enabled = f != 0f && Level.allowMotion;
 				force.relativeForce = new Vector3(0,0,maxForce * f);
 			}
 		}
