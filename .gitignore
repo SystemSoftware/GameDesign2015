@@ -1,5 +1,8 @@
 Library/
 obj/
+Temp/
+*_Data/
+*.exe
 *.suo
 *.sln
 *.csproj

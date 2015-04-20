@@ -34,7 +34,7 @@ public class Assign : MonoBehaviour {
 			{
 				controller.horizontalAxis = "Horizontal"+inputNumber;
 				controller.verticalAxis = "Vertical"+inputNumber;
-				controller.accelerate = "Fire1";
+                controller.accelerate = "Accelerate" + inputNumber;
 				controller.otherAxis = "Other"+inputNumber;
 				controller.AssignCamera(GetComponent<Camera>());
 
