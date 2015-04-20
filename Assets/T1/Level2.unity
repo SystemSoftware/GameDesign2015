@@ -16,8 +16,8 @@ RenderSettings:
   serializedVersion: 6
   m_Fog: 1
   m_FogColor: {r: .125490203, g: .235294133, b: .231372565, a: 1}
-  m_FogMode: 3
-  m_FogDensity: .00300000003
+  m_FogMode: 2
+  m_FogDensity: .00999999978
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: .211999997, g: .226999998, b: .259000003, a: 1}
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce96eba363a9a4e44846320ac51642b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bubbleSpawner: {fileID: 100000, guid: 51d8e9cd79c784fd4b12aeb86da73dca, type: 2}
 --- !u!4 &473505619
 Transform:
   m_ObjectHideFlags: 0

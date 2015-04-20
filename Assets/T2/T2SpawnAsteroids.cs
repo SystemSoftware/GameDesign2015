@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class T2SpawnAsteroids : MonoBehaviour {
+public class T1SpawnAsteroids : MonoBehaviour {
 
 	public GameObject asteroid;
 
@@ -9,9 +9,12 @@ public class T2SpawnAsteroids : MonoBehaviour {
 	void Start () {
 //		Random random;
 
-		for (int i = 0; i < 1000; i++)
+		var super = new GameObject();
+
+		for (int i = 0; i < 2000; i++)
 		{
-			Instantiate(asteroid, Random.insideUnitSphere * 10000.0f, Random.rotationUniform);
+			
+			((GameObject)Instantiate(asteroid, Random.insideUnitSphere * 10000.0f, Random.rotationUniform)).transform.parent = super.transform;
 		}
 	}
 	

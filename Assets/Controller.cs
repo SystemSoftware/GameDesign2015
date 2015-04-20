@@ -25,7 +25,22 @@ public class Controller : MonoBehaviour {
 	}
 
 
-    
+    public virtual Transform FindOrFetchShipTransform()
+    {
+        if (shipTransform != null)
+            return shipTransform;
+        Debug.Log("Setting ship transform");
+        foreach (Transform child in transform)
+        {
+            if (shipTransform == null)
+                shipTransform = child;
+            else
+            {
+                Debug.LogWarning("Additional GameObject instance '" + child.name + "' found as child of '" + transform.name + "'");
+            }
+        }
+        return shipTransform;
+    }
 
 	protected virtual void OnAssignCameraAndControl()
 	{}
@@ -34,17 +49,7 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	protected void Start ()
     {
-        Debug.Log("Setting ship transform");
-        shipTransform = null;
-        foreach (Transform child in transform)
-        {
-            if (shipTransform == null)
-                shipTransform = child;
-            else
-            {
-                Debug.LogWarning("Additional GameObject instance '"+child.name+"' found as child of '"+transform.name+"'");
-            }
-        }
+        FindOrFetchShipTransform();
         if (shipTransform != null)
         {
             Rigidbody body = shipTransform.GetComponent<Rigidbody>();
