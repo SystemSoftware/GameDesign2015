@@ -49,6 +49,7 @@ GameObject:
   - 114: {fileID: 11431052}
   - 114: {fileID: 11483620}
   - 114: {fileID: 11498558}
+  - 114: {fileID: 11476774}
   m_Layer: 0
   m_Name: GameLogic
   m_TagString: Untagged
@@ -364,6 +365,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bae4e1e695645342bd49e6c5140425a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11476774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ec9a01d3240424c977fc38f0ca386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11483620
