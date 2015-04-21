@@ -7,7 +7,7 @@ public class T2LevelLogic : MonoBehaviour {
 	void Start () {
         Level.angularDrag = 1f;
         Level.drag = 0.3f;
-        Level.allowMotion = true;
+        Level.EnableMotion(true);
 
 
 

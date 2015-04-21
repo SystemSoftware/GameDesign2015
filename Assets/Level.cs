@@ -4,13 +4,29 @@ using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
 
-    public static bool allowMotion = false,
-                        overrideDriveColor = false;
+    public static bool allowMotion = false;
+    public static bool overrideDriveColor = false;
     public static Color driveColor = Color.white;
 
     public static float drag = 0, angularDrag = 0;
 
     private static Controller[] cachedShips = new Controller[0];
+
+
+
+    public static void  EnableMotion(bool enabled)
+    {
+        foreach (var ship in cachedShips)
+        {
+            var bodies = ship.transform.GetComponentsInChildren<Rigidbody>();
+            foreach (var body in bodies)
+            {
+                body.isKinematic = !enabled;
+                body.useGravity = enabled;
+            }
+        }
+        allowMotion = enabled;
+    }
 
 
     public static Controller[] GetShips()
@@ -36,6 +52,7 @@ public class Level : MonoBehaviour {
             }
         }
         cachedShips = controllers.ToArray();
+        EnableMotion(allowMotion);
     }
 
     void OnLevelWasLoaded(int level)

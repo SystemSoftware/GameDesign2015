@@ -59,6 +59,7 @@ public class Controller : MonoBehaviour {
                 body.drag = Level.drag;
                 body.useGravity = true;
                 body.mass = 10000f;
+                Debug.Log("Set drag to " + body.angularDrag);
             }
             else
                 Debug.LogWarning("Ship body '" + shipTransform.name + "' does not have a RigidBody component attached");

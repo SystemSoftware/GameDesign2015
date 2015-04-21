@@ -15,7 +15,7 @@ public class T1LevelLogic_Water : MonoBehaviour {
         Level.angularDrag = 2f;
         Level.overrideDriveColor = true;
         Level.driveColor = new Color(0.6f, 0.9f, 1f);
-        
+        //Physics.gravity = new Vector3(0, -100, 0);
 
 
         gameLogic = GameObject.Find("GameLogic");
@@ -32,7 +32,7 @@ public class T1LevelLogic_Water : MonoBehaviour {
             {
                 listShips.enabled = false;
                 listWorlds.enabled = false;
-                Level.allowMotion = true;
+                Level.EnableMotion(true);
                 //Physics.gravity = new Vector3(0, -1f, 0);
             }
         }

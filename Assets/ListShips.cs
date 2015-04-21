@@ -16,8 +16,15 @@ public class ListShips : MonoBehaviour {
 
 
 	
+    struct ShipCollection
+    {
+        public int teamIndex;
+        public GameObject[] members;
 
-	List<GameObject>	shipPrefabs = new List<GameObject>();
+    }
+
+
+    List<ShipCollection> collections = new List<ShipCollection>();
 
 
 	GameObject[]	selected = null;
@@ -41,48 +48,64 @@ public class ListShips : MonoBehaviour {
 
 	void OnGUI()
 	{
-		
-		int counter = 1;
-		
 
-		if (shipPrefabs.Count == 0)
-			for (;;)
-			{
-				GameObject resource = (GameObject)Resources.Load("T"+counter+"/Ship");
-				counter++;
-				if (!resource)
-					break;
-				shipPrefabs.Add(resource);
 
-			}
+
+
+        if (collections.Count == 0)
+        {
+            int counter = 0;
+            for (; ; )
+            {
+                counter++;
+                GameObject[] ships = Resources.LoadAll<GameObject>("T" + counter);
+
+                //GameObject resource = (GameObject)Resources.Load("T"+counter+"/Ship");
+                if (ships == null || ships.Length == 0)
+                {
+                    if (counter > 20)
+                        break;
+                    else
+                        continue;
+                }
+                collections.Add(new ShipCollection() { teamIndex = counter, members = ships });
+
+            }
+        }
 
 		Camera[] cameras = this.GetComponentsInChildren<Camera>();
 		if (selected == null || selected.Length != cameras.Length)
 			selected = new GameObject[cameras.Length];
-		counter = 0;
-		foreach (var ship in shipPrefabs)
+        int lineCounter = 0;
+		foreach (var collection in collections)
 		{
-			string name = "Ship "+(counter+1);
-			int i = 0;
-			foreach (var c in cameras)
-			{
-				//Debug.Log(c.rect.min);
-			
-				if (c.isActiveAndEnabled && GUI.Toggle(new Rect(Screen.width * c.rect.min.x + Screen.width / 4 - 125, Screen.height * (1f - c.rect.max.y) + 50 + counter * 30, 250, 30), selected[i] == ship, name))
-				{
-					if (selected[i] != ship)
-					{ 
-						selected[i] = ship;
+            foreach (var ship in collection.members)
+            {
+                string name = "Team "+collection.teamIndex+"/"+ship.name;
+                int i = 0;
+                foreach (var c in cameras)
+                {
+                    //Debug.Log(c.rect.min);
+                    float h = 20;
+                    float y = Screen.height * (1f - c.rect.max.y) + 30 + lineCounter * h;
+                    if (c.isActiveAndEnabled 
+                        && GUI.Toggle(new Rect(Screen.width * c.rect.min.x + Screen.width / 4 - 125, y, 250, h), selected[i] == ship, name))
+                    {
+                        if (selected[i] != ship)
+                        {
+                            selected[i] = ship;
 
-						c.GetComponent<Assign>().Setup(ship,i);
-					}
-				}
-				i++;
-			}
-			
+                            c.GetComponent<Assign>().Setup(ship, i);
+                        }
+                    }
+                    i++;
+
+                }
+                lineCounter++;
+            }
 
 
-			counter ++ ;
+
 
 		}
 	}
