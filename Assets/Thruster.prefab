@@ -15,7 +15,7 @@ GameObject:
   - 75: {fileID: 7582464}
   - 138: {fileID: 13883158}
   m_Layer: 9
-  m_Name: Accel
+  m_Name: Thruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158768}
   m_LocalRotation: {x: -2.84328872e-09, y: -.99984771, z: -.0174519811, w: 1.62895873e-07}
-  m_LocalPosition: {x: 0, y: 0, z: -7.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,14 +67,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 158768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946eb1d6a2b01a94dbac231a1afac20e, type: 3}
+  m_Script: {fileID: 11500000, guid: e0f64dad2c3642d4c93b38db3860b304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifetime: .5
   maxForce: -500000
-  sys: {fileID: 0}
-  force: {fileID: 0}
-  axis: 
 --- !u!138 &13883158
 FixedJoint:
   m_ObjectHideFlags: 1

@@ -12,8 +12,6 @@ public class T1Controller : Controller {
     protected new void Start()
     {
         base.Start();
-
-
 	}
 	
 	// Update is called once per frame

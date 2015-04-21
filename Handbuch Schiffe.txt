@@ -1,0 +1,47 @@
+Handbuch: Neue Schiffe
+
+Beispielhaft seit ihr Team 99 (99 bitte überall durch tatsächliche Team-Nummer ersetzen).
+Bitte folgendermaßen vorgehen:
+
+- Sofern noch nicht bestehend, Verzeichnis Assets/T99/ anlegen
+- Sofern noch nicht bestehend, Verzeichnis Assets/Resources/T99/ anlegen
+- Beliebige Projekt-Szene laden (z.B. root.unity)
+- GameObject -> Create Empty
+- Beliebig umbennen; dies ist der Name des Schiffs
+- Im Object Inspect des neuen Objektes: 'Add Component' -> 'New Script'    als T99Controller benennen
+- T99Controller aus dem Assets-Ordner in Assets/T99/ verschieben
+- T99Controller im Editor öffnen
+	* die Zeile
+		'public class T99Controller : MonoBehaviour {'
+		in
+		'public class T99Controller : Controller {'
+		umbennen
+	* die Start()-Methode entfernen oder so umschreiben:
+		protected new void Start()
+		{
+			base.Start();
+		}
+	* die Methode Update() in LateUpdate() umbennen. Diese Methode wird einmal pro Frame aufgerufen:
+		void LateUpdate () {
+			if (shipTransform != null && myCamera != null)
+			{
+				//hier Code definieren, der myCamera.transform in Abhängigkeit zu shipTransform verändert
+			}
+		}
+	* optional kann 'protected override void OnAssignCameraAndControl()' verwendet werden, um den Event abzufangen, wenn dem lokalen Schiff
+		Kamera (this.myCamera) und Controll-ID (this.controlIndex) zugewiesen wurden.
+	
+
+- Neues GameObject als Kind des Schiffs-Objekt anlegen. Name egal (etwa T99Body). Dies ist der Rumpf des Schiffs
+	* Im Object Inspect des neuen Objektes: 'Add Component' -> 'Physics' -> 'RigidBody'
+		* Mass auf 10000 setzen
+		* Interpolate auf 'Interpolate' setzen
+	* Sofern nicht anderweitig vorhanden: Im Object Inspect des neuen Objektes: 'Add Component' -> 'Physics' -> 'xyz Collider'
+	* Zum Erstellen von existierender Geometrie kann jegliche Geometrie vom Assets-Verzeichnis als Kind dieses Rumpf-Objektes instanziiert werden
+	* Kräft können unter Anderem via den in Assets/ vorhandenen Prefabs 'Thruster' und 'DirectionalThruster' erstellt werden.
+		* Die FixedJoint-Komponenten müssen auf die RigidBody-Komponete im Schiffskörper zeigen
+	
+- Abschließend das fertige Schiffsobjekt in Assets/Resources/T99/ ziehen und damit ein Prefab erstellen. Fertig
+	
+		
+	

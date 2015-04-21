@@ -8,11 +8,11 @@ Bitte folgendermaßen vorgehen:
 	* GameObject aus der Szene entfernen: 'Main Camera'
 	* GameObject -> Create Empty
 	* Beliebig umbennen, idealerweise 'GameLogic' o.Ä.
+	* Im Object Inspect des neuen Objektes: 'Add Component' -> 'New Script'    als T99xyz benennen, z.B. 'T99GameLogic'
+	* Diese Script-Datei aus dem Assets-Ordner in Assets/T99/ verschieben
 	* File -> Save Scene as...   mit beliebigem Namen unter Assets/T99/ abspeichern
 - Alternativ: Bestehendes Level xyz.unity von irgendwo nach Assets/T99/ kopieren und dann in Unity öffnen
 - File -> Build Settings...		Button drücken: 'Add Current'
-- Im Object Inspect des neuen Objektes: 'Add Component' -> 'New Script'    also T99xyz benennen, z.B. 'T99GameLogic'
-- Diese Script-Datei aus dem Assets-Ordner in Assets/T99/ verschieben
 - Level beliebig bauen
 - Folgende Dinge sollten in T99GameLogic Start():
 	* Sofern ihr spezielle Startpunkte für die Spieler setzen wollt, bitte Level.DefineStartPoints(...) aufrufen
