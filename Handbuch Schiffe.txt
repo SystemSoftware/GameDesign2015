@@ -23,17 +23,17 @@ Bitte folgendermaßen vorgehen:
 		}
 	* die Methode Update() in LateUpdate() umbennen. Diese Methode wird einmal pro Frame aufgerufen:
 		void LateUpdate () {
-			if (shipTransform != null && myCamera != null)
+			if (myCamera != null)
 			{
-				//hier Code definieren, der myCamera.transform in Abhängigkeit zu shipTransform verändert
+				//hier Code definieren, der myCamera.transform in Abhängigkeit zu this.transform verändert
 			}
 		}
 	* optional kann 'protected override void OnAssignCameraAndControl()' verwendet werden, um den Event abzufangen, wenn dem lokalen Schiff
 		Kamera (this.myCamera) und Controll-ID (this.controlIndex) zugewiesen wurden.
 	
 
-- Neues GameObject als Kind des Schiffs-Objekt anlegen. Name egal (etwa T99Body). Dies ist der Rumpf des Schiffs
-	* Im Object Inspect des neuen Objektes: 'Add Component' -> 'Physics' -> 'RigidBody'
+- Das Schiffs-Objekt folgendermaßen ergänzen:
+	* Im Object Inspect des Schiffs: 'Add Component' -> 'Physics' -> 'RigidBody'
 		* Mass auf 10000 setzen
 		* Interpolate auf 'Interpolate' setzen
 	* Sofern nicht anderweitig vorhanden: Im Object Inspect des neuen Objektes: 'Add Component' -> 'Physics' -> 'xyz Collider'

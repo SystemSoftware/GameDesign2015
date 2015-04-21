@@ -9,7 +9,6 @@ public class Controller : MonoBehaviour {
     public string	accelerate, custom, 
 					horizontalAxis, verticalAxis, otherAxis;
 
-    protected Transform     shipTransform;
 
 
 	public void AssignCameraAndControl(Camera camera, int controlIndex)
@@ -25,22 +24,6 @@ public class Controller : MonoBehaviour {
 	}
 
 
-    public virtual Transform FindOrFetchShipTransform()
-    {
-        if (shipTransform != null)
-            return shipTransform;
-        Debug.Log("Setting ship transform");
-        foreach (Transform child in transform)
-        {
-            if (shipTransform == null)
-                shipTransform = child;
-            else
-            {
-                Debug.LogWarning("Additional GameObject instance '" + child.name + "' found as child of '" + transform.name + "'");
-            }
-        }
-        return shipTransform;
-    }
 
 	protected virtual void OnAssignCameraAndControl()
 	{}
@@ -49,23 +32,17 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	protected void Start ()
     {
-        FindOrFetchShipTransform();
-        if (shipTransform != null)
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body)
         {
-            Rigidbody body = shipTransform.GetComponent<Rigidbody>();
-            if (body)
-            {
-                body.angularDrag = Level.angularDrag;
-                body.drag = Level.drag;
-                body.useGravity = true;
-                body.mass = 10000f;
-                Debug.Log("Set drag to " + body.angularDrag);
-            }
-            else
-                Debug.LogWarning("Ship body '" + shipTransform.name + "' does not have a RigidBody component attached");
+            body.angularDrag = Level.angularDrag;
+            body.drag = Level.drag;
+            body.useGravity = true;
+            body.mass = 10000f;
+            //Debug.Log("Set drag to " + body.angularDrag);
         }
         else
-            Debug.LogWarning("Unable to find ship-child of '" + transform.name + "'. This WILL cause shit to hit the fan");
+            Debug.LogWarning("Ship body '" + name + "' does not have a RigidBody component attached");
         
 	}
 	

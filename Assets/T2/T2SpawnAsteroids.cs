@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class T1SpawnAsteroids : MonoBehaviour {
+public class T2SpawnAsteroids : MonoBehaviour {
 
 	public GameObject asteroid;
 
@@ -10,6 +10,7 @@ public class T1SpawnAsteroids : MonoBehaviour {
 //		Random random;
 
 		var super = new GameObject();
+        super.name = "Asteroids";
 
 		for (int i = 0; i < 2000; i++)
 		{

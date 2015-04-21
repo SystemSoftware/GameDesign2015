@@ -28,17 +28,17 @@ public class T2Controller : Controller {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		if (shipTransform != null && myCamera != null)
+		if (myCamera != null)
 		{
-			Vector3 delta = shipTransform.position - this.transform.position;
+			Vector3 delta = transform.position - myCamera.transform.position;
 
 			Vector3 idealLocation =
 				//shipTransform.position - shipTransform.forward * idealDistance + shipTransform.up * idealYOffset;
-				shipTransform.position - delta.normalized * idealDistance;
+                transform.position - delta.normalized * idealDistance;
 			//(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
 			Vector3 deltaToIdeal = idealLocation - myCamera.transform.position;
 			myCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
-			myCamera.transform.LookAt(shipTransform.position);
+            myCamera.transform.LookAt(transform.position);
 
 		}
 	}

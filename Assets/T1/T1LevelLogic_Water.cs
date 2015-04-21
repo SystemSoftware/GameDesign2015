@@ -51,7 +51,7 @@ public class T1LevelLogic_Water : MonoBehaviour {
             {
                 if (lastShips == null || Array.IndexOf(lastShips, ship) == -1)
                 {
-                    Transform shipTransform = ship.FindOrFetchShipTransform();
+                    Transform shipTransform = ship.transform;
                     Debug.Log(shipTransform.name);
                     ((GameObject)Instantiate(bubbleSpawner, shipTransform.position, Quaternion.identity)).transform.parent = shipTransform;
                 }

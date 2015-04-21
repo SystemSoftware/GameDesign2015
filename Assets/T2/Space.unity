@@ -96,7 +96,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 206861114}
   - 108: {fileID: 206861113}
-  - 114: {fileID: 206861115}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -119,7 +118,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_Strength: 1
     m_Bias: .0500000007
@@ -148,18 +147,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &206861115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 206861112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811dd7918962a71428a56221d7b91cba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asteroid: {fileID: 199614, guid: d5c647512c0a1e54dbc8b084c78b5b77, type: 2}
 --- !u!1 &840314218
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +216,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1862751540}
   - 114: {fileID: 1862751539}
+  - 114: {fileID: 1862751541}
   m_Layer: 0
   m_Name: LevelLogic
   m_TagString: Untagged
@@ -259,3 +247,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1862751541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1862751538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811dd7918962a71428a56221d7b91cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroid: {fileID: 199614, guid: d5c647512c0a1e54dbc8b084c78b5b77, type: 2}

@@ -10,6 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/T1/Level1.unity
   - enabled: 1
-    path: Assets/T2/Level1.unity
+    path: Assets/T2/Space.unity
   - enabled: 1
     path: Assets/T1/Underwater.unity
