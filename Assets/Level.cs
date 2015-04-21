@@ -26,6 +26,14 @@ public class Level : MonoBehaviour {
             }
         }
         allowMotion = enabled;
+
+
+
+        GameObject gameLogic = GameObject.Find("GameLogic");
+        ListShips listShips = gameLogic.GetComponent<ListShips>();
+        ListWorlds listWorlds = gameLogic.GetComponent<ListWorlds>();
+        listShips.enabled = !enabled;
+        listWorlds.enabled = !enabled;
     }
 
 
@@ -38,7 +46,7 @@ public class Level : MonoBehaviour {
     /**
      * Redetects all ships present in the local level
      */
-    public static void UpdateShipList(string context)
+    public static void UpdateShipList(string context, Controller exclude = null)
     {
         Debug.Log("Refreshing ships (" + context + ")");
         List<Controller> controllers = new List<Controller>();
@@ -46,9 +54,10 @@ public class Level : MonoBehaviour {
         foreach (GameObject obj in objects)
         {
             Controller ctrl = obj.GetComponent<Controller>();
-            if (ctrl != null)
+            if (ctrl != null && ctrl != exclude)
             {
                 controllers.Add(ctrl);
+                Debug.Log("Added "+ctrl.name);
             }
         }
         cachedShips = controllers.ToArray();
@@ -71,6 +80,13 @@ public class Level : MonoBehaviour {
             new System(){position = new Vector3(-separation,separation,0), orientation = Quaternion.identity}
         };
         overrideDriveColor = false;
+    }
+
+
+    public static void DefineStartPoints(Transform[] locations)
+    {
+        for (int i = 0; i < 4 && i < locations.Length; i++)
+            startPoints[i] = new System() { position = locations[i].position, orientation = locations[i].rotation };
     }
 
 
@@ -107,4 +123,9 @@ public class Level : MonoBehaviour {
         position = startPoints[inputNumber].position;
         orientation = startPoints[inputNumber].orientation;
     }
+
+    //internal static void LockShipSelection(bool p)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

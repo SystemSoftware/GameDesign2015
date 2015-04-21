@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class T1LevelLogic_Water : MonoBehaviour {
 
-    GameObject gameLogic;
-    ListShips listShips;
-    ListWorlds listWorlds;
-
+    
 	// Use this for initialization
 	void Start () {
 
@@ -18,10 +16,15 @@ public class T1LevelLogic_Water : MonoBehaviour {
         //Physics.gravity = new Vector3(0, -100, 0);
 
 
-        gameLogic = GameObject.Find("GameLogic");
-        listShips = gameLogic.GetComponent<ListShips>();
-        listWorlds = gameLogic.GetComponent<ListWorlds>();
-	}
+        List<Transform> startPoints = new List<Transform>();
+        foreach (Transform child in transform)
+        {
+            startPoints.Add(child);
+        }
+
+        Level.DefineStartPoints(startPoints.ToArray());
+
+    }
 
     void OnGUI()
     {
@@ -30,10 +33,7 @@ public class T1LevelLogic_Water : MonoBehaviour {
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
             {
-                listShips.enabled = false;
-                listWorlds.enabled = false;
                 Level.EnableMotion(true);
-                //Physics.gravity = new Vector3(0, -1f, 0);
             }
         }
     }

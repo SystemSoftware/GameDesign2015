@@ -18,8 +18,10 @@ public class Assign : MonoBehaviour {
 
 	public void Setup(GameObject targetType, int inputNumber)
 	{
+        Controller exclude = null;
 		if (playerShip != null)
 		{
+            exclude = playerShip.GetComponent<Controller>();
 			Destroy(playerShip);
 			playerShip = null;
 		}
@@ -42,7 +44,7 @@ public class Assign : MonoBehaviour {
 			}
 		}
 
-        Level.UpdateShipList("ship spawned: "+inputNumber);
+        Level.UpdateShipList("ship spawned: "+inputNumber,exclude);
 	}
 
  
