@@ -16,11 +16,7 @@ public class EngineDriver : MonoBehaviour {
 		sys = this.GetComponent<ParticleSystem>();
 		force = this.GetComponent<ConstantForce>();
 
-        if (sys != null)
-        {
-            if (Level.overrideDriveColor)
-                sys.startColor = Level.driveColor;
-        }
+
 
 
 
@@ -35,7 +31,7 @@ public class EngineDriver : MonoBehaviour {
 
 	private string FetchAxis0()
 	{
-        Controller ctrl = transform.GetComponentInParent<Controller>();
+        Controller ctrl = GetComponentInParent<Controller>();
         if (ctrl != null)
             return FetchAxis(ctrl);
         return null;
@@ -73,7 +69,6 @@ public class EngineDriver : MonoBehaviour {
 
 			if (force != null)
 			{
-                force.enabled = f != 0f && Level.AllowMotion;
 				force.relativeForce = new Vector3(0,0,maxForce * f);
 			}
 		}

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /**
  * Base controller class, foundation for every ship controller class
  **/
 public class Controller : MonoBehaviour {
 
-	public Camera myCamera;
+	public Camera attachedCamera;
 
 
     public int      controlIndex;   //!< Index [0,3] in control of the local ship instance.
@@ -16,6 +17,33 @@ public class Controller : MonoBehaviour {
                     verticalAxis,   //!< Axis name used to query the vertical axis of the local joystick
                     otherAxis;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
 
+
+    private Dictionary<System.Type, object> attachments = new Dictionary<System.Type,object>();
+
+    /**
+     * Attaches the specified item. Only one item of each type is allowed per Controller instance
+     **/
+    public void Attach<T>(T item)
+    {
+        attachments.Add(item.GetType(), item);
+    }
+
+    /**
+     * Retrieves an attachment from the local Controller instance via its type.
+     * Use HasAttachment() to check its presence where necessary
+     **/
+    public T GetAttachment<T>()
+    {
+        return (T)attachments[typeof(T)];
+    }
+
+    /**
+     * Checks whether or not a specific object type is attached to the local Controller instance
+     **/
+    public bool HasAttachment<T>()
+    {
+        return attachments.ContainsKey(typeof(T));
+    }
 
 
 
@@ -29,7 +57,7 @@ public class Controller : MonoBehaviour {
         accelerate = "Accelerate" + controlIndex;
         otherAxis = "Other" + controlIndex;
 
-		myCamera = camera;
+		attachedCamera = camera;
         this.controlIndex = controlIndex;
 		OnAssignCameraAndControl();
 	}
@@ -48,6 +76,8 @@ public class Controller : MonoBehaviour {
      **/
 	protected void Start ()
     {
+        
+
         Rigidbody body = GetComponent<Rigidbody>();
         if (body)
         {
@@ -61,17 +91,17 @@ public class Controller : MonoBehaviour {
             Debug.LogWarning("Ship body '" + name + "' does not have a RigidBody component attached");
 
 
-        //ParticleSystem[] systems = GetComponentsInChildren<ParticleSystem>();
-        //if (systems != null)
-        //{
-        //    foreach (ParticleSystem sys in systems)
-        //    {
-        //        sys.
-
-        //    }
-
-        //}
-
+        if (Level.overrideDriveColor)
+        {
+            ParticleSystem[] systems = GetComponentsInChildren<ParticleSystem>();
+            if (systems != null)
+            {
+                foreach (ParticleSystem sys in systems)
+                {
+                    sys.startColor = Level.driveColor;
+                }
+            }
+        }
 	}
 	
 }

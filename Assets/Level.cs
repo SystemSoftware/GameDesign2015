@@ -52,6 +52,11 @@ public class Level : MonoBehaviour {
                 body.isKinematic = !enabled;
                 body.useGravity = enabled;
             }
+            var forces = ship.transform.GetComponentsInChildren<ConstantForce>();
+            foreach (var force in forces)
+            {
+                force.enabled = enabled;
+            }
         }
         allowMotion = enabled;
 

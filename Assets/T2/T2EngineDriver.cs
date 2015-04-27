@@ -15,11 +15,6 @@ public class T2EngineDriver : MonoBehaviour {
 	{
 		sys = this.GetComponent<ParticleSystem>();
 		force = this.GetComponent<ConstantForce>();
-        if (sys != null)
-        {
-            if (Level.overrideDriveColor)
-                sys.startColor = Level.driveColor;
-        }
 
 	}
 
@@ -102,8 +97,7 @@ public class T2EngineDriver : MonoBehaviour {
 
 			if (force != null)
 			{
-                force.enabled = f != 0f && Level.AllowMotion;
-				force.relativeForce = new Vector3(0,0,maxForce * f);
+        		force.relativeForce = new Vector3(0,0,maxForce * f);
 			}
 		}
 	}

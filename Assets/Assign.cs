@@ -9,6 +9,7 @@ public class Assign : MonoBehaviour {
 	//public int inputNumber;
 
 	GameObject	playerShip = null;
+    int lastInput = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -29,20 +30,14 @@ public class Assign : MonoBehaviour {
         Vector3 position;
         Quaternion orientation;
         Level.GetSpawnPoint(inputNumber, out position, out orientation);
+        playerShip = (GameObject)Instantiate(targetType, position, orientation);
 
-		playerShip = (GameObject)Instantiate(targetType, position, orientation);
+        lastInput = inputNumber;
 
-		var scripts = playerShip.GetComponents<MonoBehaviour>();
-		for (int i = 0; i < scripts.Length; i++)
-		{
-			MonoBehaviour data = scripts[i];
-			Controller controller = data as Controller;
-			if (controller != null)
-			{
-				controller.AssignCameraAndControl(GetComponent<Camera>(),inputNumber);
+        AdjustToCameraChange();
 
-			}
-		}
+
+
 
         Level.UpdateShipList("ship spawned: "+inputNumber,exclude);
 	}
@@ -53,4 +48,18 @@ public class Assign : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void AdjustToCameraChange()
+    {
+        var scripts = playerShip.GetComponents<MonoBehaviour>();
+        for (int i = 0; i < scripts.Length; i++)
+        {
+            MonoBehaviour data = scripts[i];
+            Controller controller = data as Controller;
+            if (controller != null)
+            {
+                controller.AssignCameraAndControl(GetComponent<Camera>(), lastInput);
+            }
+        }
+    }
 }

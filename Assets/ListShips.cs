@@ -35,12 +35,12 @@ public class ListShips : MonoBehaviour {
 		selected = null;
 	}
 
-	public void Reassign(int index)
+	public void AdjustToCameraChange(int index)
 	{
 		Camera[] cameras = this.GetComponentsInChildren<Camera>();
 		if (selected[index] != null)
 		{
-			cameras[index].GetComponent<Assign>().Setup(selected[index], index);
+			cameras[index].GetComponent<Assign>().AdjustToCameraChange();
 		}
 
 
