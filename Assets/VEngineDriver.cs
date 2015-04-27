@@ -5,10 +5,10 @@ public class VEngineDriver : EngineDriver {
 
 	public int sign = 0;
 
-	protected override bool DoIgnore(float f)
+	protected override float Filter(float f)
 	{
-		return sign != (int)Mathf.Sign(f);
-	}
+        return sign != (int)Mathf.Sign(f) ? Mathf.Abs(f) : 0f;
+    }
 
 
 	protected override string FetchAxis(Controller ctrl)

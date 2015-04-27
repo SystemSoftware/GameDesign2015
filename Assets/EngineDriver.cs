@@ -35,22 +35,16 @@ public class EngineDriver : MonoBehaviour {
 
 	private string FetchAxis0()
 	{
-		Transform t = transform.parent;
-		while(t != null)
-		{
-			var ctrl = t.GetComponent<Controller>();
-			if (ctrl != null)
-				return FetchAxis(ctrl);
-			t = t.parent;
-		}
-		return null;
+        Controller ctrl = transform.GetComponentInParent<Controller>();
+        if (ctrl != null)
+            return FetchAxis(ctrl);
+        return null;
 	}
 
 
-	protected virtual bool DoIgnore(float f)
+	protected virtual float Filter(float f)
 	{
-		return false;
-
+		return Mathf.Max(f,0f); //thruster logic
 	}
 
 	// Update is called once per frame
@@ -69,11 +63,7 @@ public class EngineDriver : MonoBehaviour {
 			if (axis != null && axis.Length > 0)
 			{ 
 				//Debug.Log(axis);
-				f = Input.GetAxis(axis);
-				if (DoIgnore(f))
-					f = 0f;
-				else
-					f = Mathf.Abs(f);
+				f = Filter(Input.GetAxis(axis));
 			}
 			if (sys != null)
 			{
@@ -83,7 +73,7 @@ public class EngineDriver : MonoBehaviour {
 
 			if (force != null)
 			{
-                force.enabled = f != 0f && Level.allowMotion;
+                force.enabled = f != 0f && Level.AllowMotion;
 				force.relativeForce = new Vector3(0,0,maxForce * f);
 			}
 		}

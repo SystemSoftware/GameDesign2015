@@ -11,7 +11,7 @@ public class T2LevelLogic : MonoBehaviour {
 
     void OnGUI()
     {
-        if (!Level.allowMotion)
+        if (!Level.AllowMotion)
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
             {

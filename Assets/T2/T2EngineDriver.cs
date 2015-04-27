@@ -69,6 +69,7 @@ public class T2EngineDriver : MonoBehaviour {
 		return f;
 	}
 
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -90,7 +91,7 @@ public class T2EngineDriver : MonoBehaviour {
 			vec.y = Mathf.Clamp(z,-1f,1f) * -25f + 180f;
 			this.transform.localEulerAngles = vec;
 
-			float f = Mathf.Max( Mathf.Abs(ResolveAxis(axes.acceleration)), Mathf.Max(Mathf.Max(Mathf.Abs(h),Mathf.Abs(v)),Mathf.Abs(z)));
+			float f = Mathf.Max( Mathf.Max(ResolveAxis(axes.acceleration) , 0f), Mathf.Max(Mathf.Max(Mathf.Abs(h),Mathf.Abs(v)),Mathf.Abs(z)));
 			
 
 			if (sys != null)
@@ -101,7 +102,7 @@ public class T2EngineDriver : MonoBehaviour {
 
 			if (force != null)
 			{
-                force.enabled = f != 0f && Level.allowMotion;
+                force.enabled = f != 0f && Level.AllowMotion;
 				force.relativeForce = new Vector3(0,0,maxForce * f);
 			}
 		}
