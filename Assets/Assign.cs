@@ -31,6 +31,8 @@ public class Assign : MonoBehaviour {
         Quaternion orientation;
         Level.GetSpawnPoint(inputNumber, out position, out orientation);
         playerShip = (GameObject)Instantiate(targetType, position, orientation);
+        playerShip.layer = 8 + inputNumber;
+        playerShip.tag = "Ship";
 
         lastInput = inputNumber;
 

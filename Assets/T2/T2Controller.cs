@@ -22,7 +22,8 @@ public class T2Controller : Controller {
 		Rect pos = new Rect(attachedCamera.rect.center.x-w/2,attachedCamera.rect.min.y,w,h);
 
 		//if (shipTransform != null)
-			this.GetComponentInChildren<Camera>().rect = pos;
+		this.GetComponentInChildren<Camera>().rect = pos;
+        this.GetComponentInChildren<Camera>().enabled = attachedCamera.enabled;
 	
 	}
 	

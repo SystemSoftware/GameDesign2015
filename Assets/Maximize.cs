@@ -32,11 +32,11 @@ public class Maximize : MonoBehaviour {
             else
             {
                 originalRects.Clear();
-                bool first = true;
+                int at = 0;
                 foreach (var c in this.GetComponentsInChildren<Camera>())
                 {
                     originalRects.Add(c.rect);
-                    if (first)
+                    if (at==0)
                     {
                         c.rect = new Rect(0, 0, 1, 1);
                     }
@@ -45,10 +45,9 @@ public class Maximize : MonoBehaviour {
                         c.enabled = false;
                     }
 
-                    first = false;
+                    GetComponent<ListShips>().AdjustToCameraChange(at++);
 
                 }
-                GetComponent<ListShips>().AdjustToCameraChange(0);
                 maximized = true;
             }
 		}
