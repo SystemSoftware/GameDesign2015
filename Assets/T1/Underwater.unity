@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: .125490203, g: .235294133, b: .231372565, a: 1}
   m_FogMode: 2
-  m_FogDensity: .00999999978
+  m_FogDensity: .00700000022
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: .211999997, g: .226999998, b: .259000003, a: 1}
@@ -100,7 +100,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -430.339996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.z
@@ -254,7 +254,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -430.299988
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.z
@@ -304,7 +304,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -430.339996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.z
@@ -350,7 +350,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -430.299988
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 409196, guid: d1b9c2def7cb59f40b99e1cfc8000a06, type: 2}
       propertyPath: m_LocalPosition.z
@@ -402,7 +402,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!154 &1944327241
 TerrainCollider:
