@@ -4043,7 +4043,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168500}
   serializedVersion: 2
-  m_Mass: 10000
+  m_Mass: 100
   m_Drag: .300000012
   m_AngularDrag: 1.20000005
   m_UseGravity: 0
@@ -4842,15 +4842,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d9773a20f4e4047b9141e09f72f9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedCamera: {fileID: 0}
-  controlIndex: 0
-  accelerate: 
-  custom: 
-  horizontalAxis: 
-  verticalAxis: 
-  otherAxis: 
-  idealDistance: 50
-  idealYOffset: 10
+  ctrlAttachedCamera: {fileID: 0}
+  ctrlControlIndex: 0
+  ctrlAxisAccelerate: 
+  ctrlAxisCustom: 
+  ctrlAxisHorizontal: 
+  ctrlAxisVertical: 
+  ctrlAxisOther: 
+  cameraIdealDistance: 50
+  cameraIdealYOffset: 0
 --- !u!114 &11417344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4863,7 +4863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifetime: .200000003
-  maxForce: -80000
+  maxForce: -800
   orientation: 1
 --- !u!114 &11488386
 MonoBehaviour:
@@ -4877,7 +4877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifetime: .200000003
-  maxForce: -80000
+  maxForce: -800
   orientation: -1
 --- !u!114 &11492174
 MonoBehaviour:
@@ -4891,7 +4891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifetime: .5
-  maxForce: -500000
+  maxForce: -5000
 --- !u!124 &12491952
 Behaviour:
   m_ObjectHideFlags: 1

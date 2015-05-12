@@ -126,65 +126,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &1027998028
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1027998030}
-  - 215: {fileID: 1027998029}
-  m_Layer: 0
-  m_Name: Reflection Probe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!215 &1027998029
-ReflectionProbe:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1027998028}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Type: 0
-  m_Mode: 0
-  m_RefreshMode: 0
-  m_TimeSlicingMode: 0
-  m_Resolution: 128
-  m_UpdateFrequency: 0
-  m_Importance: 1
-  m_BoxSize: {x: 10, y: 10, z: 10}
-  m_BoxOffset: {x: 0, y: 0, z: 0}
-  m_NearClip: .300000012
-  m_FarClip: 1000
-  m_ShadowDistance: 100
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: 0}
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IntensityMultiplier: 1
-  m_HDR: 1
-  m_BoxProjection: 0
-  m_RenderDynamicObjects: 0
-  m_UseOcclusionCulling: 1
-  m_CustomBakedTexture: {fileID: 0}
---- !u!4 &1027998030
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1027998028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.8709011, y: 27.3700638, z: -82.0836411}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!1 &1262787618
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,3 +278,21 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3927d2595a458d4d82fef410bdcd8ef, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1819793510 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 193190, guid: a3927d2595a458d4d82fef410bdcd8ef, type: 2}
+  m_PrefabInternal: {fileID: 1545904276}
+--- !u!114 &1819793512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1819793510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98bfba3b0a4cce459dec61d47d5b2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setSize: 0
+  size: {x: 102, y: 102, z: 10}
+  applySize: 0

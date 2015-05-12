@@ -8,7 +8,6 @@ using System.Collections.Generic;
 public class Controller : MonoBehaviour {
 
 
-    public readonly string helloWorld = "yay";
 
 	public Camera   ctrlAttachedCamera;
 
@@ -20,8 +19,6 @@ public class Controller : MonoBehaviour {
                     ctrlAxisVertical,   //!< Axis name used to query the vertical axis of the local joystick
                     ctrlAxisOther;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
 
-
-    public Bounds   ctrlBoundingBox;
 
     private Dictionary<System.Type, object> attachments = new Dictionary<System.Type,object>();
 
@@ -131,7 +128,8 @@ public class Controller : MonoBehaviour {
             body.angularDrag = Level.angularDrag;
             body.drag = Level.drag;
             body.useGravity = true;
-            body.mass = 10000f;
+            body.mass = 100f;
+            //body.maxAngularVelocity = 10000;
             //Debug.Log("Set drag to " + body.angularDrag);
         }
         else
@@ -150,5 +148,34 @@ public class Controller : MonoBehaviour {
             }
         }
 	}
+
+
+
+
+
+    public float    cameraIdealDistance = 50.0f,
+                    cameraIdealYOffset = 0.0f;
+	
+
+    /**
+     * This is the default camera behavior. If you want to implement your own, define your own LateUpdate()
+     */
+    protected void LateUpdate()
+    {
+        if (ctrlAttachedCamera != null)
+        {
+            //Vector3 delta = target.position - this.transform.position;
+
+            Vector3 idealLocation =
+                transform.position - transform.forward * cameraIdealDistance + transform.up * cameraIdealYOffset;
+            //target.position - delta.normalized * idealDistance;
+            //(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
+            Vector3 deltaToIdeal = idealLocation - ctrlAttachedCamera.transform.position;
+            ctrlAttachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
+            ctrlAttachedCamera.transform.rotation = Quaternion.Lerp(ctrlAttachedCamera.transform.rotation, transform.rotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
+            ;
+
+        }
+    }
 	
 }

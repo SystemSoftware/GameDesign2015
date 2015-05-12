@@ -28,7 +28,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178632}
-  m_LocalRotation: {x: -5.3385083e-08, y: .707106709, z: .707106829, w: 5.33850724e-08}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .100000009, y: .100000001, z: 1}
   m_Children: []
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifetime: .200000003
-  maxForce: -30000
+  maxForce: 300
   sign: 0
 --- !u!138 &13832724
 FixedJoint:
@@ -147,7 +147,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 30
+      scalar: -30
       maxCurve:
         serializedVersion: 2
         m_Curve:

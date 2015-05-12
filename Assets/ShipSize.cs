@@ -2,7 +2,7 @@
 using System.Collections;
 
 [ExecuteInEditMode]
-public class ShipBounds : MonoBehaviour {
+public class ShipSize : MonoBehaviour {
 
     public bool setSize = false;
     public Vector3 size;
@@ -20,19 +20,26 @@ public class ShipBounds : MonoBehaviour {
         {
             Bounds boundingBox;
             boundingBox = new Bounds();
+            bool any = false;
             {
                 Renderer m = GetComponent<Renderer>();
                 if (m != null)
                 {
-
-                    boundingBox.Encapsulate(m.bounds);
+                    boundingBox = m.bounds;
+                    any = true;
                 }
             }
 
 
             foreach (Renderer m in GetComponentsInChildren<Renderer>())
             {
-                boundingBox.Encapsulate(m.bounds);
+                if (!any)
+                {
+                    boundingBox = m.bounds;
+                    any = true;
+                }
+                else
+                    boundingBox.Encapsulate(m.bounds);
             }
 
             Vector3 currentSize = boundingBox.max - boundingBox.min;

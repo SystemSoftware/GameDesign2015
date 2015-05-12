@@ -5,9 +5,7 @@ public class T2Controller : Controller {
 
 
 
-	public float idealDistance = 50.0f,
-					idealYOffset = 10.0f;
-	
+
 	// Use this for initialization
 	protected new void Start () {
         base.Start();
@@ -28,14 +26,14 @@ public class T2Controller : Controller {
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () {
+	new void LateUpdate () {
 		if (ctrlAttachedCamera != null)
 		{
 			Vector3 delta = transform.position - ctrlAttachedCamera.transform.position;
 
 			Vector3 idealLocation =
 				//shipTransform.position - shipTransform.forward * idealDistance + shipTransform.up * idealYOffset;
-                transform.position - delta.normalized * idealDistance;
+                transform.position - delta.normalized * cameraIdealDistance;
 			//(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
 			Vector3 deltaToIdeal = idealLocation - ctrlAttachedCamera.transform.position;
 			ctrlAttachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
