@@ -23,10 +23,10 @@ public class T1LevelLogic_1 : MonoBehaviour {
         {
             foreach (var ship in Level.ActiveShips)
             {
-                if (ship.attachedCamera.enabled)
+                if (ship.ctrlAttachedCamera.enabled)
                 {
 
-                    GUI.Label(new Rect(Screen.width * ship.attachedCamera.rect.min.x, Screen.height * (1f - ship.attachedCamera.rect.max.y), 50, 50), ship.GetAttachment<T1RaceTracker>().progress.ToString());
+                    GUI.Label(new Rect(Screen.width * ship.ctrlAttachedCamera.rect.min.x, Screen.height * (1f - ship.ctrlAttachedCamera.rect.max.y), 50, 50), ship.GetAttachment<T1RaceTracker>().progress.ToString());
 
                 }
 

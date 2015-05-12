@@ -764,13 +764,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4affead7ea466b54a8541b963ee3d6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedCamera: {fileID: 0}
-  controlIndex: 0
-  accelerate: 
-  custom: 
-  horizontalAxis: Horizontal
-  verticalAxis: Vertical
-  otherAxis: 
+  ctrlAttachedCamera: {fileID: 0}
+  ctrlControlIndex: 0
+  ctrlAxisAccelerate: 
+  ctrlAxisCustom: 
+  ctrlAxisHorizontal: 
+  ctrlAxisVertical: 
+  ctrlAxisOther: 
   idealDistance: 20
   idealYOffset: 5
 --- !u!114 &11476082

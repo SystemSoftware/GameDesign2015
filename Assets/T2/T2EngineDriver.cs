@@ -29,7 +29,7 @@ public class T2EngineDriver : MonoBehaviour {
 
 	protected virtual Axes FetchAxis(Controller controller)
 	{
-		return new Axes(){horizontal = controller.horizontalAxis, vertical = controller.verticalAxis, acceleration = controller.accelerate, other = controller.otherAxis};
+		return new Axes(){horizontal = controller.ctrlAxisHorizontal, vertical = controller.ctrlAxisVertical, acceleration = controller.ctrlAxisAccelerate, other = controller.ctrlAxisOther};
 	}
 
 

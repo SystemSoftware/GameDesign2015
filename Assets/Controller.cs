@@ -7,16 +7,21 @@ using System.Collections.Generic;
  **/
 public class Controller : MonoBehaviour {
 
-	public Camera attachedCamera;
+
+    public readonly string helloWorld = "yay";
+
+	public Camera   ctrlAttachedCamera;
 
 
-    public int      controlIndex;   //!< Index [0,3] in control of the local ship instance.
-    public string	accelerate,     //!< Axis name used to accelerate (or brake) the ship
-                    custom,         //!< Axis name used to issue a custom command
-					horizontalAxis, //!< Axis name used to query the horizontal axis of the local joystick
-                    verticalAxis,   //!< Axis name used to query the vertical axis of the local joystick
-                    otherAxis;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
+    public int      ctrlControlIndex;   //!< Index [0,3] in control of the local ship instance.
+    public string	ctrlAxisAccelerate,     //!< Axis name used to accelerate (or brake) the ship
+                    ctrlAxisCustom,         //!< Axis name used to issue a custom command
+					ctrlAxisHorizontal, //!< Axis name used to query the horizontal axis of the local joystick
+                    ctrlAxisVertical,   //!< Axis name used to query the vertical axis of the local joystick
+                    ctrlAxisOther;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
 
+
+    public Bounds   ctrlBoundingBox;
 
     private Dictionary<System.Type, object> attachments = new Dictionary<System.Type,object>();
 
@@ -52,13 +57,13 @@ public class Controller : MonoBehaviour {
      **/
 	public void AssignCameraAndControl(Camera camera, int controlIndex)
 	{
-        horizontalAxis = "Horizontal" + controlIndex;
-        verticalAxis = "Vertical" + controlIndex;
-        accelerate = "Accelerate" + controlIndex;
-        otherAxis = "Other" + controlIndex;
+        ctrlAxisHorizontal = "Horizontal" + controlIndex;
+        ctrlAxisVertical = "Vertical" + controlIndex;
+        ctrlAxisAccelerate = "Accelerate" + controlIndex;
+        ctrlAxisOther = "Other" + controlIndex;
 
-		attachedCamera = camera;
-        this.controlIndex = controlIndex;
+		ctrlAttachedCamera = camera;
+        this.ctrlControlIndex = controlIndex;
 		OnAssignCameraAndControl();
 	}
 
@@ -96,13 +101,14 @@ public class Controller : MonoBehaviour {
             GameObject camera = GameObject.Find(cameraName);
             if (camera == null)
             {
-                camera = new GameObject();
+                Debug.Log("Adding camera");
+                camera = new GameObject(cameraName);
                 camera.transform.position = this.transform.position - this.transform.forward * 100f;
                 camera.transform.LookAt(this.transform);
                 camera.name = cameraName;
+                component = camera.AddComponent<Camera>();
                 camera.AddComponent<FlareLayer>();
                 camera.AddComponent<AudioListener>();
-                component = camera.AddComponent<Camera>();
                 component.enabled = true;
                 component.farClipPlane = 5000f;
                 component.fieldOfView = 35f;

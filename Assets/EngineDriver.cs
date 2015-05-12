@@ -25,7 +25,7 @@ public class EngineDriver : MonoBehaviour {
 
 	protected virtual string FetchAxis(Controller controller)
 	{
-		return controller.accelerate;
+		return controller.ctrlAxisAccelerate;
 	}
 
 

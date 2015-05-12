@@ -12,7 +12,7 @@ public class HEngineDriver : EngineDriver {
 
 	protected override string FetchAxis(Controller ctrl)
 	{
-		return ctrl.horizontalAxis;
+		return ctrl.ctrlAxisHorizontal;
 	}
 
 }

@@ -13,7 +13,7 @@ public class VEngineDriver : EngineDriver {
 
 	protected override string FetchAxis(Controller ctrl)
 	{
-		return ctrl.verticalAxis;
+		return ctrl.ctrlAxisVertical;
 	}
 
 

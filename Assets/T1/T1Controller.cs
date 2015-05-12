@@ -16,7 +16,7 @@ public class T1Controller : Controller {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		if (attachedCamera != null)
+		if (ctrlAttachedCamera != null)
 		{
 			//Vector3 delta = target.position - this.transform.position;
 
@@ -24,9 +24,9 @@ public class T1Controller : Controller {
                 transform.position - transform.forward * idealDistance + transform.up * idealYOffset;
 			//target.position - delta.normalized * idealDistance;
 			//(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
-			Vector3 deltaToIdeal = idealLocation - attachedCamera.transform.position;
-			attachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
-            attachedCamera.transform.rotation = Quaternion.Lerp(attachedCamera.transform.rotation, transform.rotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
+			Vector3 deltaToIdeal = idealLocation - ctrlAttachedCamera.transform.position;
+			ctrlAttachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
+            ctrlAttachedCamera.transform.rotation = Quaternion.Lerp(ctrlAttachedCamera.transform.rotation, transform.rotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
 			;
 
 		}
