@@ -63,10 +63,13 @@ public class Level : MonoBehaviour {
 
 
         GameObject gameLogic = GameObject.Find("GameLogic");
-        ListShips listShips = gameLogic.GetComponent<ListShips>();
-        ListWorlds listWorlds = gameLogic.GetComponent<ListWorlds>();
-        listShips.enabled = !enabled;
-        listWorlds.enabled = !enabled;
+        if (gameLogic != null)
+        {
+            ListShips listShips = gameLogic.GetComponent<ListShips>();
+            ListWorlds listWorlds = gameLogic.GetComponent<ListWorlds>();
+            listShips.enabled = !enabled;
+            listWorlds.enabled = !enabled;
+        }
     }
 
 
@@ -155,4 +158,15 @@ public class Level : MonoBehaviour {
         orientation = startPoints[inputNumber].orientation;
     }
 
+    /**
+     * Tells the level logic that all initialization is done and any pre-existing ships should be restarted
+     */
+    public static void InitializationDone()
+    {
+        UpdateShipList("Initialization done");
+        foreach (var ship in ActiveShips)
+        {
+            ship.Reinit();
+        }
+    }
 }

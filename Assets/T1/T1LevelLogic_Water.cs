@@ -24,6 +24,8 @@ public class T1LevelLogic_Water : MonoBehaviour {
 
         Level.DefineStartPoints(startPoints.ToArray());
 
+        Level.InitializationDone(); //Reassign values to ship that somehow already exist
+
     }
 
     void OnGUI()

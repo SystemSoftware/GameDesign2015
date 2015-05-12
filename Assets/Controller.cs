@@ -76,7 +76,48 @@ public class Controller : MonoBehaviour {
      **/
 	protected void Start ()
     {
-        
+        Reinit();
+    }
+
+    /**
+     * Reapplies global level variables
+     */
+    public void Reinit()
+    {
+        GameObject gameLogic = GameObject.Find("GameLogic");
+        if (gameLogic == null)
+        {
+            string cameraName = "AutoCamera(GameLogic is missing)";
+
+
+            Level.UpdateShipList("No GameLogic Standalone-starter");
+
+            Camera component;
+            GameObject camera = GameObject.Find(cameraName);
+            if (camera == null)
+            {
+                camera = new GameObject();
+                camera.transform.position = this.transform.position - this.transform.forward * 100f;
+                camera.transform.LookAt(this.transform);
+                camera.name = cameraName;
+                camera.AddComponent<FlareLayer>();
+                camera.AddComponent<AudioListener>();
+                component = camera.AddComponent<Camera>();
+                component.enabled = true;
+                component.farClipPlane = 5000f;
+                component.fieldOfView = 35f;
+                component.orthographic = false;
+            }
+            else
+            {
+                component = camera.GetComponent<Camera>();
+
+            }
+            
+            AssignCameraAndControl(component, 0);
+
+
+        }
 
         Rigidbody body = GetComponent<Rigidbody>();
         if (body)

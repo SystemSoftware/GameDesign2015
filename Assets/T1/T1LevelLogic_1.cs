@@ -42,7 +42,8 @@ public class T1LevelLogic_1 : MonoBehaviour {
 	void Start () {
         Level.drag = 0.3f;
         Level.angularDrag = 0.8f;
-	
+
+        Level.InitializationDone();
 	}
 	
 	// Update is called once per frame
