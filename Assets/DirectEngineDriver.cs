@@ -12,7 +12,7 @@ public class DirectEngineDriver : MonoBehaviour {
     protected Rigidbody target;
 
     public Vector3 offset = Vector3.zero;
-    public Vector3 force = Vector3.zero;
+    private Vector3 force = Vector3.zero;
 
 
 	// Use this for initialization
@@ -74,7 +74,7 @@ public class DirectEngineDriver : MonoBehaviour {
 	}
 
 
-    public Vector3 world, dbgOffset;
+    private Vector3 world, dbgOffset;
     protected void FixedUpdate()
     {
         if (target != null)
