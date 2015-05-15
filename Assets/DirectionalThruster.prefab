@@ -41,7 +41,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178632}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: .00100000005
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifetime: .200000003
-  maxForce: 300
+  maxForce: 30
   sign: 0
 --- !u!138 &13832724
 FixedJoint:

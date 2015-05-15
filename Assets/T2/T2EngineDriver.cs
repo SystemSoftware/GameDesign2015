@@ -80,6 +80,7 @@ public class T2EngineDriver : MonoBehaviour {
 		{
 			Vector3 vec = this.transform.localEulerAngles;
 			float v = ResolveAxis(axes.vertical);
+
 			float h = ResolveAxis(axes.horizontal);
 			float z = ResolveAxis(axes.other);
 			vec.x = Mathf.Clamp(v*0.7f + h * orientation, -1f, 1f) * 35f + 3.2f;

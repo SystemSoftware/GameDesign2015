@@ -4,9 +4,14 @@ using System.Collections;
 [ExecuteInEditMode]
 public class ShipSize : MonoBehaviour {
 
-    public bool setSize = false;
-    public Vector3 size;
+//    public bool setSize = false;
+    public int triangleCount = 0;
+    
+    public Vector3 currentSize;
+    public Vector3 wantSize;
     public bool applySize = false;
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -18,6 +23,16 @@ public class ShipSize : MonoBehaviour {
         //if (counter >= 10)
         if (!Application.isPlaying)
         {
+
+            triangleCount = 0;
+            foreach (MeshFilter filter in GetComponentsInChildren<MeshFilter>())
+            {
+                triangleCount += filter.sharedMesh.triangles.Length / 3;
+            }
+
+
+
+
             Bounds boundingBox;
             boundingBox = new Bounds();
             bool any = false;
@@ -42,24 +57,25 @@ public class ShipSize : MonoBehaviour {
                     boundingBox.Encapsulate(m.bounds);
             }
 
-            Vector3 currentSize = boundingBox.max - boundingBox.min;
-            if (setSize && applySize)
+            currentSize = boundingBox.max - boundingBox.min;
+
+
+
+            if (applySize)
             {
                 Vector3 fc = new Vector3(
-                                    size.x / currentSize.x,
-                                    size.y / currentSize.y,
-                                    size.z / currentSize.z);
+                                    wantSize.x / currentSize.x,
+                                    wantSize.y / currentSize.y,
+                                    wantSize.z / currentSize.z);
                 float largest = Mathf.Max(Mathf.Max(fc.x, fc.y), fc.z);
                 if (largest > 0f)
                 {
                     this.transform.localScale *= largest;
                 }
-                setSize = false;
                 applySize = false;
+                wantSize = Vector3.zero;
                 Update();
             }
-            else if (!setSize)
-                size = currentSize;
 
         }
         else

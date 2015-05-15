@@ -5,13 +5,13 @@ public class EngineDriver : MonoBehaviour {
 
 
 	public float	maxLifetime = 0.5f,
-					maxForce = -500000f;
+					maxForce = 50f;
 
 	protected ParticleSystem sys;
 	protected ConstantForce force;
 	protected string axis;
 	// Use this for initialization
-	void Start ()
+	protected void Start ()
 	{
 		sys = this.GetComponent<ParticleSystem>();
 		force = this.GetComponent<ConstantForce>();
@@ -44,7 +44,7 @@ public class EngineDriver : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update()
+	protected void Update()
 	{
 
 
