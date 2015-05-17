@@ -23,18 +23,20 @@ Bitte folgendermaßen vorgehen:
 		}
 	* die Methode Update() in LateUpdate() umbennen. Diese Methode wird einmal pro Frame aufgerufen:
 		void LateUpdate () {
-			if (myCamera != null)
+			if (ctrlAttachedCamera != null)
 			{
-				//hier Code definieren, der myCamera.transform in Abhängigkeit zu this.transform verändert
+				//hier Code definieren, der ctrlAttachedCamera.transform in Abhängigkeit zu this.transform verändert
 			}
 		}
+		Alternativ kann die vorgegebene LateUpdate()-Methode von der Klasse 'Controller' verwendet werden. Dazu einfach LateUpdate()
+		gar nicht definieren, oder im Körper base.LateUpdate() aufrufen.
 	* optional kann 'protected override void OnAssignCameraAndControl()' verwendet werden, um den Event abzufangen, wenn dem lokalen Schiff
-		Kamera (this.myCamera) und Controll-ID (this.controlIndex) zugewiesen wurden.
+		Kamera (this.ctrlAttachedCamera) und Controll-ID (this.ctrlControlIndex) zugewiesen wurden.
 	
 
 - Das Schiffs-Objekt folgendermaßen ergänzen:
 	* Im Object Inspect des Schiffs: 'Add Component' -> 'Physics' -> 'RigidBody'
-		* Mass auf 10000 setzen
+		* Mass auf 100 setzen
 		* Interpolate auf 'Interpolate' setzen
 	* Sofern nicht anderweitig vorhanden: Im Object Inspect des neuen Objektes: 'Add Component' -> 'Physics' -> 'xyz Collider'
 	* Zum Erstellen von existierender Geometrie kann jegliche Geometrie vom Assets-Verzeichnis als Kind dieses Rumpf-Objektes instanziiert werden
