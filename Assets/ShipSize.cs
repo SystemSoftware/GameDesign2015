@@ -77,6 +77,14 @@ public class ShipSize : MonoBehaviour {
                 Update();
             }
 
+
+			//Draw center of mass
+			Rigidbody body = this.GetComponent<Rigidbody>();
+			if(body != null){
+				Debug.DrawLine(body.worldCenterOfMass,body.transform.right*10,Color.red);
+				Debug.DrawLine(body.worldCenterOfMass,body.transform.up*10,Color.green);
+				Debug.DrawLine(body.worldCenterOfMass,body.transform.forward*10,Color.blue);
+			}
         }
         else
             this.enabled = false;
