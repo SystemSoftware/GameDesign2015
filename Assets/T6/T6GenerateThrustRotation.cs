@@ -47,7 +47,7 @@ public class T6GenerateThrustRotation : MonoBehaviour {
                 thrustFlap.AddComponent<MeshCollider>().convex = true; //Kollisionsboxen verschieben CoM                
                 thrustFlap.transform.parent = this.transform.parent;
                 thrustFlap.transform.position = new Vector3(x, y, z);
-                float tmp = Mathf.Sqrt(ship.localScale.x);
+                float tmp = Mathf.Sqrt(ship.localScale.x)*1.2f;
                 thrustFlap.transform.localScale = new Vector3(tmp, tmp, tmp);
                 thrustFlap.transform.Rotate(new Vector3(0, 0, 1), 360f / (float)count * i);
                 thrustFlap.AddComponent<T6RotateThrustFlaps>();
