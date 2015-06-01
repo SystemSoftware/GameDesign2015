@@ -20,11 +20,11 @@ public class T6YawCorrection : MonoBehaviour {
         yaw = Input.GetAxis(controller.ctrlAxisVertical);
         if (yaw == 0)
         {
-            setForce(localAngularVelocity.x * 2000);
+            setForce(localAngularVelocity.x * 5000);
         }
         else
         {
-            setForce(0);
+            setForce(-yaw*3000);
         }
         
 	}
