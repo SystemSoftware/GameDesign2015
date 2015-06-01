@@ -26,6 +26,7 @@ public class T6RotateThrustFlaps : MonoBehaviour
        Vector3 pointTo = ship.position + accelerationVector;
        //chase the dot! :3
        Vector3 virtualPoint = this.transform.position + (this.transform.position - pointTo);
+       
        this.transform.LookAt(virtualPoint, ship.up);
        this.transform.Rotate(0, 0, selfRotation, Space.Self);
    }
