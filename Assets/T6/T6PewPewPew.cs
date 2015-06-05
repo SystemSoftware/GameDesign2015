@@ -19,7 +19,6 @@ public class T6PewPewPew : MonoBehaviour {
 	void Update () {
         if (Level.AllowMotion) {
         cooldown -= Time.deltaTime;
-        Debug.Log(Input.GetButton("Fire1"));
         if (!fired && !opened && cooldown < 0)
         {
             if (Input.GetButton("Fire1"))

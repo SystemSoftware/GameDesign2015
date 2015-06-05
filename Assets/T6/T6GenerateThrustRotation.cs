@@ -51,9 +51,10 @@ public class T6GenerateThrustRotation : MonoBehaviour {
                 thrustFlap.transform.localScale = new Vector3(tmp, tmp, tmp);
                 thrustFlap.transform.Rotate(new Vector3(0, 0, 1), 360f / (float)count * i);
                 thrustFlap.AddComponent<T6RotateThrustFlaps>();
-                ship.position = shipOld.position;
-                ship.rotation = shipOld.rotation;
+                
 			}
+            ship.position = shipOld.position;
+            ship.rotation = shipOld.rotation;
 		}
 
 	}
