@@ -40,8 +40,9 @@ public class T6Trajectory : MonoBehaviour {
             direction.Normalize();
             double G = 6.674;
             Vector3 grav = direction * (float)(G * 100 * T6PlantesLogic.planetMass / (r * r));
-            trajectory += grav * Time.fixedDeltaTime ;
-            points[i] = points[i - 1] + trajectory;
+            trajectory += grav * (float)0.001;
+			velocity = trajectory;
+			points[i] = points[i - 1] + trajectory * Time.fixedDeltaTime;
         }
         orbitPane = points[0] - points[iterations/2];
         return points;

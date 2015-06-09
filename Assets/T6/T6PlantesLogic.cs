@@ -113,7 +113,7 @@ public class T6PlantesLogic : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (Level.AllowMotion)
         {
             foreach (var ship in Level.ActiveShips)
@@ -123,7 +123,7 @@ public class T6PlantesLogic : MonoBehaviour {
                 long r = (long)direction.magnitude;
                 direction.Normalize();
                 double G = 6.674;
-                gravity = direction * (float)(G * 100 * planetMass / (r * r));
+                gravity = direction * (float)(G * ship.GetComponent<Rigidbody>().mass * planetMass / (r * r));
                 ship.GetComponent<Rigidbody>().AddForce(gravity);
 
             }
