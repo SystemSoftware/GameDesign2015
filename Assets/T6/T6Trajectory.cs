@@ -23,6 +23,7 @@ public class T6Trajectory : MonoBehaviour {
     {
        var points =  calculateTrajectory(100);
        drawTrajectory(points);
+       
     }
 
     Vector3[] calculateTrajectory(int iterations)
@@ -40,12 +41,16 @@ public class T6Trajectory : MonoBehaviour {
             direction.Normalize();
             double G = 6.674;
             Vector3 grav = direction * (float)(G * 100 * T6PlantesLogic.planetMass / (r * r));
-            trajectory += grav * Time.fixedDeltaTime ;
+            trajectory += grav*0.01f;
+			velocity = trajectory;
             points[i] = points[i - 1] + trajectory;
+
+ 
+
         }
-        orbitPane = points[0] - points[iterations/2];
+        orbitPane = Vector3.Cross(points[0] - points[iterations / 2], points[iterations / 2] - points[iterations - 1]);
         return points;
-        
+
     }
 
     void drawTrajectory(Vector3[] points)

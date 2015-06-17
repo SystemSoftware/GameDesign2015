@@ -13,11 +13,16 @@ public class T6PlantesRotateMapCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (enabled)
-        {
+        {/*
             Vector3 orbitPane = ship.GetComponent<T6Trajectory>().orbitPane;
             Vector2 pane2d = new Vector2(orbitPane.x,orbitPane.y);
             float angle = Vector2.Angle(pane2d,new Vector2(1,1))+ 90;
             rotation(angle);
+          * */
+            Vector3 orbitPane = ship.GetComponent<T6Trajectory>().orbitPane;
+            this.transform.position = orbitPane.normalized * 100000;
+            this.transform.LookAt(new Vector3(0, 0, 0));
+            
         }
 	}
 

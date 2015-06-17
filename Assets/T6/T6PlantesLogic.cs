@@ -63,7 +63,7 @@ public class T6PlantesLogic : MonoBehaviour {
         {
             ship.ctrlAttachedCamera.farClipPlane = 100000;
             ship.ctrlAttachedCamera.cullingMask &= ~(1 << 5);
-            GameObject mapCamera = Instantiate(Resources.LoadAssetAtPath<GameObject>("Assets/T6/T6MapCamera.prefab"));
+            GameObject mapCamera = Instantiate(Resources.Load<GameObject>("T6MapCamera"));
             mapCamera.name = "MapCamera" + ship.ctrlControlIndex;
             //Faster than bitsniffing
             switch (ship.ctrlControlIndex)
