@@ -45,32 +45,32 @@ public class EngineDriver : MonoBehaviour {
 
 	// Update is called once per frame
 	protected void Update()
-	{
+    {
 
 
-		//bool enabled = Input.GetKey(key);
+        //bool enabled = Input.GetKey(key);
 
-		if (axis == null || axis.Length == 0)
-			axis = FetchAxis0();
+        if (axis == null || axis.Length == 0)
+            axis = FetchAxis0();
+        
 
-		
-		{
-			float f = 0f;
-			if (axis != null && axis.Length > 0)
-			{ 
-				//Debug.Log(axis);
-				f = Filter(Input.GetAxis(axis));
-			}
-			if (sys != null)
-			{
-				sys.enableEmission = f != 0f;
-				sys.startLifetime = f * maxLifetime;
-			}
+        {
+            float f = 0f;
+            if (axis != null && axis.Length > 0)
+            {
+                //Debug.Log(axis);
+                f = Filter(Input.GetAxis(axis));
+            }
+            if (sys != null)
+            {
+                sys.enableEmission = f != 0f;
+                sys.startLifetime = f * maxLifetime;
+            }
 
-			if (force != null)
-			{
-				force.relativeForce = new Vector3(0,0,maxForce * f);
-			}
-		}
-	}
+            if (force != null)
+            {
+                force.relativeForce = new Vector3(0, 0, maxForce * f);
+            }
+        }
+    }
 }
