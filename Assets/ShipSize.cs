@@ -7,7 +7,7 @@ public class ShipSize : MonoBehaviour {
 //    public bool setSize = false;
     public int triangleCount = 0;
     public bool showCentersOfGravity = true;
-
+    public float markerSize = 20f;
     public Vector3 currentSize;
     public Vector3 wantSize;
     public bool applySize = false;
@@ -120,6 +120,6 @@ public class ShipSize : MonoBehaviour {
 
     void DrawEdge(Vector3 c, Vector3 v, Vector3 w)
     {
-        Debug.DrawLine(c + v * 10f, c + w * 10f, Color.red);
+        Debug.DrawLine(c + v * markerSize * 0.5f, c + w * markerSize * 0.5f, Color.red);
     }
 }
