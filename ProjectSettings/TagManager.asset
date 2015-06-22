@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Spawn
+  - Planet
   - Ship
   layers:
   - Default
