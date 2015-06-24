@@ -12,16 +12,6 @@ public class Controller : MonoBehaviour {
 	public Camera   ctrlAttachedCamera;
 
 
-    public enum AxisID
-    {
-        Accelerate,
-        Horizontal,
-        Vertical,
-        Other,
-        Custom
-    };
-
-
     public int      ctrlControlIndex;   //!< Index [0,3] in control of the local ship instance.
     public string	ctrlAxisAccelerate,     //!< Axis name used to accelerate (or brake) the ship
                     ctrlAxisCustom,         //!< Axis name used to issue a custom command
@@ -32,27 +22,6 @@ public class Controller : MonoBehaviour {
     public bool setMassTo100 = true;
 
     private Dictionary<System.Type, object> attachments = new Dictionary<System.Type,object>();
-
-
-    public string GetAxisByID(AxisID id)
-    {
-        switch (id)
-        {
-            case AxisID.Accelerate:
-                return ctrlAxisAccelerate;
-            case AxisID.Horizontal:
-                return ctrlAxisHorizontal;
-            case AxisID.Vertical:
-                return ctrlAxisVertical;
-            case AxisID.Other:
-                return ctrlAxisOther;
-            case AxisID.Custom:
-                return ctrlAxisCustom;
-        }
-
-        Debug.LogWarning("Invalid axis id: " + id);
-        return "";
-    }
 
     /**
      * Attaches the specified item. Only one item of each type is allowed per Controller instance

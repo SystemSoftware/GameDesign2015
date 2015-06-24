@@ -5,6 +5,7 @@ public class T6RCSWings : MonoBehaviour {
 
     T6Controller controller;
     float roll;
+    float lastForce;
     Rigidbody ship;
     float flag;
 	// Use this for initialization
@@ -22,11 +23,12 @@ public class T6RCSWings : MonoBehaviour {
 
         if (roll == 0)
         {
-            setForce(localAngularVelocity.z * 500 * flag);
+            setForce(localAngularVelocity.z * 200 * flag);
         }
         else
         {
-            setForce(roll * 500 * flag);
+            setForce(roll * 100 * flag);
+            lastForce = roll * 100;
         }
 
 	}
@@ -34,7 +36,7 @@ public class T6RCSWings : MonoBehaviour {
     void setForce(float f)
     {
         this.GetComponent<ConstantForce>().relativeForce = new Vector3(0, 0, f);
-        this.GetComponent<ParticleSystem>().startSpeed = f/-6;
+        this.GetComponent<ParticleSystem>().startSpeed = f/-2;
     }
 
 

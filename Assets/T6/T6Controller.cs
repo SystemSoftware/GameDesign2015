@@ -5,11 +5,6 @@ public class T6Controller : Controller {
 
     public bool cameraLock = true;
 
-    void Start()
-    {
-        base.Start();
-    }
-
 	// Update is called once per frame
 	void Update () {
         float acceleration = Input.GetAxis(ctrlAxisAccelerate)+1;

@@ -14,8 +14,6 @@ public class DirectEngineDriver : MonoBehaviour {
     public Vector3 offset = Vector3.zero;
     private Vector3 force = Vector3.zero;
 
-    public Controller.AxisID queryAxis = Controller.AxisID.Accelerate;
-    public int querySign = 1;
 
 	// Use this for initialization
 	protected void Start ()
@@ -27,7 +25,7 @@ public class DirectEngineDriver : MonoBehaviour {
 
 	protected virtual string FetchAxis(Controller controller)
 	{
-        return controller.GetAxisByID(queryAxis);
+		return controller.ctrlAxisAccelerate;
 	}
 
 
@@ -40,19 +38,9 @@ public class DirectEngineDriver : MonoBehaviour {
 	}
 
 
-    public static float SmoothStep(float edge0, float edge1, float x)
-    {
-        float t = Mathf.Clamp01((x - edge0) / (edge1 - edge0));
-        return t * t * (3f - 2f * t);
-    }
-
-
-
-
-
 	protected virtual float Filter(float f)
 	{
-		return Mathf.Max(f * querySign,0f); //thruster logic
+		return Mathf.Max(f,0f); //thruster logic
 	}
 
 	// Update is called once per frame

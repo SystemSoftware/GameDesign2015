@@ -437,7 +437,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154452}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &9205370
 Behaviour:
   m_ObjectHideFlags: 1
@@ -513,6 +513,7 @@ MonoBehaviour:
   ctrlAxisHorizontal: 
   ctrlAxisVertical: 
   ctrlAxisOther: 
+  setMassTo100: 1
   cameraIdealDistance: 50
   cameraIdealYOffset: 0
 --- !u!114 &11471514
@@ -562,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triangleCount: 0
+  showCentersOfGravity: 1
   currentSize: {x: 0, y: 0, z: 0}
   wantSize: {x: 0, y: 0, z: 0}
   applySize: 0
