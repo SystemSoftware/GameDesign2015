@@ -5,13 +5,18 @@ public class T6Controller : Controller {
 
     public bool cameraLock = true;
 
+    void Start()
+    {
+        base.Start();
+    }
+
 	// Update is called once per frame
 	void Update () {
         float acceleration = Input.GetAxis(ctrlAxisAccelerate)+1;
         float horizontal = Input.GetAxis(ctrlAxisHorizontal);
         float vertical = Input.GetAxis(ctrlAxisVertical);
         float yaw = Input.GetAxis(ctrlAxisOther);
-        foreach (RotateThrustFlaps s in this.GetComponentsInChildren<RotateThrustFlaps>())
+        foreach (T6RotateThrustFlaps s in this.GetComponentsInChildren<T6RotateThrustFlaps>())
         {
             s.Rotate(acceleration, vertical, yaw);
         }
@@ -23,8 +28,8 @@ public class T6Controller : Controller {
     {
         Transform target = this.transform;
         Transform camera = ctrlAttachedCamera.transform;
-        Vector3 forward = target.forward * 400.0f;
-        Vector3 needPos = target.position - forward + (target.up * 50);
+        Vector3 forward = target.forward * 200.0f;
+        Vector3 needPos = target.position - forward + (target.up * 30);
 
         if (cameraLock) { 
         camera.LookAt(target.transform);

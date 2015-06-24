@@ -4,10 +4,10 @@ using System.Collections;
 public class T7SidePropeller : MonoBehaviour {
 	public Vector3 center;
 	public T7SignaledDirectEngineDriver tar;
-	public HEDrive tarRight;
-	public HEDrive tarLeft;
-	public VEDrive tarUp;
-	public VEDrive tarDown;
+	public T7HEDrive tarRight;
+	public T7HEDrive tarLeft;
+	public T7VEDrive tarUp;
+	public T7VEDrive tarDown;
 
 	public float faktor = 0f, maxFaktor=1f;
 	

@@ -6,8 +6,8 @@ public class T7RingPropAlign : MonoBehaviour {
 	public float faktor = 0f, maxFaktor=1f;
 	public int currentRightTransform = 0;
 	public T7SignaledDirectEngineDriver tar;
-	public VEDrive tarVEDown;
-	public VEDrive tarVE;
+	public T7VEDrive tarVEDown;
+	public T7VEDrive tarVE;
 
 	protected void Start()
 	{

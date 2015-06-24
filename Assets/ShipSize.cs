@@ -6,7 +6,8 @@ public class ShipSize : MonoBehaviour {
 
 //    public bool setSize = false;
     public int triangleCount = 0;
-    
+    public bool showCentersOfGravity = true;
+    public float markerSize = 20f;
     public Vector3 currentSize;
     public Vector3 wantSize;
     public bool applySize = false;
@@ -77,10 +78,48 @@ public class ShipSize : MonoBehaviour {
                 Update();
             }
 
+
+			//Draw center of mass
+            if (showCentersOfGravity)
+            {
+                foreach (var body in this.GetComponentsInChildren<Rigidbody>())
+                {
+                    DrawEdge(body.worldCenterOfMass, new Vector3(-1, 0, 0), new Vector3(1, 0, 0));
+                    DrawEdge(body.worldCenterOfMass, new Vector3(0, -1, 0), new Vector3(0, 1, 0));
+                    DrawEdge(body.worldCenterOfMass, new Vector3(0, 0, -1), new Vector3(0, 0, 1));
+
+
+                    //Rigidbody body = this.GetComponent<Rigidbody>();
+             //       if (body != null)
+                    //{
+                    //    for (int x = 0; x < 2; x++)
+                    //        for (int y = x + 1; y < 3; y++)
+                    //        {
+                                
+                    //            for (int k = 0; k < 4; k++)
+                    //            {
+                    //                Vector3 v = new Vector3(0,0,0),
+                    //                        w = new Vector3(0,0,0);
+                    //                v[x] = (k%2)==0? (k/2==0 ? 1 : -1) : 0;
+                    //                v[y] = (k % 2) != 0 ? (k / 2 == 0 ? 1 : -1) : 0;
+                    //                w[x] = (k % 2) != 0 ? ((k == 0 || k == 3)? 1 : -1) : 0;
+                    //                w[y] = (k % 2) == 0 ? ((k == 0 || k == 3) ? 1 : -1) : 0;
+                    //                DrawEdge(body.worldCenterOfMass, v, w);
+                    //            }
+                    //        }
+
+                    //}
+                }
+            }
         }
         else
             this.enabled = false;
 
 
 	}
+
+    void DrawEdge(Vector3 c, Vector3 v, Vector3 w)
+    {
+        Debug.DrawLine(c + v * markerSize * 0.5f, c + w * markerSize * 0.5f, Color.red);
+    }
 }

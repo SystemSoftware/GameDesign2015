@@ -12,6 +12,16 @@ public class Controller : MonoBehaviour {
 	public Camera   ctrlAttachedCamera;
 
 
+    public enum AxisID
+    {
+        Accelerate,
+        Horizontal,
+        Vertical,
+        Other,
+        Custom
+    };
+
+
     public int      ctrlControlIndex;   //!< Index [0,3] in control of the local ship instance.
     public string	ctrlAxisAccelerate,     //!< Axis name used to accelerate (or brake) the ship
                     ctrlAxisCustom,         //!< Axis name used to issue a custom command
@@ -19,8 +29,30 @@ public class Controller : MonoBehaviour {
                     ctrlAxisVertical,   //!< Axis name used to query the vertical axis of the local joystick
                     ctrlAxisOther;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
 
+    public bool setMassTo100 = true;
 
     private Dictionary<System.Type, object> attachments = new Dictionary<System.Type,object>();
+
+
+    public string GetAxisByID(AxisID id)
+    {
+        switch (id)
+        {
+            case AxisID.Accelerate:
+                return ctrlAxisAccelerate;
+            case AxisID.Horizontal:
+                return ctrlAxisHorizontal;
+            case AxisID.Vertical:
+                return ctrlAxisVertical;
+            case AxisID.Other:
+                return ctrlAxisOther;
+            case AxisID.Custom:
+                return ctrlAxisCustom;
+        }
+
+        Debug.LogWarning("Invalid axis id: " + id);
+        return "";
+    }
 
     /**
      * Attaches the specified item. Only one item of each type is allowed per Controller instance
@@ -128,7 +160,8 @@ public class Controller : MonoBehaviour {
             body.angularDrag = Level.angularDrag;
             body.drag = Level.drag;
             body.useGravity = true;
-            body.mass = 100f;
+            if (setMassTo100)
+                body.mass = 100f;
             //body.maxAngularVelocity = 10000;
             //Debug.Log("Set drag to " + body.angularDrag);
         }
@@ -172,7 +205,14 @@ public class Controller : MonoBehaviour {
             //(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
             Vector3 deltaToIdeal = idealLocation - ctrlAttachedCamera.transform.position;
             ctrlAttachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
-            ctrlAttachedCamera.transform.rotation = Quaternion.Lerp(ctrlAttachedCamera.transform.rotation, transform.rotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
+
+            
+            Quaternion targetRotation = transform.rotation;
+            targetRotation = Quaternion.Lerp(targetRotation, Quaternion.LookRotation((transform.position - ctrlAttachedCamera.transform.position), transform.up), 0.5f);
+            
+
+
+            ctrlAttachedCamera.transform.rotation = Quaternion.Lerp(ctrlAttachedCamera.transform.rotation, targetRotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
             ;
 
         }

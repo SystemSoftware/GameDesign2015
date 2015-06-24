@@ -8,20 +8,31 @@ public class T7Controller : Controller {
 		base.Start();
 	}
 
+
+	public int layer = 1 << 20;
+
 	//Pro Frame
-	void LateUpdate () {
+    void LateUpdate()
+	{
 		if (ctrlAttachedCamera != null)
 		{
-			//Vector3 delta = target.position - this.transform.position;
-			
+
+			Rigidbody comp = GetComponentInParent<Rigidbody>();
+			float maxSpeed = 570f;
+
+
+
 			Vector3 idealLocation =
 				transform.position - transform.forward * cameraIdealDistance + transform.up * cameraIdealYOffset;
-			//target.position - delta.normalized * idealDistance;
-			//(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
 			Vector3 deltaToIdeal = idealLocation - ctrlAttachedCamera.transform.position;
-			ctrlAttachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
-			ctrlAttachedCamera.transform.rotation = Quaternion.Lerp(ctrlAttachedCamera.transform.rotation, transform.rotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
-			;
+			ctrlAttachedCamera.transform.transform.position += deltaToIdeal;
+			ctrlAttachedCamera.transform.RotateAround(transform.position, transform.right, (-77 * (Vector3.Dot(comp.velocity, transform.up)) / maxSpeed));
+			idealLocation = ctrlAttachedCamera.transform.transform.position;
+			RaycastHit hitinfo;
+			float dist = Vector3.Distance(transform.position, idealLocation);
+			if(Physics.Raycast(new Ray(transform.position, (idealLocation - transform.position).normalized), out hitinfo, dist, layer)){
+				ctrlAttachedCamera.transform.transform.position = Vector3.MoveTowards(hitinfo.point, transform.position, 2f);
+			}
 			ctrlAttachedCamera.transform.LookAt(transform.position);
 
 		}
