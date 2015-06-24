@@ -59,7 +59,7 @@ public class T4Path : MonoBehaviour {
     void FixedUpdate() {
         cur_dist_alrcalc = false;
 
-        if (ship_init) {
+        if (ship_init && gizmo_init) {
             // Calculcate the closest point on the path
             // closer to next point than to current one
             if (ptli+1<=(portal_point.Count-1)) {
@@ -85,7 +85,6 @@ public class T4Path : MonoBehaviour {
             }
 
             // apply force
-            if (gizmo_init) {
                 float perc_dist = cur_dist / radius;
                 // is the ship in the inner 60% around the actual portalpoint?
                 if (perc_dist <= 0.6f) { return; }
@@ -96,7 +95,7 @@ public class T4Path : MonoBehaviour {
                 //push_f.z = 0;
                 //float dx = distance;
                 rb.AddForce(push_f);
-            }
+            
         }
     }
 
@@ -110,7 +109,7 @@ public class T4Path : MonoBehaviour {
 			initGizmos();
 		}
         Gizmos.color = new Color32(255,255,255,255);
-        if ((ship_init) && (gizmo_init)) {
+        if ((ship_init) && (gizmo_init) && portal_point[ptli] != null && ship.transform.position != null) {
             Gizmos.DrawLine(portal_point[ptli], ship.transform.position);
         }
         // iterate over the pathobjects
