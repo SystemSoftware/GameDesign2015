@@ -77,6 +77,7 @@
      <Compile Include="Assets\T4\Level\T4Gravity.cs" />
      <Compile Include="Assets\T4\Level\T4Logic.cs" />
      <Compile Include="Assets\T4\Level\T4Path.cs" />
+     <Compile Include="Assets\T4\Level\T4ShipPositioned.cs" />
      <Compile Include="Assets\T4\T4Controller.cs" />
      <Compile Include="Assets\T4\T4ViperEngineDriver.cs" />
      <Compile Include="Assets\T4\T4ViperEngineReverse.cs" />
@@ -95,11 +96,8 @@
      <Compile Include="Assets\TerminateOnEscape.cs" />
      <Compile Include="Assets\VEngineDriver.cs" />
      <Compile Include="Assets\VThrusterAutoAlign.cs" />
-     <None Include="Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
-     <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\ProjectorLight.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
-     <None Include="Assets\Standard Assets\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
  <Reference Include="UnityEngine.UI">

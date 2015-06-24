@@ -27,8 +27,9 @@ public class T4Path : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
 
+        initGizmos();
+        gizmo_init = true;
         ui_debug = GameObject.Find("DebugInfo").GetComponent<Text>();
         
         /*
@@ -57,34 +58,38 @@ public class T4Path : MonoBehaviour {
 	}
 
     void FixedUpdate() {
+        
+
         cur_dist_alrcalc = false;
 
         if (ship_init && gizmo_init) {
-            // Calculcate the closest point on the path
-            // closer to next point than to current one
-            if (ptli+1<=(portal_point.Count-1)) {
-                //Debug.Log("##################################################");
-                cur_dist = Vector3.Distance(portal_point[ptli], ship.transform.position);
-                float next_dist = Vector3.Distance(portal_point[ptli+1], ship.transform.position);
-                cur_dist_alrcalc = true;
-
-                if (cur_dist > next_dist) {
-                    ptli++;
-                }
-            }
-            // closer to previous point than to current one
-            if (ptli - 1 > 0) {
-                if (!cur_dist_alrcalc) {
+            //if (ship.gameObject.GetComponent<T4ShipPositioned>().positioned) {
+            if (Level.AllowMotion) {
+                // Calculcate the closest point on the path
+                // closer to next point than to current one
+                if (ptli+1<=(portal_point.Count-1)) {
+                    //Debug.Log("##################################################");
                     cur_dist = Vector3.Distance(portal_point[ptli], ship.transform.position);
-                }
-                float prev_dist = Vector3.Distance(portal_point[ptli - 1], ship.transform.position);
+                    float next_dist = Vector3.Distance(portal_point[ptli+1], ship.transform.position);
+                    cur_dist_alrcalc = true;
 
-                if (cur_dist > prev_dist) {
-                    ptli--;
+                    if (cur_dist > next_dist) {
+                        ptli++;
+                    }
                 }
-            }
+                // closer to previous point than to current one
+                if (ptli - 1 > 0) {
+                    if (!cur_dist_alrcalc) {
+                        cur_dist = Vector3.Distance(portal_point[ptli], ship.transform.position);
+                    }
+                    float prev_dist = Vector3.Distance(portal_point[ptli - 1], ship.transform.position);
 
-            // apply force
+                    if (cur_dist > prev_dist) {
+                        ptli--;
+                    }
+                }
+
+                // apply force
                 float perc_dist = cur_dist / radius;
                 // is the ship in the inner 60% around the actual portalpoint?
                 if (perc_dist <= 0.6f) { return; }
@@ -95,60 +100,57 @@ public class T4Path : MonoBehaviour {
                 //push_f.z = 0;
                 //float dx = distance;
                 rb.AddForce(push_f);
-            
+            }
         }
     }
 
 
     void OnDrawGizmos() {
-        if (!gizmo_init) {
-            initGizmos();
-            gizmo_init = true;
-        }else if(Application.isEditor){
-			//in Editor
-			initGizmos();
-		}
         Gizmos.color = new Color32(255,255,255,255);
         if ((ship_init) && (gizmo_init) && portal_point[ptli] != null && ship.transform.position != null) {
             Gizmos.DrawLine(portal_point[ptli], ship.transform.position);
         }
-        // iterate over the pathobjects
-        for (int i = 0; i < path.Count; i++) {
-            Gizmos.color = rayColor;
-            Vector3 pos = path[i].position;
-            //float path_intervals = 6;//+1
-            Vector3 cubep = new Vector3(pos.x, pos.y, pos.z);
-            if (i > 0) {
-                Vector3 prev = path[i - 1].position;
-                Gizmos.DrawLine(prev, pos);
 
-                for (int k = 0; k < portal_point.Count; k++) {
-                    Gizmos.DrawWireSphere(portal_point[k], 2f);
+        if (Application.isEditor) { initGizmos(); }
+            // iterate over the pathobjects
+            for (int i = 0; i < path.Count; i++) {
+                Gizmos.color = rayColor;
+                Vector3 pos = path[i].position;
+                //float path_intervals = 6;//+1
+                Vector3 cubep = new Vector3(pos.x, pos.y, pos.z);
+                if (i > 0) {
+                    Vector3 prev = path[i - 1].position;
+                    Gizmos.DrawLine(prev, pos);
+                    /*
+                    for (int k = 0; k < portal_point.Count; k++) {
+                        Gizmos.DrawWireSphere(portal_point[k], 2f);
+                    }
+                     */
+                } else {
+                    // draw the first cube on the path
+                    Gizmos.DrawCube(cubep, new Vector3(1, 1, 1));
                 }
-            } else {
-                // draw the first cube on the path
-                Gizmos.DrawCube(cubep, new Vector3(1, 1, 1));
-            }
 
-            
-            // draw circle around it
-            Gizmos.color = circleColor;
-            float t = 0;
-            float precision = 8;
-            float box_size = 3;
-            // calc the points of the circle and draw it with cubes
-            for (int j = 0; j <= (precision); j++) {
-                t = (j / precision);
-                float x = Mathf.Lerp(pos.x-radius, pos.x+radius, t);
-                // draw upper circle
-                float y_top = pos.y + Mathf.Sqrt(Mathf.Pow(radius,2) - Mathf.Pow((x - pos.x), 2));
-                Gizmos.DrawCube(new Vector3(x, y_top, pos.z), new Vector3(box_size, box_size, box_size));
-                // draw lower circle
-                float y_bot = pos.y - Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((x - pos.x), 2));
-                Gizmos.DrawCube(new Vector3(x, y_bot, pos.z), new Vector3(box_size, box_size, box_size));
+                /*
+                // draw circle around it
+                Gizmos.color = circleColor;
+                float t = 0;
+                float precision = 8;
+                float box_size = 3;
+                // calc the points of the circle and draw it with cubes
+                for (int j = 0; j <= (precision); j++) {
+                    t = (j / precision);
+                    float x = Mathf.Lerp(pos.x-radius, pos.x+radius, t);
+                    // draw upper circle
+                    float y_top = pos.y + Mathf.Sqrt(Mathf.Pow(radius,2) - Mathf.Pow((x - pos.x), 2));
+                    Gizmos.DrawCube(new Vector3(x, y_top, pos.z), new Vector3(box_size, box_size, box_size));
+                    // draw lower circle
+                    float y_bot = pos.y - Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((x - pos.x), 2));
+                    Gizmos.DrawCube(new Vector3(x, y_bot, pos.z), new Vector3(box_size, box_size, box_size));
+                }
+                */
             }
-            
-        }
+        
     }
 
 

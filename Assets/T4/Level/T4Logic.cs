@@ -10,10 +10,11 @@ public class T4Logic : MonoBehaviour {
             // no motion
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start")) {
                 foreach (var ship in Level.ActiveShips) {
-                    ship.transform.position = path.transform.position;
-                    //ship.transform.position = new Vector3(0, 0, 0);
+                    //ship.transform.position = path.transform.position;
+                    ship.transform.position = new Vector3(0, 141.7f, -2029);
                     ship.ctrlAttachedCamera.farClipPlane = 6000f;
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
+                    ship.gameObject.AddComponent<T4ShipPositioned>();
                 }
 				// destroy level preview camera
                 DestroyImmediate(cam.gameObject);
