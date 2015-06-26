@@ -74,6 +74,7 @@
      <Compile Include="Assets\T2\T2ViperVDriver.cs" />
      <Compile Include="Assets\T2InsideCheckpoint.cs" />
      <Compile Include="Assets\T2SunBurstLevelLogic.cs" />
+     <Compile Include="Assets\T4\GUI\T4GUI.cs" />
      <Compile Include="Assets\T4\Level\T4Gravity.cs" />
      <Compile Include="Assets\T4\Level\T4Logic.cs" />
      <Compile Include="Assets\T4\Level\T4Path.cs" />
