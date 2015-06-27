@@ -14,7 +14,7 @@ public class T4Logic : MonoBehaviour {
                     ship.transform.position = new Vector3(0, 141.7f, -2029);
                     ship.ctrlAttachedCamera.farClipPlane = 6000f;
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
-                    ship.gameObject.AddComponent<T4ShipPositioned>();
+                    ship.gameObject.AddComponent<T4GUICrosshairHandler>();
                 }
 				// destroy level preview camera
                 DestroyImmediate(cam.gameObject);
@@ -47,7 +47,15 @@ public class T4Logic : MonoBehaviour {
         Level.angularDrag = 0.4f;
         Level.InitializationDone();
 
-        
+        // set gui at start pos
+        GameObject.Find("Crosshair0").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair0").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair1").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair1").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair2").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair2").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair3").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
+        GameObject.Find("Crosshair3").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
 	}
 	
 	// Update is called once per frame
