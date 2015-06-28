@@ -16,6 +16,11 @@ public class T4Logic : MonoBehaviour {
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
                     ship.gameObject.AddComponent<T4GUICrosshairHandler>();
                 }
+                var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects
+                foreach (var ship_object in ship_objects) { //add the following 2 Scripts to each of them
+                    ship_object.AddComponent<T4ShootBullet>(); //lets the ship shoot
+                    ship_object.AddComponent<T4PlayerCollision>(); //lets them behave acordingly when colliding with special objects
+                }
 				// destroy level preview camera
                 DestroyImmediate(cam.gameObject);
                 Level.EnableMotion(true);

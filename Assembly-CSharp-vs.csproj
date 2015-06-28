@@ -80,7 +80,13 @@
      <Compile Include="Assets\T4\Level\T4Logic.cs" />
      <Compile Include="Assets\T4\Level\T4Path.cs" />
      <Compile Include="Assets\T4\Level\T4ShipPositioned.cs" />
+     <Compile Include="Assets\T4\T4BulletTrigger.cs" />
      <Compile Include="Assets\T4\T4Controller.cs" />
+     <Compile Include="Assets\T4\T4PlayerCollision.cs" />
+     <Compile Include="Assets\T4\T4PlayerShoot.cs" />
+     <Compile Include="Assets\T4\T4RingTrigger.cs" />
+     <Compile Include="Assets\T4\T4RockSpawner.cs" />
+     <Compile Include="Assets\T4\T4ShootBullet.cs" />
      <Compile Include="Assets\T4\T4ViperEngineDriver.cs" />
      <Compile Include="Assets\T4\T4ViperEngineReverse.cs" />
      <Compile Include="Assets\T5\ShipMovement.cs" />
