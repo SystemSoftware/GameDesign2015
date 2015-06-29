@@ -44,13 +44,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _OcclusionMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
@@ -72,6 +65,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _OcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _MetallicGlossMap
         second:
           m_Texture: {fileID: 0}
@@ -85,15 +85,15 @@ Material:
       data:
         first:
           name: _Exposure
-        second: 1.29999995
+        second: 1
       data:
         first:
           name: _SunSize
-        second: .0399999991
+        second: .112999998
       data:
         first:
           name: _AtmosphereThickness
-        second: 1
+        second: 1.72000003
       data:
         first:
           name: _SrcBlend
@@ -132,11 +132,11 @@ Material:
         second: 0
       data:
         first:
-          name: _EmissionScaleUI
+          name: _Mode
         second: 0
       data:
         first:
-          name: _Mode
+          name: _EmissionScaleUI
         second: 0
       data:
         first:
@@ -158,7 +158,7 @@ Material:
       data:
         first:
           name: _GroundColor
-        second: {r: .368999988, g: .349000007, b: .340999991, a: 1}
+        second: {r: .0965073556, g: .23671405, b: .375, a: 1}
       data:
         first:
           name: _EmissionColorUI
