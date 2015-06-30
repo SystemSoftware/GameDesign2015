@@ -24,18 +24,13 @@ public class T6YawCorrection : MonoBehaviour {
         }
         else
         {
-            setForce(-yaw*3000);
+            setForce(-yaw*300);
         }
         
 	}
     void setForce(float f)
     {
-        if (this.name == "YawDownCorrection") { f = -f; }
-        if (f >= 0)
-        {
-            this.GetComponent<ConstantForce>().relativeForce = new Vector3(0, 0, f);
-            this.GetComponent<ParticleSystem>().startSpeed = f / -20;
-        }
-        
+        this.GetComponent<ConstantForce>().relativeForce = new Vector3(0, 0, f);
+        this.GetComponent<ParticleSystem>().startSpeed = f / -20;
     }
 }
