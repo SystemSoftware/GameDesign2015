@@ -15,6 +15,13 @@ public class T4Logic : MonoBehaviour {
                     ship.ctrlAttachedCamera.farClipPlane = 6000f;
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
                     ship.gameObject.AddComponent<T4GUICrosshairHandler>();
+
+                    GameObject smoke = Resources.Load("T4Smoke") as GameObject;
+                    GameObject g = Instantiate(smoke, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+
+                    g.transform.parent = ship.ctrlAttachedCamera.transform;
+                    g.transform.position = Vector3.zero;
+                    g.transform.rotation = new Quaternion(0, 50, 0, 0);
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects
                 foreach (var ship_object in ship_objects) { //add the following 2 Scripts to each of them
@@ -28,6 +35,7 @@ public class T4Logic : MonoBehaviour {
         } else {
             // motion allowed
             if (!once) {
+
                 // delete all the tiny cams for each player
                 foreach (var ship in Level.ActiveShips) {
                     Transform min_cam = ship.transform.Find("Camera");
