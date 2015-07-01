@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class T4Logic : MonoBehaviour {
     public Camera cam;
@@ -7,6 +8,7 @@ public class T4Logic : MonoBehaviour {
     bool once = false;
     GameObject fog;
     GameObject gui;
+    GameObject countdown;
     private Maximize m;
 
     void OnGUI() {
@@ -34,8 +36,22 @@ public class T4Logic : MonoBehaviour {
                 }
 				// destroy level preview camera
                 DestroyImmediate(cam.gameObject);
+                // enable motion finally (makes startpanel dispear!)
                 Level.EnableMotion(true);
-
+                
+                // tricky: BUT dont let ships moves before countdown!
+                foreach (var ship in Level.ActiveShips) {
+                    var bodies = ship.transform.GetComponentsInChildren<Rigidbody>();
+                    foreach (var body in bodies) {
+                        body.useGravity = false;
+                    }
+                    var forces = ship.transform.GetComponentsInChildren<ConstantForce>();
+                    foreach (var force in forces) {
+                        force.enabled = false;
+                    }
+                }
+                countdown.active = true;
+                
                 // enable gui
                 gui.active = true;
             }
@@ -76,12 +92,17 @@ public class T4Logic : MonoBehaviour {
         GameObject.Find("Crosshair2").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
         GameObject.Find("Crosshair3").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
         GameObject.Find("Crosshair3").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
+
+        countdown = GameObject.Find("Countdown").gameObject;
+        countdown.active = false;
+
         gui = GameObject.Find("GUI").gameObject;
         gui.active = false;
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         lastMState = m.maximized;
 	}
 
+    float timePassed = 0;
     bool lastMState;
 	// Update is called once per frame
 	void Update () {
@@ -91,6 +112,42 @@ public class T4Logic : MonoBehaviour {
             // causes unity to call the OnFillVBO function again
             gui.active = !gui.active;
             lastMState = m.maximized;
+        }
+        // count the time for handling the countdown
+        if (timePassed < 14) {
+            timePassed += Time.deltaTime;
+
+            // 3 > 2 (wait 3 sec at begin)
+            if ((timePassed >= 3) && (timePassed < 4)) {
+                Sprite cd_2 = Resources.Load<Sprite>("cd_2");
+                countdown.GetComponent<Image>().sprite = cd_2;
+            }
+            // 2 > 1
+            if ((timePassed >= 4.5f) && (timePassed < 5.5f)) {
+                Sprite cd_1 = Resources.Load<Sprite>("cd_1");
+                countdown.GetComponent<Image>().sprite = cd_1;
+            }
+            // 1 > GO!
+            if ((timePassed >= 6) && (timePassed < 7)) {
+                Sprite cd_go = Resources.Load<Sprite>("cd_go");
+                countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 200); 
+                countdown.GetComponent<Image>().sprite = cd_go;
+                // enable motion (now really)
+                foreach (var ship in Level.ActiveShips) {
+                    var bodies = ship.transform.GetComponentsInChildren<Rigidbody>();
+                    foreach (var body in bodies) {
+                        body.useGravity = true;
+                    }
+                    var forces = ship.transform.GetComponentsInChildren<ConstantForce>();
+                    foreach (var force in forces) {
+                        force.enabled = true;
+                    }
+                }
+            }
+            // remove GO!
+            if ((timePassed >= 7.5f) && (timePassed < 8.5f)) {
+                countdown.active = false;
+            }
         }
 	}
 }
