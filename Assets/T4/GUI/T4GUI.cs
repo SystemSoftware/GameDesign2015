@@ -9,6 +9,17 @@ public class T4GUI : Graphic {
     public int fillPercent;
     public bool fill = true;
     public int thikness = 5;
+    private int splitborder_thickness = 1; // *2, ex: 1*2 = 2px
+    private Maximize m = null;
+    private GameObject g;
+
+
+    void Start() {
+        g = GameObject.Find("GameLogic");
+        if (g != null) {
+            m = g.GetComponent<Maximize>();
+        }
+    }
 
     void Update() {
         this.thikness = (int)Mathf.Clamp(this.thikness, 0, rectTransform.rect.width / 2);
@@ -26,27 +37,11 @@ public class T4GUI : Graphic {
 
         vert.color = color;
         vert.position = new Vector3(0,0,0);
-        /*
-        vbo.Add(vert);
-        vert.position = new Vector3(10, 0, 0);
-        vbo.Add(vert);
-        vert.position = new Vector3(10, 10, 0);
-        vbo.Add(vert);
-        vert.position = new Vector3(0, 10, 0);
-        vbo.Add(vert);
 
-        vert.position = new Vector3(-10, 20, 0);
-        vbo.Add(vert);
-        vert.position = new Vector3(0, 20, 0);
-        vbo.Add(vert);
-        vert.position = new Vector3(0, 30, 0);
-        vbo.Add(vert);
-        vert.position = new Vector3(-10, 30, 0);
-        vbo.Add(vert);
-         * */
         Vector3 c = new Vector3(0, 0, 0);
         Vector3 p = new Vector3(c.x-100, c.y-100, 0);
         //vbo.Add(vert);
+        /* Draw red curved arc
         for (int i = 1; i <= 80; i++) {
             Vector3 tmp = new Vector3(0,0,0);
             tmp.x = (c.x + (p.x - c.x) * Mathf.Cos(i * Mathf.Deg2Rad) - (c.y - p.y) * Mathf.Sin(i * Mathf.Deg2Rad));
@@ -64,33 +59,37 @@ public class T4GUI : Graphic {
             vert.position = new Vector3(tmp.x, tmp.y+2, 0);
             vbo.Add(vert);
         }
-        /*
-        float f = (float)(this.fillPercent / 100f);
-        int fa = (int)(361 * f);
+        */
+        splitscreenBorder(vbo);
+    }
 
-        for (int i = 0; i < fa; i++) {
-            float rad = Mathf.Deg2Rad * i;
-            float c = Mathf.Cos(rad);
-            float s = Mathf.Sin(rad);
-            float x = outer * c;
-            float y = inner * c;
-            vert.color = color;
-            vert.position = prevX;
+    private bool test = false;
+    private void splitscreenBorder(List<UIVertex> vbo) {
+        if ((m != null) && (!m.maximized)) {
+            UIVertex vert = UIVertex.simpleVert;
+            vert.color = new Color32(30, 30, 30, 255);
+
+            float tmp = Screen.width / 2;
+            // horizontal line
+            vert.position = new Vector3(-tmp, -splitborder_thickness, 0);
             vbo.Add(vert);
-            prevX = new Vector2(outer * c, outer * s);
-            vert.position = prevX;
+            vert.position = new Vector3(tmp, -splitborder_thickness, 0);
             vbo.Add(vert);
-            if (this.fill) {
-                vert.position = Vector2.zero;
-                vbo.Add(vert);
-                vbo.Add(vert);
-            } else {
-                vert.position = new Vector2(inner * c, inner * s); ;
-                vbo.Add(vert);
-                vert.position = prevY;
-                vbo.Add(vert);
-                prevY = new Vector2(inner * c, inner * s);
-            }
-        }*/
+            vert.position = new Vector3(tmp, splitborder_thickness, 0);
+            vbo.Add(vert);
+            vert.position = new Vector3(-tmp, splitborder_thickness, 0);
+            vbo.Add(vert);
+            tmp = Screen.height / 2;
+            // vertical line
+            vert.position = new Vector3(-splitborder_thickness, -tmp, 0);
+            vbo.Add(vert);
+            vert.position = new Vector3(-splitborder_thickness, tmp, 0);
+            vbo.Add(vert);
+            vert.position = new Vector3(splitborder_thickness, tmp, 0);
+            vbo.Add(vert);
+            vert.position = new Vector3(splitborder_thickness, -tmp, 0);
+            vbo.Add(vert);
+            test = true;
+        }
     }
 }

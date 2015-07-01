@@ -43899,7 +43899,7 @@ Transform:
   m_PrefabParentObject: {fileID: 402654, guid: 037955c12c7729c4995aca5c9d387105, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1028630726}
-  m_LocalRotation: {x: .0172700416, y: .705862761, z: .706895769, w: -.0419292487}
+  m_LocalRotation: {x: .0172700398, y: .705862701, z: .706895709, w: -.041929245}
   m_LocalPosition: {x: 238.536163, y: -.00171530561, z: -1.70177388}
   m_LocalScale: {x: 1.00210333, y: 50.0000153, z: 2.11012125}
   m_Children: []
@@ -62742,7 +62742,7 @@ Transform:
   m_PrefabParentObject: {fileID: 402690, guid: 037955c12c7729c4995aca5c9d387105, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1514530566}
-  m_LocalRotation: {x: .693680584, y: .687789381, z: .137104586, w: .164181352}
+  m_LocalRotation: {x: .693680525, y: .687789321, z: .137104571, w: .164181337}
   m_LocalPosition: {x: 128.14679, y: 26.823349, z: 9.23608398}
   m_LocalScale: {x: .685183585, y: .441574246, z: .685183585}
   m_Children: []
@@ -63300,7 +63300,7 @@ Transform:
   m_PrefabParentObject: {fileID: 402692, guid: 037955c12c7729c4995aca5c9d387105, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1525846336}
-  m_LocalRotation: {x: .693680584, y: .687789381, z: .137104586, w: .164181352}
+  m_LocalRotation: {x: .693680525, y: .687789321, z: .137104571, w: .164181337}
   m_LocalPosition: {x: 131.570923, y: 26.823349, z: 10.85711}
   m_LocalScale: {x: .685183585, y: .441574246, z: .685183585}
   m_Children: []
@@ -66992,7 +66992,7 @@ Transform:
   m_PrefabParentObject: {fileID: 402694, guid: 037955c12c7729c4995aca5c9d387105, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1631243525}
-  m_LocalRotation: {x: .693680584, y: .687789381, z: .137104586, w: .164181352}
+  m_LocalRotation: {x: .693680525, y: .687789321, z: .137104571, w: .164181337}
   m_LocalPosition: {x: 134.944809, y: 26.8233471, z: 12.380949}
   m_LocalScale: {x: .685183585, y: .441574246, z: .685183585}
   m_Children: []
@@ -87816,7 +87816,7 @@ GameObject:
   - 222: {fileID: 2131327087}
   - 114: {fileID: 2131327086}
   m_Layer: 5
-  m_Name: Image
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87858,7 +87858,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -8, y: -54}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &2131777532

@@ -10,9 +10,11 @@ public class T4GUICrosshairHandler : MonoBehaviour {
     private float cam_width, cam_height, mx, my, fx, fy, offx, offy;
     private Controller ctrl;
     private bool maximized = false;
+    private Maximize m;
 
 	// Use this for initialization
 	void Start () {
+        m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         ctrl  = this.GetComponent<Controller>();
         inner_crosshair = GameObject.Find("Crosshair"+ctrl.ctrlControlIndex).transform.Find("Inner").gameObject;
         outer_crosshair = GameObject.Find("Crosshair"+ctrl.ctrlControlIndex).transform.Find("Outer").gameObject;
@@ -49,14 +51,9 @@ public class T4GUICrosshairHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            maximized = !maximized;
-        }
-
-
         offx = transform.forward.x;
         offy = transform.forward.y;
-        if (!maximized) {
+        if (!m.maximized) {
             // just one cam
             outer_crosshair.transform.position = new Vector3(mx + offx * 10, my + offy * 10, 0);
             inner_crosshair.transform.position = new Vector3(mx + offx * 20, my + offy * 20, 0);

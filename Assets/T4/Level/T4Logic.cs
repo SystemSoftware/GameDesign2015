@@ -5,6 +5,10 @@ public class T4Logic : MonoBehaviour {
     public Camera cam;
     public GameObject path;
     bool once = false;
+    GameObject fog;
+    GameObject gui;
+    private Maximize m;
+
     void OnGUI() {
         if (!Level.AllowMotion) {
             // no motion
@@ -16,12 +20,12 @@ public class T4Logic : MonoBehaviour {
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
                     ship.gameObject.AddComponent<T4GUICrosshairHandler>();
 
-                    GameObject smoke = Resources.Load("T4Smoke") as GameObject;
-                    GameObject g = Instantiate(smoke, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                    // add fog to the camera
+                    GameObject fog = Resources.Load("T4Fog") as GameObject;
+                    GameObject g = Instantiate(fog, new Vector3(0, 0, 15), Quaternion.identity) as GameObject;
+                    // make it a child of the playercamera
+                    g.transform.SetParent(ship.ctrlAttachedCamera.transform, false);
 
-                    g.transform.parent = ship.ctrlAttachedCamera.transform;
-                    g.transform.position = Vector3.zero;
-                    g.transform.rotation = new Quaternion(0, 50, 0, 0);
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects
                 foreach (var ship_object in ship_objects) { //add the following 2 Scripts to each of them
@@ -31,6 +35,9 @@ public class T4Logic : MonoBehaviour {
 				// destroy level preview camera
                 DestroyImmediate(cam.gameObject);
                 Level.EnableMotion(true);
+
+                // enable gui
+                gui.active = true;
             }
         } else {
             // motion allowed
@@ -69,10 +76,21 @@ public class T4Logic : MonoBehaviour {
         GameObject.Find("Crosshair2").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
         GameObject.Find("Crosshair3").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
         GameObject.Find("Crosshair3").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
+        gui = GameObject.Find("GUI").gameObject;
+        gui.active = false;
+        m = GameObject.Find("GameLogic").GetComponent<Maximize>();
+        lastMState = m.maximized;
 	}
-	
+
+    bool lastMState;
 	// Update is called once per frame
 	void Update () {
-	
+        // kinda a hack but works
+        // changed from max to split OR the other way around?
+        if (lastMState != m.maximized) {
+            // causes unity to call the OnFillVBO function again
+            gui.active = !gui.active;
+            lastMState = m.maximized;
+        }
 	}
 }
