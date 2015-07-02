@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f103e366f762f6346b4ab1eca821e311
-timeCreated: 1435762821
+guid: 63381ee54206c554a8066a46932aa0e7
+timeCreated: 1429458823
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -312,6 +312,67 @@ ModelImporter:
     4300116: Tube45
     4300118: Tube46
     4300120: Tube47
+    6400000: Box01
+    6400002: Capsule0
+    6400004: Capsule1
+    6400006: Capsule2
+    6400008: Cylinde0
+    6400010: Cylinde1
+    6400012: Cylinde2
+    6400014: Cylinde3
+    6400016: Cylinder
+    6400018: Mesh01
+    6400020: Object02
+    6400022: OilTank0
+    6400024: OilTank1
+    6400026: Sphere01
+    6400028: Sphere02
+    6400030: Sphere03
+    6400032: Tube02
+    6400034: Tube03
+    6400036: Tube04
+    6400038: Tube05
+    6400040: Tube06
+    6400042: Tube07
+    6400044: Tube08
+    6400046: Tube09
+    6400048: Tube10
+    6400050: Tube11
+    6400052: Tube12
+    6400054: Tube13
+    6400056: Tube14
+    6400058: Tube15
+    6400060: Tube16
+    6400062: Tube17
+    6400064: Tube18
+    6400066: Tube19
+    6400068: Tube20
+    6400070: Tube21
+    6400072: Tube22
+    6400074: Tube23
+    6400076: Tube24
+    6400078: Tube25
+    6400080: Tube26
+    6400082: Tube27
+    6400084: Tube28
+    6400086: Tube30
+    6400088: Tube31
+    6400090: Tube32
+    6400092: Tube33
+    6400094: Tube34
+    6400096: Tube35
+    6400098: Tube36
+    6400100: Tube37
+    6400102: Tube38
+    6400104: Tube39
+    6400106: Tube40
+    6400108: Tube41
+    6400110: Tube42
+    6400112: Tube43
+    6400114: Tube44
+    6400116: Tube45
+    6400118: Tube46
+    6400120: Tube47
   materials:
     importMaterials: 1
     materialName: 0
@@ -331,9 +392,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .200000003
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

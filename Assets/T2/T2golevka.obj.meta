@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: cb3d927052cf12547a53b0fe9d367448
-timeCreated: 1435762821
+guid: a1808a445229f3d489fe42bd142a9d4d
+timeCreated: 1429361459
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -12,6 +12,7 @@ ModelImporter:
     2300000: default
     3300000: default
     4300000: default
+    6400000: default
   materials:
     importMaterials: 1
     materialName: 0
@@ -33,7 +34,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

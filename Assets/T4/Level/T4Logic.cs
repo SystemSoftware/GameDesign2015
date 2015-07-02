@@ -123,24 +123,26 @@ public class T4Logic : MonoBehaviour {
 
     float timePassed = 0;
     void handleCountdown() {
+        if (!Level.AllowMotion) { return;  }
+
         // count the time for handling the countdown
         if (timePassed < 14) {
             timePassed += Time.deltaTime;
 
             // 3 > 2 (wait 3 sec at begin)
-            if ((timePassed >= 3) && (timePassed < 4)) {
+            if ((timePassed >= 1) && (timePassed < 2)) {
                 Sprite cd_2 = Resources.Load<Sprite>("cd_2");
                 countdown.GetComponent<Image>().sprite = cd_2;
             }
             // 2 > 1
-            if ((timePassed >= 4) && (timePassed < 5)) {
+            if ((timePassed >= 2) && (timePassed < 3)) {
                 Sprite cd_1 = Resources.Load<Sprite>("cd_1");
                 countdown.GetComponent<Image>().sprite = cd_1;
                 //countdownSound.GetComponent<AudioSource>().PlayOneShot(countdownSound.GetComponent<AudioSource>().clip);
                 //countdownSound.GetComponent<AudioSource>().clip.Play();
             }
             // 1 > GO!
-            if ((timePassed >= 5) && (timePassed < 6)) {
+            if ((timePassed >= 3) && (timePassed < 4)) {
                 Sprite cd_go = Resources.Load<Sprite>("cd_go");
                 countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(1024, 256);
                 countdown.GetComponent<Image>().sprite = cd_go;
@@ -158,7 +160,7 @@ public class T4Logic : MonoBehaviour {
                 countdownOver = true;
             }
             // remove GO!
-            if ((timePassed >= 6) && (timePassed < 8.5f)) {
+            if ((timePassed >= 4) && (timePassed < 5f)) {
                 countdown.active = false;
             }
         }

@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3307974}
   - 23: {fileID: 2319318}
   - 64: {fileID: 6410030}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 468592}
   - 135: {fileID: 13540138}
   - 54: {fileID: 5440956}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: T2Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: b4a5c63b1a2456043b0673b6986ba159, type: 2}
+  - {fileID: 2100000, guid: 82cf5536048fbb14989c0bea0b6a86e7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -136,7 +136,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 82cf5536048fbb14989c0bea0b6a86e7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 199614}
