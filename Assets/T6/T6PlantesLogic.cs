@@ -31,9 +31,7 @@ public class T6PlantesLogic : MonoBehaviour {
      * 
      * */
 
-    public static  GameObject planet;
     static Vector3 gravity;
-    public static long planetMass;
 
     void OnGUI()
     {
@@ -87,16 +85,14 @@ public class T6PlantesLogic : MonoBehaviour {
             ship.gameObject.AddComponent<LineRenderer>();
             ship.gameObject.AddComponent<T6ViewController>().enabled = false;
             ship.gameObject.GetComponent<T6ViewController>().setCameras(mapCamera.GetComponent<Camera>(), ship.ctrlAttachedCamera);
-            ship.gameObject.AddComponent<T6Trajectory>().enabled = true;
+            ship.gameObject.AddComponent<T6Trajectory>();
             GameObject positionOrb = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             positionOrb.transform.position = ship.transform.position;
             positionOrb.transform.localScale = new Vector3(1000, 1000, 1000);
             positionOrb.transform.parent = ship.transform;
             Destroy(positionOrb.GetComponent<SphereCollider>());
             positionOrb.layer = 5;
-            planetMass = 5000000000;
         }
-        planet = GameObject.Find("Planet1");
     }
 
 	// Use this for initialization
@@ -112,21 +108,4 @@ public class T6PlantesLogic : MonoBehaviour {
         Level.InitializationDone();   
 	}
 
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (Level.AllowMotion)
-        {
-            foreach (var ship in Level.ActiveShips)
-            {
-
-                Vector3 direction = planet.transform.position - ship.transform.position;
-                long r = (long)direction.magnitude;
-                direction.Normalize();
-                double G = 6.674;
-                gravity = direction * (float)(G * ship.GetComponent<Rigidbody>().mass * planetMass / (r * r));
-                ship.GetComponent<Rigidbody>().AddForce(gravity);
-
-            }
-        }
-	}
 }

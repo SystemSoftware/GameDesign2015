@@ -24,7 +24,7 @@ public class T6YawCorrection : MonoBehaviour {
         }
         else
         {
-            setForce(-yaw*300);
+            setForce(-yaw*800);
         }
         
 	}
