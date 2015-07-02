@@ -1372,6 +1372,7 @@ ModelImporter:
     102728: Wasser_004
     102730: Wasser_005
     102732: Wasser_006
+    102734: Cylinder_098
     400000: berg1
     400002: bush1
     400004: bush1_001
@@ -2739,6 +2740,7 @@ ModelImporter:
     402728: Wasser_004
     402730: Wasser_005
     402732: Wasser_006
+    402734: Cylinder_098
     2300000: berg1
     2300002: bush1
     2300004: bush1_001
@@ -4105,6 +4107,7 @@ ModelImporter:
     2302726: Wasser_004
     2302728: Wasser_005
     2302730: Wasser_006
+    2302732: Cylinder_098
     3300000: berg1
     3300002: bush1
     3300004: bush1_001
@@ -5471,6 +5474,7 @@ ModelImporter:
     3302726: Wasser_004
     3302728: Wasser_005
     3302730: Wasser_006
+    3302732: Cylinder_098
     4300000: Wasser_005
     4300002: Wasser_004
     4300004: Wasser_003
@@ -6837,6 +6841,7 @@ ModelImporter:
     4302726: Plane_021
     4302728: Plane_020
     4302730: Wasser_006
+    4302732: Cylinder_098
     7400000: Default Take
     9500000: //RootNode
   materials:

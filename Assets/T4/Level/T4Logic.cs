@@ -10,6 +10,8 @@ public class T4Logic : MonoBehaviour {
     GameObject gui;
     GameObject countdown;
     private Maximize m;
+    public GameObject countdownSound, startSound;
+    public bool countdownOver = false;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
@@ -20,7 +22,7 @@ public class T4Logic : MonoBehaviour {
                     //ship.transform.position = new Vector3(0, 141.7f, -2029);
                     ship.ctrlAttachedCamera.farClipPlane = 6000f;
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
-                    ship.gameObject.AddComponent<T4GUICrosshairHandler>();
+                    ship.gameObject.AddComponent<T4GUICrosshairHandler>();  
 
                     // add fog to the camera
                     GameObject fog = Resources.Load("T4Fog") as GameObject;
@@ -93,26 +95,34 @@ public class T4Logic : MonoBehaviour {
         GameObject.Find("Crosshair3").transform.Find("Inner").gameObject.transform.position = new Vector3(-200, -200, 0);
         GameObject.Find("Crosshair3").transform.Find("Outer").gameObject.transform.position = new Vector3(-200, -200, 0);
 
+        // deactivate the countdown
         countdown = GameObject.Find("Countdown").gameObject;
         countdown.active = false;
 
+        // deactivate the gui
         gui = GameObject.Find("GUI").gameObject;
         gui.active = false;
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         lastMState = m.maximized;
 	}
 
-    float timePassed = 0;
     bool lastMState;
 	// Update is called once per frame
 	void Update () {
         // kinda a hack but works
-        // changed from max to split OR the other way around?
+        // changed from max to split OR the other way around
         if (lastMState != m.maximized) {
             // causes unity to call the OnFillVBO function again
             gui.active = !gui.active;
             lastMState = m.maximized;
         }
+
+        handleCountdown();
+	}
+
+
+    float timePassed = 0;
+    void handleCountdown() {
         // count the time for handling the countdown
         if (timePassed < 14) {
             timePassed += Time.deltaTime;
@@ -123,14 +133,16 @@ public class T4Logic : MonoBehaviour {
                 countdown.GetComponent<Image>().sprite = cd_2;
             }
             // 2 > 1
-            if ((timePassed >= 4.5f) && (timePassed < 5.5f)) {
+            if ((timePassed >= 4) && (timePassed < 5)) {
                 Sprite cd_1 = Resources.Load<Sprite>("cd_1");
                 countdown.GetComponent<Image>().sprite = cd_1;
+                //countdownSound.GetComponent<AudioSource>().PlayOneShot(countdownSound.GetComponent<AudioSource>().clip);
+                //countdownSound.GetComponent<AudioSource>().clip.Play();
             }
             // 1 > GO!
-            if ((timePassed >= 6) && (timePassed < 7)) {
+            if ((timePassed >= 5) && (timePassed < 6)) {
                 Sprite cd_go = Resources.Load<Sprite>("cd_go");
-                countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 200); 
+                countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(1024, 256);
                 countdown.GetComponent<Image>().sprite = cd_go;
                 // enable motion (now really)
                 foreach (var ship in Level.ActiveShips) {
@@ -143,11 +155,12 @@ public class T4Logic : MonoBehaviour {
                         force.enabled = true;
                     }
                 }
+                countdownOver = true;
             }
             // remove GO!
-            if ((timePassed >= 7.5f) && (timePassed < 8.5f)) {
+            if ((timePassed >= 6) && (timePassed < 8.5f)) {
                 countdown.active = false;
             }
         }
-	}
+    }
 }

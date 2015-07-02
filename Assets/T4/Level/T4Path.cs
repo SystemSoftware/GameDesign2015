@@ -25,6 +25,8 @@ public class T4Path : MonoBehaviour {
     private int ptli = 0;
     private Vector3 pt_a;
 
+    private T4Logic logic;
+
 	// Use this for initialization
 	void Start () {
 
@@ -42,6 +44,7 @@ public class T4Path : MonoBehaviour {
          * */
         pt_a = new Vector3(0, 0, 0);
 
+        logic = GameObject.Find("Logic").GetComponent<T4Logic>();
 	}
 	
 	// Update is called once per frame
@@ -68,7 +71,6 @@ public class T4Path : MonoBehaviour {
                 // Calculcate the closest point on the path
                 // closer to next point than to current one
                 if (ptli+1<=(portal_point.Count-1)) {
-                    //Debug.Log("##################################################");
                     cur_dist = Vector3.Distance(portal_point[ptli], ship.transform.position);
                     float next_dist = Vector3.Distance(portal_point[ptli+1], ship.transform.position);
                     cur_dist_alrcalc = true;
@@ -77,18 +79,42 @@ public class T4Path : MonoBehaviour {
                         ptli++;
                     }
                 }
-                // closer to previous point than to current one
-                if (ptli - 1 > 0) {
-                    if (!cur_dist_alrcalc) {
-                        cur_dist = Vector3.Distance(portal_point[ptli], ship.transform.position);
-                    }
-                    float prev_dist = Vector3.Distance(portal_point[ptli - 1], ship.transform.position);
+                /** push ship forward*/
+                if((ptli+1 <= portal_point.Count-1) && (logic.countdownOver)){
+                    Vector3 forward = (portal_point[ptli + 1] - portal_point[ptli]).normalized * 4000;
+                    rb.AddForce(forward);
+                }
+                
+                /** rotate ship towards current path_point+40 */
+                if ((ptli + 40 <= portal_point.Count - 1) && (logic.countdownOver)) {
+                    // pid controller to adjust the torgue of the ship
+                    // ref: http://webber.physik.uni-freiburg.de/~hon/vorlss02/Literatur/Ingenieurswiss/pid/pid+matlab/PID%20systems%20tutorial.htm
+                    VectorPid angularVelocityController = new VectorPid(1.7766f, 0, 0.2553191f);
+                    VectorPid headingController = new VectorPid(1.244681f, 0, 0.06382979f);
+ 
+                    Vector3 target = portal_point[ptli+40];
+                    var angularVelocityError = rb.angularVelocity * -1;
+                    Debug.DrawRay(ship.transform.position, rb.angularVelocity * 10, Color.black);
 
-                    if (cur_dist > prev_dist) {
-                        ptli--;
-                    }
+                    var angularVelocityCorrection = angularVelocityController.Update(angularVelocityError, Time.deltaTime);
+                    Debug.DrawRay(ship.transform.position, angularVelocityCorrection, Color.green);
+
+                    rb.AddTorque(angularVelocityCorrection);
+
+                    var desiredHeading = target - ship.transform.position;
+                    Debug.DrawRay(ship.transform.position, desiredHeading, Color.yellow);
+
+                    var currentHeading = ship.transform.forward;
+                    Debug.DrawRay(ship.transform.position, currentHeading * 15, Color.blue);
+
+                    var headingError = Vector3.Cross(currentHeading, desiredHeading);
+                    var headingCorrection = headingController.Update(headingError, Time.deltaTime);
+
+                    rb.AddTorque(headingCorrection);
+                    //Debug.Log("rotating");
                 }
 
+                /** Drag  ship to the next point*/
                 // apply force
                 float perc_dist = cur_dist / radius;
                 // is the ship in the inner 60% around the actual portalpoint?
@@ -100,6 +126,9 @@ public class T4Path : MonoBehaviour {
                 //push_f.z = 0;
                 //float dx = distance;
                 rb.AddForce(push_f);
+
+                
+
             }
         }
     }

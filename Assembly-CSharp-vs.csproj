@@ -75,9 +75,11 @@
      <Compile Include="Assets\T2InsideCheckpoint.cs" />
      <Compile Include="Assets\T2SunBurstLevelLogic.cs" />
      <Compile Include="Assets\T4\GUI\T4GUI.cs" />
+     <Compile Include="Assets\T4\GUI\T4GUICountdown.cs" />
      <Compile Include="Assets\T4\GUI\T4GUICrosshairHandler.cs" />
      <Compile Include="Assets\T4\Level\T4Gravity.cs" />
      <Compile Include="Assets\T4\Level\T4Logic.cs" />
+     <Compile Include="Assets\T4\Level\T4PID.cs" />
      <Compile Include="Assets\T4\Level\T4Path.cs" />
      <Compile Include="Assets\T4\Level\T4ShipPositioned.cs" />
      <Compile Include="Assets\T4\T4BulletTrigger.cs" />
