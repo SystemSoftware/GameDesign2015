@@ -93,6 +93,8 @@
      <Compile Include="Assets\T4\T4ShootBullet.cs" />
      <Compile Include="Assets\T4\T4ViperEngineDriver.cs" />
      <Compile Include="Assets\T4\T4ViperEngineReverse.cs" />
+     <Compile Include="Assets\T4\T4_E29\T4E29_Controller.cs" />
+     <Compile Include="Assets\T4\T4_E29\T4E29_Driver.cs" />
      <Compile Include="Assets\T5\ShipMovement.cs" />
      <Compile Include="Assets\T6\GenerateThrustRotation.cs" />
      <Compile Include="Assets\T6\RayTest.cs" />

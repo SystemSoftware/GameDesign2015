@@ -70760,6 +70760,7 @@ MonoBehaviour:
   path: {fileID: 1701923975}
   countdownSound: {fileID: 121856, guid: d15421b922fed21459957018726e974c, type: 2}
   startSound: {fileID: 186128, guid: a3c3e10e286e64b41b5dc87e9ed3c982, type: 2}
+  countdownOver: 0
 --- !u!4 &1724282284
 Transform:
   m_ObjectHideFlags: 0
