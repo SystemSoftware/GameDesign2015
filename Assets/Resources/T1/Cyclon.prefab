@@ -533,7 +533,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195418}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -567,6 +567,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 2
+  querySign: 1
 --- !u!114 &11414050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -585,7 +587,6 @@ MonoBehaviour:
   ctrlAxisHorizontal: 
   ctrlAxisVertical: 
   ctrlAxisOther: 
-  ctrlAxisFire: 
   setMassTo100: 1
   cameraIdealDistance: 50
   cameraIdealYOffset: 0
@@ -603,6 +604,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 0
+  querySign: 1
   idealDistance: 10
   effectiveAtDistance: 20
 --- !u!114 &11430136
@@ -619,6 +622,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 500000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 0
+  querySign: 1
 --- !u!114 &11430482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,6 +638,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 2
+  querySign: -1
 --- !u!114 &11437964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -647,6 +654,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 3
+  querySign: 1
 --- !u!114 &11443572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -661,6 +670,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 3
+  querySign: -1
 --- !u!114 &11449766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,6 +686,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 3
+  querySign: 1
 --- !u!114 &11455096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -689,6 +702,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 0
+  querySign: 1
   idealDistance: 20
   effectiveAtDistance: 30
 --- !u!114 &11456030
@@ -705,6 +720,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 0
+  querySign: 1
   idealDistance: 10
   effectiveAtDistance: 20
 --- !u!114 &11457142
@@ -721,6 +738,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 0
+  querySign: 1
   idealDistance: 10
   effectiveAtDistance: 20
 --- !u!114 &11468292
@@ -737,6 +756,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 3
+  querySign: -1
 --- !u!114 &11481262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -751,6 +772,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 2
+  querySign: -1
 --- !u!114 &11487734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -765,6 +788,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 0
+  querySign: 1
   idealDistance: 10
   effectiveAtDistance: 20
 --- !u!114 &11496430
@@ -781,6 +806,8 @@ MonoBehaviour:
   maxLifetime: .5
   maxForce: 10000
   offset: {x: 0, y: 0, z: 0}
+  queryAxis: 2
+  querySign: 1
 --- !u!136 &13644794
 CapsuleCollider:
   m_ObjectHideFlags: 1

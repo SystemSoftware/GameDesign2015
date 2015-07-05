@@ -1,46 +1,42 @@
 fileFormatVersion: 2
-guid: 2ae53d55e4f910e458d9215d8775ab29
-timeCreated: 1436114304
-licenseType: Free
+guid: 95b8d7fadd7c26d42b50b69efecd7ac1
+labels:
+- Architecture
+- Concrete
+- Industrial
+- L-section
+- Pipe
+- Prop
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Body1
-    100004: Box001
-    100006: LRCS
-    100008: RCSR
-    100010: ThrustFlaps00
-    100012: Torus001
-    400000: //RootNode
-    400002: Body1
-    400004: Box001
-    400006: LRCS
-    400008: RCSR
-    400010: ThrustFlaps00
-    400012: Torus001
-    2300000: Body1
-    2300002: Box001
-    2300004: LRCS
-    2300006: RCSR
-    2300008: ThrustFlaps00
-    2300010: Torus001
-    3300000: Body1
-    3300002: Box001
-    3300004: LRCS
-    3300006: RCSR
-    3300008: ThrustFlaps00
-    3300010: Torus001
-    4300000: Body1
-    4300002: Box001
-    4300004: LRCS
-    4300006: RCSR
-    4300008: ThrustFlaps00
-    4300010: Torus001
+    100000: L
+    100002: //RootNode
+    100004: concrete_pipe
+    100006: Concrete_pipe_bend
+    100008: Concrete_pipe_bend_collider
+    400000: L
+    400002: //RootNode
+    400004: concrete_pipe
+    400006: Concrete_pipe_bend
+    400008: Concrete_pipe_bend_collider
+    2300000: L
+    2300002: concrete_pipe
+    2300004: Concrete_pipe_bend
+    2300006: Concrete_pipe_bend_collider
+    3300000: L
+    3300002: concrete_pipe
+    3300004: Concrete_pipe_bend
+    3300006: Concrete_pipe_bend_collider
+    4300000: L
+    4300002: concrete_pipe
+    4300004: Concrete_pipe_bend
+    4300006: Concrete_pipe_bend_collider
+    9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
-    materialSearch: 1
+    materialSearch: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -56,10 +52,10 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .100000001
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -70,7 +66,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1

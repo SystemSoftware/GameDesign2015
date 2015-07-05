@@ -24,7 +24,11 @@ public class T6GenerateThrustRotation : MonoBehaviour {
 	void Update () {
 		if (!done) {
 			done=true;
-            Transform ship = this.transform;
+            Transform ship = this.transform.parent;
+            Transform shipOld = ship;
+            ship.position = new Vector3(0, 0, 0);
+            ship.rotation = Quaternion.Euler(0, 0, 0);
+
             RecognizeSelectedObject(this.gameObject);
             p.Set(0, 0, 1);
             UpdatePivot();
@@ -42,13 +46,15 @@ public class T6GenerateThrustRotation : MonoBehaviour {
                 thrustFlap.AddComponent<MeshFilter>().sharedMesh = this.GetComponent<MeshFilter>().sharedMesh;
                 thrustFlap.AddComponent<MeshCollider>().convex = true; //Kollisionsboxen verschieben CoM                
                 thrustFlap.transform.parent = this.transform.parent;
-                thrustFlap.transform.localPosition = new Vector3(x, y, z);
+                thrustFlap.transform.position = new Vector3(x, y, z);
                 float tmp = Mathf.Sqrt(ship.localScale.x)*1.2f;
                 thrustFlap.transform.localScale = new Vector3(tmp, tmp, tmp);
                 thrustFlap.transform.Rotate(new Vector3(0, 0, 1), 360f / (float)count * i);
                 thrustFlap.AddComponent<T6RotateThrustFlaps>();
                 
 			}
+            ship.position = shipOld.position;
+            ship.rotation = shipOld.rotation;
 		}
 
 	}

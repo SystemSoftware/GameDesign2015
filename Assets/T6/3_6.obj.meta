@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2ae53d55e4f910e458d9215d8775ab29
-timeCreated: 1436114304
+guid: e191fdba7a5c8cf408aad0373ed03cd6
+timeCreated: 1432105529
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -12,6 +12,7 @@ ModelImporter:
     100008: RCSR
     100010: ThrustFlaps00
     100012: Torus001
+    100014: Tube001
     400000: //RootNode
     400002: Body1
     400004: Box001
@@ -19,24 +20,28 @@ ModelImporter:
     400008: RCSR
     400010: ThrustFlaps00
     400012: Torus001
+    400014: Tube001
     2300000: Body1
     2300002: Box001
     2300004: LRCS
     2300006: RCSR
     2300008: ThrustFlaps00
     2300010: Torus001
+    2300012: Tube001
     3300000: Body1
     3300002: Box001
     3300004: LRCS
     3300006: RCSR
     3300008: ThrustFlaps00
     3300010: Torus001
+    3300012: Tube001
     4300000: Body1
     4300002: Box001
     4300004: LRCS
     4300006: RCSR
     4300008: ThrustFlaps00
     4300010: Torus001
+    4300012: Tube001
   materials:
     importMaterials: 1
     materialName: 0

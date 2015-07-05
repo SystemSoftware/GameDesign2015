@@ -1,0 +1,14 @@
+Library/
+obj/
+Temp/
+*_Data/
+*.exe
+*.suo
+*.sln
+*.csproj
+Assets/Resources/T2/Viper2.prefab
+Assets/Resources/T2/Viper2.prefab.meta
+Assets/T2/T2ViperDriver0.cs
+Assets/T2/T2ViperDriver1.cs
+Assembly-UnityScript-vs.unityproj
+Assembly-UnityScript.unityproj

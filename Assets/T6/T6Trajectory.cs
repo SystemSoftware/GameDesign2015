@@ -16,26 +16,11 @@ public class T6Trajectory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Level.AllowMotion)
-        {
-            this.enabled = true;
-        }
-        else { this.enabled = false; }
+	
 	}
 
     void FixedUpdate()
     {
-   
-        foreach (GameObject planet in GameObject.FindGameObjectsWithTag("Planet"))
-        {
-            Vector3 direction = planet.transform.position - this.transform.position;
-            long r = (long)direction.magnitude;
-            direction.Normalize();
-            double G = 6.674;
-            Vector3 gravity = direction * (float)(G * this.GetComponent<Rigidbody>().mass * planet.GetComponent<Rigidbody>().mass / (r * r));
-
-            this.GetComponent<Rigidbody>().AddForce(gravity);
-        }
        var points =  calculateTrajectory(100);
        drawTrajectory(points);
        
@@ -50,18 +35,17 @@ public class T6Trajectory : MonoBehaviour {
         points[0] = this.transform.position;
         for (int i = 1; i < iterations; i++)
         {
-            
-            foreach (GameObject planet in GameObject.FindGameObjectsWithTag("Planet"))
-            {
-                Vector3 direction = planet.transform.position - points[i - 1];
-                long r = (long)direction.magnitude;
-                direction.Normalize();
-                double G = 6.674;
-                Vector3 grav = direction * (float)(G * 100 * planet.GetComponent<Rigidbody>().mass / (r * r));
-                velocity += grav * 0.01f;
-                
-            }
-            points[i] = points[i - 1] + velocity;
+            Vector3 trajectory = velocity;
+            Vector3 direction = T6PlantesLogic.planet.transform.position - points[i - 1];
+            long r = (long)direction.magnitude;
+            direction.Normalize();
+            double G = 6.674;
+            Vector3 grav = direction * (float)(G * 100 * T6PlantesLogic.planetMass / (r * r));
+            trajectory += grav*0.01f;
+			velocity = trajectory;
+            points[i] = points[i - 1] + trajectory;
+
+ 
 
         }
         orbitPane = Vector3.Cross(points[0] - points[iterations / 2], points[iterations / 2] - points[iterations - 1]);

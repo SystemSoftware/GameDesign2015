@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Spawn
+  - Planet
   - Ship
   layers:
   - Default
@@ -19,7 +21,6 @@ TagManager:
   - Ship3
   - Ship4
   - Non-Standard
-  - Background
   - 
   - 
   - 
@@ -27,6 +28,7 @@ TagManager:
   - 
   - 
   - 
+  - Camera Collidable Layer
   - 
   - 
   - 

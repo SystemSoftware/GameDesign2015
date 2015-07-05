@@ -38,7 +38,7 @@ public class T1AutoDistance : DirectEngineDriver {
             {
                 float timeToImpact = hit.distance / speedTowardsWall;
                 float timeToCompensate = Mathf.Max(0.1f, (hit.distance - idealDistance) / speedTowardsWall);
-                float severity = (1f - Mathf.SmoothStep(0f, effectiveAtDistance, (hit.distance - idealDistance))) * 2f;
+                float severity = (1f - SmoothStep(0f, effectiveAtDistance, (hit.distance - idealDistance))) * 2f;
                 counterAcceleration = speedTowardsWall / timeToCompensate * severity * 200f;
             //    Debug.Log(hit.distance + " => " + severity);
             }
