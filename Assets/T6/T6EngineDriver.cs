@@ -6,16 +6,11 @@ public class T6EngineDriver : EngineDriver {
     string pitch;
     string yaw;
 
-    void Start()
-    {
-        base.Start();
-    }
-
 	// Override EngineDriver Update function to scale the input without a backward range
     void Update()
     {
 
-        
+
         //bool enabled = Input.GetKey(key);
 
         if (axis == null || axis.Length == 0)
@@ -35,8 +30,6 @@ public class T6EngineDriver : EngineDriver {
             if (force != null)
             {
                force.relativeForce = new Vector3(0, 0, maxForce * f);
-               Debug.DrawRay(this.force.transform.position, this.force.transform.forward * 50);
-
             }
         }
 

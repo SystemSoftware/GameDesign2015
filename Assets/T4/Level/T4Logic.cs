@@ -22,7 +22,8 @@ public class T4Logic : MonoBehaviour {
                     //ship.transform.position = new Vector3(0, 141.7f, -2029);
                     ship.ctrlAttachedCamera.farClipPlane = 6000f;
 					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
-                    ship.gameObject.AddComponent<T4GUICrosshairHandler>();  
+                    ship.gameObject.AddComponent<T4GUICrosshairHandler>();
+                    ship.gameObject.AddComponent<T4GUIHealthbarHandler>();
 
                     // add fog to the camera
                     GameObject fog = Resources.Load("T4Fog") as GameObject;

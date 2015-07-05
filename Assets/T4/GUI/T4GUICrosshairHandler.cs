@@ -9,7 +9,6 @@ public class T4GUICrosshairHandler : MonoBehaviour {
     private Camera c;
     private float cam_width, cam_height, mx, my, fx, fy, offx, offy;
     private Controller ctrl;
-    private bool maximized = false;
     private Maximize m;
 
 	// Use this for initialization
