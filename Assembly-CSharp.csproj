@@ -96,9 +96,6 @@
      <Compile Include="Assets\T4\T4_E29\T4E29_Controller.cs" />
      <Compile Include="Assets\T4\T4_E29\T4E29_Driver.cs" />
      <Compile Include="Assets\T5\ShipMovement.cs" />
-     <Compile Include="Assets\T6\GenerateThrustRotation.cs" />
-     <Compile Include="Assets\T6\RayTest.cs" />
-     <Compile Include="Assets\T6\RotateThrustFlaps.cs" />
      <Compile Include="Assets\T6\T6BulletPortal.cs" />
      <Compile Include="Assets\T6\T6Controller.cs" />
      <Compile Include="Assets\T6\T6EngineDriver.cs" />
@@ -115,7 +112,7 @@
      <Compile Include="Assets\T6\T6UIController.cs" />
      <Compile Include="Assets\T6\T6ViewController.cs" />
      <Compile Include="Assets\T6\T6YawCorrection.cs" />
-     <Compile Include="Assets\T6\TestSceneLogic.cs" />
+     <Compile Include="Assets\T6TestRotateMapCamera.cs" />
      <Compile Include="Assets\TerminateOnEscape.cs" />
      <Compile Include="Assets\VEngineDriver.cs" />
      <Compile Include="Assets\VThrusterAutoAlign.cs" />
