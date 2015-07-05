@@ -771,8 +771,11 @@ MonoBehaviour:
   ctrlAxisHorizontal: 
   ctrlAxisVertical: 
   ctrlAxisOther: 
+  setMassTo100: 0
   cameraIdealDistance: 50
   cameraIdealYOffset: 0
+  cameraCollisionLayer: 20
+  cameraWallOffset: 2
 --- !u!114 &11476082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8522,7 +8525,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: setMassTo100
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168138}

@@ -76,7 +76,7 @@ public class DirectEngineDriver : MonoBehaviour {
 			if (sys != null)
 			{
 				sys.enableEmission = f != 0f;
-				sys.startLifetime = f * maxLifetime;
+				sys.startLifetime = Mathf.Clamp01(f) * maxLifetime;
 			}
 
 			{
