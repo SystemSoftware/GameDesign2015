@@ -10,7 +10,7 @@ public class Maximize : MonoBehaviour {
 	}
 
 
-    bool maximized = false;
+    public bool maximized = false;
     List<Rect> originalRects = new List<Rect>();
 	
 	// Update is called once per frame

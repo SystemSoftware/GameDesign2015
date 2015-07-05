@@ -27,7 +27,8 @@ public class Controller : MonoBehaviour {
                     ctrlAxisCustom,         //!< Axis name used to issue a custom command
 					ctrlAxisHorizontal, //!< Axis name used to query the horizontal axis of the local joystick
                     ctrlAxisVertical,   //!< Axis name used to query the vertical axis of the local joystick
-                    ctrlAxisOther;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
+                    ctrlAxisOther,      //!< Axis name used to query the rotational axis of the local joystick (if supported)
+					ctrlAxisFire;
 
     public bool setMassTo100 = true;
 
@@ -90,6 +91,7 @@ public class Controller : MonoBehaviour {
         ctrlAxisVertical = "Vertical" + controlIndex;
         ctrlAxisAccelerate = "Accelerate" + controlIndex;
         ctrlAxisOther = "Other" + controlIndex;
+		ctrlAxisFire = "Fire" + controlIndex;
 
 		ctrlAttachedCamera = camera;
         this.ctrlControlIndex = controlIndex;

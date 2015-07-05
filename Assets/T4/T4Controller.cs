@@ -9,8 +9,10 @@ public class T4Controller : Controller {
 		float w = ctrlAttachedCamera.rect.width/4,
 		h = ctrlAttachedCamera.rect.height / 4;
 		Rect pos = new Rect(ctrlAttachedCamera.rect.center.x-w/2,ctrlAttachedCamera.rect.min.y,w,h);
-		this.GetComponentInChildren<Camera>().rect = pos;
-		this.GetComponentInChildren<Camera>().enabled = ctrlAttachedCamera.enabled;
+        if (this.GetComponentInChildren<Camera>() != null) {
+            this.GetComponentInChildren<Camera>().rect = pos;
+            this.GetComponentInChildren<Camera>().enabled = ctrlAttachedCamera.enabled;
+        }
 		
 	}
 
