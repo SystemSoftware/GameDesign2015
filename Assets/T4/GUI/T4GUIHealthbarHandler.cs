@@ -3,21 +3,23 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class T4GUIHealthbarHandler : MonoBehaviour {
+    private int health;
     private Controller ctrl;
     private Maximize m;
     private GameObject hbar_numA, hbar_numB, hbar_numC, bar, icon;
+    private Sprite[] sprites;
 
     // screen pos
     Vector2 fullscr_anchor, split_anchor;
 
 	// Use this for initialization
 	void Start () {
+        health = 30;
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         ctrl = this.GetComponent<Controller>();
 
         // load sprites
-        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/MiddleNumbers");
-        Debug.Log("sprites loaded = " + sprites.Length);
+        sprites = Resources.LoadAll<Sprite>("Sprites/MiddleNumbers");
 
         // first number A config
         hbar_numA = GameObject.Find("Healthbar"+ctrl.ctrlControlIndex).transform.Find("NumA").gameObject;
@@ -74,9 +76,54 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
         }
 
 	}
-	
+
+    public void setHealth(int new_health) {
+        health = new_health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    int count = 0;
 	// Update is called once per frame
 	void Update () {
+        // get health numbers (A,B,C)
+        int split_adjust = 0, full_adjust = 0;
+        if (health == 100) {
+            // show number A B
+            hbar_numA.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            hbar_numB.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            // set numbers
+            hbar_numA.GetComponent<Image>().sprite = sprites[1];
+            hbar_numB.GetComponent<Image>().sprite = sprites[0];
+            hbar_numC.GetComponent<Image>().sprite = sprites[0];
+            split_adjust = 0;
+            full_adjust = 0;
+        } else {
+            if (health < 10) { // health under 10
+                // hide number A and B
+                hbar_numA.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                hbar_numB.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                // set numbers
+                int c = health % 10;
+                hbar_numC.GetComponent<Image>().sprite = sprites[c];
+                split_adjust = 26;
+                full_adjust = 60;
+            } else { // health 10-99
+                // hide number A
+                hbar_numA.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                // set numbers
+                int b = health / 10;
+                int c = health % 10;
+                hbar_numB.GetComponent<Image>().sprite = sprites[b];
+                hbar_numC.GetComponent<Image>().sprite = sprites[c];
+                split_adjust = 10;
+                full_adjust = 20;
+            }
+        }
+
+        // position the ui
         if (!m.maximized) { // splitscreen
             if (ctrl.ctrlControlIndex == 0) {   // adjust size of components used for player 1
                 icon.GetComponent<RectTransform>().sizeDelta = new Vector2(32, 32);
@@ -86,9 +133,10 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
                 bar.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 25);
             }
             // position components
-            icon.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 10, split_anchor.y + 25);
-            hbar_numA.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 35, split_anchor.y + 25);
-            hbar_numB.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 55, split_anchor.y + 25);
+            icon.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 16 + split_adjust, split_anchor.y + 25);
+            
+            hbar_numA.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 36, split_anchor.y + 25);
+            hbar_numB.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 53, split_anchor.y + 25);
             hbar_numC.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 75, split_anchor.y + 25);
             bar.GetComponent<RectTransform>().position = split_anchor;
         } else { // fullscreen
@@ -107,12 +155,20 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
                 hbar_numC.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
                 bar.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 50);
                 // position components
-                icon.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 20, fullscr_anchor.y + 50);
-                hbar_numA.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 70, fullscr_anchor.y + 50);
-                hbar_numB.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 110, fullscr_anchor.y + 50);
+                icon.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 30 + full_adjust, fullscr_anchor.y + 50);
+                hbar_numA.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 72, fullscr_anchor.y + 50);
+                hbar_numB.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 105, fullscr_anchor.y + 50);
                 hbar_numC.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 150, fullscr_anchor.y + 50);
                 bar.GetComponent<RectTransform>().position = fullscr_anchor;
             }
         }
+        /*
+         * //test 
+        if (count == 0) {
+            health--;
+            if (health < 0) { health = 100; }
+        }
+        count = (count + 1) % 10;
+         * */
 	}
 }
