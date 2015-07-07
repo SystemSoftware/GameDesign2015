@@ -147,16 +147,28 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
         // adjust displayed healthbarsprite and its size
         float needed_width = Mathf.RoundToInt((((float)health) / 100) * 200);
         if (health == 100) {
+            // 100 %
+            // set full bar sprite
             bar.GetComponent<Image>().sprite = hpbar[75];
-            
-            bar.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 25);
+            // set size of the bar
+            if (!m.maximized) {
+                bar.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 25);
+            } else {
+                bar.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 50);
+            }
         }else{
+            // NOT 100%
             int cur_sprite = Mathf.RoundToInt((((float)health) / 100) * 75);
             //Debug.Log("cursprite=" + cur_sprite);
             bar.GetComponent<Image>().sprite = hpbar[cur_sprite];
             //needed_width = Mathf.RoundToInt((((float)health) / 100) * 200);
-            needed_width = bar_width_info[cur_sprite] / 2;
-            bar.GetComponent<RectTransform>().sizeDelta = new Vector2(needed_width, 25);
+            if (!m.maximized) {
+                needed_width = bar_width_info[cur_sprite] / 2;
+                bar.GetComponent<RectTransform>().sizeDelta = new Vector2(needed_width, 25);
+            } else {
+                needed_width = bar_width_info[cur_sprite];
+                bar.GetComponent<RectTransform>().sizeDelta = new Vector2(needed_width, 50);
+            }
         }
 
         // position and resize the ui
@@ -176,14 +188,13 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
             hbar_numC.GetComponent<RectTransform>().position = new Vector2(split_anchor.x + 75, split_anchor.y + 25);
 
             empty.GetComponent<RectTransform>().position = split_anchor;
+
+            // position bar fill
             if (health != 100) {
-                float adjuster = 0;
-                if (health > 80) {
-                    adjuster = (10 * ((float)health / 100));
-                }
-                float x = (split_anchor.x - (100 - (float)needed_width/2) - 0);
+                float x = (split_anchor.x - (100 - (float)needed_width/2));
                 bar.GetComponent<RectTransform>().position = new Vector2( x, split_anchor.y);
             } else {
+                // 100%
                 bar.GetComponent<RectTransform>().position = split_anchor;
             }
         } else { // fullscreen
@@ -194,13 +205,13 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
                 hbar_numB.GetComponent<RectTransform>().position = new Vector2(-200, -200);
                 hbar_numC.GetComponent<RectTransform>().position = new Vector2(-200, -200);
                 bar.GetComponent<RectTransform>().position = new Vector2(-200, -200);
+                empty.GetComponent<RectTransform>().position = new Vector2(-200, -200);
             } else { // is player 1
                 // adjust size of ui parts
                 icon.GetComponent<RectTransform>().sizeDelta = new Vector2(64, 64);
                 hbar_numA.GetComponent<RectTransform>().sizeDelta = new Vector2(50,50);
                 hbar_numB.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
                 hbar_numC.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
-                //bar.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 50);
                 empty.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 50);
 
                 // position components
@@ -208,18 +219,22 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
                 hbar_numA.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 72, fullscr_anchor.y + 50);
                 hbar_numB.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 105, fullscr_anchor.y + 50);
                 hbar_numC.GetComponent<RectTransform>().position = new Vector2(fullscr_anchor.x + 150, fullscr_anchor.y + 50);
-                bar.GetComponent<RectTransform>().position = fullscr_anchor;
+                empty.GetComponent<RectTransform>().position = fullscr_anchor;
 
-                
-                float test = split_anchor.x - (200 - (float)needed_width/2) - (20*( (float)health/100));
-            
-               //Debug.Log("test=" + test + " neededw=" + needed_width + " ctrl_i" + ctrl.ctrlControlIndex);
-               bar.GetComponent<RectTransform>().position = new Vector2(test, split_anchor.y);
+               
+                // position bar fill
+                if (health != 100) {
+                    float x = (fullscr_anchor.x - (200 - (float)needed_width / 2));
+                    bar.GetComponent<RectTransform>().position = new Vector2(x, fullscr_anchor.y);
+                } else {
+                    // 100%
+                    bar.GetComponent<RectTransform>().position = fullscr_anchor;
+                }
             }
         }
         
         if (count == 0) {
-            //health++;
+            health++;
             if (health == 101){ health = 0; }
         }
         count = (count + 1) % 4;
