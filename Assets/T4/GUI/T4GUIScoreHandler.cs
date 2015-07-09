@@ -14,8 +14,8 @@ public class T4GUIScoreHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        score = 124;
-        seconds_passed = 0;
+        score = 5555;
+        seconds_passed = 683; // 11:23
 
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         ctrl = this.GetComponent<Controller>();
@@ -113,16 +113,37 @@ public class T4GUIScoreHandler : MonoBehaviour {
 
     public void setScore(int toSet) {
         score = toSet;
+    }
 
+    public int getPassedTimeInSec() {
+        return seconds_passed;
+    }
+
+    public void setPassedTimeInSec(int new_time) {
+        seconds_passed = new_time;
+    }
+
+    public void addPassedTimeInSec(int new_sec) {
+        seconds_passed += new_sec;
     }
 
 	// Update is called once per frame
 	void Update () {
         // score numbers
-        scoreNA.GetComponent<Image>().sprite = score_num[Mathf.RoundToInt(score/1000)];
-        scoreNB.GetComponent<Image>().sprite = score_num[Mathf.RoundToInt((score%1000) / 100)];
-        scoreNC.GetComponent<Image>().sprite = score_num[Mathf.RoundToInt((score % 100) / 10)];
+        scoreNA.GetComponent<Image>().sprite = score_num[(int)(score / 1000)];
+        scoreNB.GetComponent<Image>().sprite = score_num[(int)((score % 1000) / 100)];
+        scoreNC.GetComponent<Image>().sprite = score_num[(int)((score % 100) / 10)];
         scoreND.GetComponent<Image>().sprite = score_num[(score%10)];
+        // calc the time to display
+        // minutes
+        int min = Mathf.RoundToInt((float)seconds_passed / 60);
+        timeNA.GetComponent<Image>().sprite = time_num[(int)((float)min / 10)];
+        timeNB.GetComponent<Image>().sprite = time_num[(int)(min % 10)];
+        // seconds
+        int sec = seconds_passed % 60;
+        timeNC.GetComponent<Image>().sprite = time_num[(int)((float)sec / 10)];
+        timeND.GetComponent<Image>().sprite = time_num[(int)(sec % 10)];
+
 
         if (!m.maximized) {
             // SPLITSCREEN
