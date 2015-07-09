@@ -26,6 +26,7 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4GUIHealthbarHandler>();
                     ship.gameObject.AddComponent<T4GUISpeedbarHandler>();
                     ship.gameObject.AddComponent<T4GUIShotHandler>();
+                    ship.gameObject.AddComponent<T4GUIScoreHandler>();
 
                     // add fog to the camera
                     GameObject fog = Resources.Load("T4Fog") as GameObject;

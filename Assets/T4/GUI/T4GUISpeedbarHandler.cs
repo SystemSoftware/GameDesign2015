@@ -197,6 +197,7 @@ public class T4GUISpeedbarHandler : MonoBehaviour {
                 hbar_numB.GetComponent<RectTransform>().position = new Vector2(-200, -200);
                 hbar_numC.GetComponent<RectTransform>().position = new Vector2(-200, -200);
                 bar.GetComponent<RectTransform>().position = new Vector2(-200, -200);
+                empty.GetComponent<RectTransform>().position = new Vector2(-200, -200);
             } else { // is player 1
                 // adjust size of ui parts
                 icon.GetComponent<RectTransform>().sizeDelta = new Vector2(64, 64);
