@@ -9,6 +9,7 @@ public class T4GUIScoreHandler : MonoBehaviour {
     private Sprite[] score_num, time_num;
     private Sprite star_sprite, colon_sprite;
     private GameObject scoreNA, scoreNB, scoreNC, scoreND, timeNA, timeNB, timeNC, timeND, star, colon;
+    private T4Logic logic;
 
     Vector2 fullscr_anchor, split_anchor;
 
@@ -18,6 +19,7 @@ public class T4GUIScoreHandler : MonoBehaviour {
         seconds_passed = 683; // 11:23
 
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
+        logic = GameObject.Find("Logic").GetComponent<T4Logic>();
         ctrl = this.GetComponent<Controller>();
 
         // load star icon
@@ -129,6 +131,10 @@ public class T4GUIScoreHandler : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        // update the time
+        Debug.Log(logic.getPassedTimeInSeconds());
+        seconds_passed = logic.getPassedTimeInSeconds();
+
         // score numbers
         scoreNA.GetComponent<Image>().sprite = score_num[(int)(score / 1000)];
         scoreNB.GetComponent<Image>().sprite = score_num[(int)((score % 1000) / 100)];
@@ -136,7 +142,7 @@ public class T4GUIScoreHandler : MonoBehaviour {
         scoreND.GetComponent<Image>().sprite = score_num[(score%10)];
         // calc the time to display
         // minutes
-        int min = Mathf.RoundToInt((float)seconds_passed / 60);
+        int min = (int)((float)seconds_passed / 60);
         timeNA.GetComponent<Image>().sprite = time_num[(int)((float)min / 10)];
         timeNB.GetComponent<Image>().sprite = time_num[(int)(min % 10)];
         // seconds

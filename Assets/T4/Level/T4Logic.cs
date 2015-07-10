@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine.UI;
 
 public class T4Logic : MonoBehaviour {
@@ -12,6 +13,7 @@ public class T4Logic : MonoBehaviour {
     private Maximize m;
     public GameObject countdownSound, startSound;
     public bool countdownOver = false;
+    private Stopwatch stopwatch;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
@@ -147,6 +149,7 @@ public class T4Logic : MonoBehaviour {
             }
             // 1 > GO!
             if ((timePassed >= 3) && (timePassed < 4)) {
+                
                 Sprite cd_go = Resources.Load<Sprite>("cd_go");
                 countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(1024, 256);
                 countdown.GetComponent<Image>().sprite = cd_go;
@@ -162,11 +165,21 @@ public class T4Logic : MonoBehaviour {
                     }
                 }
                 countdownOver = true;
+
+                stopwatch = new Stopwatch();
+                stopwatch.Start();
             }
             // remove GO!
             if ((timePassed >= 4) && (timePassed < 5f)) {
                 countdown.active = false;
             }
         }
+    }
+
+    public int getPassedTimeInSeconds() {
+        if (stopwatch != null) {
+            return stopwatch.Elapsed.Seconds + stopwatch.Elapsed.Minutes * 60;
+        }
+        return 0;
     }
 }
