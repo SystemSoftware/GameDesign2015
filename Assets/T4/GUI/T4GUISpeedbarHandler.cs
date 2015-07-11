@@ -222,11 +222,13 @@ public class T4GUISpeedbarHandler : MonoBehaviour {
                 }
             }
         }
+        /*
         if (count == 0) {
             speed++;
             if (speed == 101) { speed = 0; }
         }
         count = (count + 1) % 4;
+         * */
 	}
 
     private Sprite cropSprite(Sprite source, int x, int y, int width, int height) {

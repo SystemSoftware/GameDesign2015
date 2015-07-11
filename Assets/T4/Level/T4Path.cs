@@ -16,6 +16,7 @@ public class T4Path : MonoBehaviour {
     Color circleColor = new Color32(0, 253, 226, 255);
     List<Transform> path;
     List<Vector3> portal_point;
+    
 
     int radius = 80;
     float cur_dist = 0;
@@ -77,6 +78,10 @@ public class T4Path : MonoBehaviour {
 
                     if (cur_dist > next_dist) {
                         ptli++;
+
+                        if (ptli < portal_point.Count - 1) {
+                            executeEvent("");
+                        }
                     }
                 }
                 /** push ship forward*/
@@ -133,6 +138,9 @@ public class T4Path : MonoBehaviour {
         }
     }
 
+    private void executeEvent(string tag) {
+
+    }
 
     void OnDrawGizmos() {
         Gizmos.color = new Color32(255,255,255,255);

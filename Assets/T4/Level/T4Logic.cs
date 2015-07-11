@@ -29,6 +29,7 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4GUISpeedbarHandler>();
                     ship.gameObject.AddComponent<T4GUIShotHandler>();
                     ship.gameObject.AddComponent<T4GUIScoreHandler>();
+                    ship.gameObject.AddComponent<T4PathHandler>();
 
                     // add fog to the camera
                     GameObject fog = Resources.Load("T4Fog") as GameObject;
@@ -44,6 +45,10 @@ public class T4Logic : MonoBehaviour {
                 }
 				// destroy level preview camera
                 DestroyImmediate(cam.gameObject);
+
+                // collect the path objects
+                GameObject.Find("Path").GetComponent<T4PathCollector>().collectPathObjects();
+
                 // enable motion finally (makes startpanel dispear!)
                 Level.EnableMotion(true);
                 

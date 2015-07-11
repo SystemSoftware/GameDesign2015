@@ -132,7 +132,6 @@ public class T4GUIScoreHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // update the time
-        Debug.Log(logic.getPassedTimeInSeconds());
         seconds_passed = logic.getPassedTimeInSeconds();
 
         // score numbers
