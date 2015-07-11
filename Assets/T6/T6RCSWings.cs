@@ -14,7 +14,7 @@ public class T6RCSWings : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         roll = Input.GetAxis(controller.ctrlAxisHorizontal);
         flag = 1;
         if (this.transform.parent.name == "LRCS") {flag = -1; }

@@ -86,6 +86,8 @@ public class T6PlantesLogic : MonoBehaviour {
             ship.gameObject.AddComponent<T6ViewController>().enabled = false;
             ship.gameObject.GetComponent<T6ViewController>().setCameras(mapCamera.GetComponent<Camera>(), ship.ctrlAttachedCamera);
             ship.gameObject.AddComponent<T6Trajectory>();
+            T6RaceLogic.init();
+            ship.gameObject.AddComponent<T6RaceLogic>();
             GameObject positionOrb = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             positionOrb.transform.position = ship.transform.position;
             positionOrb.transform.localScale = new Vector3(1000, 1000, 1000);

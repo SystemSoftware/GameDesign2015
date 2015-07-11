@@ -17,7 +17,7 @@ public class T6PitchCorrection : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 localAngularVelocity = ship.transform.InverseTransformDirection(ship.angularVelocity);
         yaw = Input.GetAxis(controller.ctrlAxisOther);
