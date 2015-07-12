@@ -21,15 +21,18 @@ public class T4Logic : MonoBehaviour {
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start")) {
                 foreach (var ship in Level.ActiveShips) {
 					ship.transform.position = path.transform.position;
-                    //ship.transform.position = new Vector3(0, 141.7f, -2029);
                     ship.ctrlAttachedCamera.farClipPlane = 6000f;
-					//ship.gameObject.AddComponent<T4HelloWorldYeller>();
+                    // add scripts
                     ship.gameObject.AddComponent<T4GUICrosshairHandler>();
                     ship.gameObject.AddComponent<T4GUIHealthbarHandler>();
                     ship.gameObject.AddComponent<T4GUISpeedbarHandler>();
                     ship.gameObject.AddComponent<T4GUIShotHandler>();
                     ship.gameObject.AddComponent<T4GUIScoreHandler>();
                     ship.gameObject.AddComponent<T4PathHandler>();
+                    ship.gameObject.AddComponent<T4CullingMask>();
+
+                    // set layer of the ship to their worlds
+                    ship.gameObject.layer = (28+ship.ctrlControlIndex);
 
                     // add fog to the camera
                     GameObject fog = Resources.Load("T4Fog") as GameObject;

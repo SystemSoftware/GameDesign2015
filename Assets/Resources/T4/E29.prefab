@@ -335,7 +335,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115740}
-  m_Mesh: {fileID: 4300000, guid: 29cd94385149d274fb90f16fd914edb0, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2a97f9db0fb15804babef4336e3882fb, type: 3}
 --- !u!54 &5416842
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -530,8 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a23b2f28eac9874abd8781f9bbd244d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 1
-  invert: 1
 --- !u!114 &11476154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,6 +552,8 @@ MonoBehaviour:
   setMassTo100: 1
   cameraIdealDistance: 50
   cameraIdealYOffset: 0
+  cameraCollisionLayer: 20
+  cameraWallOffset: 2
 --- !u!138 &13806716
 FixedJoint:
   m_ObjectHideFlags: 1
