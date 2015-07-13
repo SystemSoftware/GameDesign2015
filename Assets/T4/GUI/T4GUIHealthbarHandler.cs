@@ -233,12 +233,13 @@ public class T4GUIHealthbarHandler : MonoBehaviour {
             }
         }
         
+        /*
         if (count == 0) {
             health++;
             if (health == 101){ health = 0; }
         }
         count = (count + 1) % 4;
-         
+         */
 	}
 
     private Sprite cropSprite(Sprite source, int x, int y, int width, int height){

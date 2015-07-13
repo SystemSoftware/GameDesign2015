@@ -39,7 +39,7 @@ public class T4GUIShotHandler : MonoBehaviour {
         shotC.GetComponent<Image>().sprite = full;
         shotD.GetComponent<Image>().sprite = full;
 
-        shots_left = 2;
+        shots_left = 4;
         float cam_width = Screen.width / 2;
         float cam_height = Screen.height / 2;
         switch (ctrl.ctrlControlIndex) {
@@ -138,10 +138,12 @@ public class T4GUIShotHandler : MonoBehaviour {
             }
         }
 
+        /*
         if (count == 0) {
             shots_left++;
             if (shots_left == 5) { shots_left = 0; }
         }
         count = (count + 1) % 10;
+        */
 	}
 }
