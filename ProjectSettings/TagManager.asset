@@ -8,6 +8,8 @@ TagManager:
   - Planet
   - Ship
   - T4RemoveFog
+  - Bullet
+  - T4NextEnemy
   layers:
   - Default
   - TransparentFX
