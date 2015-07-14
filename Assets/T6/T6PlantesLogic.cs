@@ -12,6 +12,7 @@ public class T6PlantesLogic : MonoBehaviour {
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
             {
                 init();
+                //TODO: Counter
                 Level.EnableMotion(true);
             }
         }
@@ -60,6 +61,7 @@ public class T6PlantesLogic : MonoBehaviour {
             ship.gameObject.AddComponent<T6ViewController>().enabled = false;
             ship.gameObject.GetComponent<T6ViewController>().setCameras(mapCamera.GetComponent<Camera>(), ship.ctrlAttachedCamera);
             ship.gameObject.AddComponent<T6Trajectory>();
+            ship.gameObject.AddComponent<T6UIController>();
             T6RaceLogic.init();
             ship.gameObject.AddComponent<T6RaceLogic>();
             GameObject positionOrb = GameObject.CreatePrimitive(PrimitiveType.Sphere);

@@ -24,7 +24,8 @@ public class T6EngineDriver : EngineDriver {
             float f = 0f;
             if (axis != null)
             {
-                f = (Input.GetAxis(axis)+1)/2f;
+              //  f = (Input.GetAxis(axis)+1)/2f;
+                f = Mathf.Max(0, Input.GetAxis(axis));
             }
             if (sys != null)
             {

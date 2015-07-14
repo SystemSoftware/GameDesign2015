@@ -12,7 +12,7 @@ public class T6Controller : Controller {
 
 	// Update is called once per frame
 	void Update () {
-        float acceleration = Input.GetAxis(ctrlAxisAccelerate)+1;
+        float acceleration = Mathf.Max(0,Input.GetAxis(ctrlAxisAccelerate));
         float horizontal = Input.GetAxis(ctrlAxisHorizontal);
         float vertical = Input.GetAxis(ctrlAxisVertical);
         float yaw = Input.GetAxis(ctrlAxisOther);
