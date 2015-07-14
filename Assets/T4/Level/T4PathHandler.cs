@@ -12,6 +12,8 @@ public class T4PathHandler : MonoBehaviour {
     private Vector3 prev_pos;
     private T4GUISpeedbarHandler spbar;
     private string prev_tag;
+    private GameObject world;
+    private T4EnemyShips enemy_ships;
  
 	// Use this for initialization
 	void Start () {
@@ -23,6 +25,17 @@ public class T4PathHandler : MonoBehaviour {
         spbar = this.GetComponent<T4GUISpeedbarHandler>();
         prev_pos = transform.position;
         prev_tag = "Untagged";
+
+        world = GameObject.Find("World"+this.GetComponent<Controller>().ctrlControlIndex);
+
+        for (int h = 0; h < world.transform.childCount; h++) {
+            if (world.transform.GetChild(h).name.Equals("EnemyShips")) {
+                enemy_ships = world.transform.GetChild(h).gameObject.GetComponent<T4EnemyShips>();
+            }
+
+
+        }
+
 	}
 	
 	// Update is called once per frame
@@ -37,8 +50,18 @@ public class T4PathHandler : MonoBehaviour {
 
                 if (current_distance > next_distance) {
                     cPP_i++;
+                    
+                    //  launch event if passing pathobject with the right tag
                     if (!pc.getPathObject(cPP_i).tag.Equals(prev_tag)) {
-                        Debug.Log(pc.getPathObject(cPP_i).tag);
+                        //Debug.Log(pc.getPathObject(cPP_i).tag);
+                        switch (pc.getPathObject(cPP_i).tag) {
+                            case "T4NextEnemy":
+                                Debug.Log("launch next enemy");
+                                enemy_ships.launchNext();
+                                break;
+                            case "T4RemoveFog":
+                                break;
+                        }
                     }
                     prev_tag = pc.getPathObject(cPP_i).tag;
                 }
