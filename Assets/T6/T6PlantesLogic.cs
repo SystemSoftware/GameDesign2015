@@ -2,34 +2,6 @@
 using System.Collections;
 
 public class T6PlantesLogic : MonoBehaviour {
-    /*
-     *  How it works: 
-     *  UI:
-     *  There are 2 Cameras per player in this level, 1 is the custom chasecam, 1 is a fixed orthocam as map view.
-     *  The chasecam is beeing altered to have a long far-pane to make the planets visible.
-     *  Each ship-controller is getting a script attached, that controls the change of map and chase view.
-     *  For each map camera and thus each player there is a canvas generated on that the GUI elements will be. This canvas is enabled by the viewController that is attached to each Controller.
-     *      Each canvas shows the position of all players as well as a approximation of the own trajectory
-     *  
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * */
 
     static Vector3 gravity;
 
@@ -67,22 +39,24 @@ public class T6PlantesLogic : MonoBehaviour {
             switch (ship.ctrlControlIndex)
             {
                 case 0:
-                    mapCamera.GetComponent<Camera>().rect = new Rect(0, 0.5f, 0.5f, 0.5f);
+                    mapCamera.GetComponent<Camera>().rect = new Rect(0.3f, 0.5f, 0.2f, 0.2f);
                     break;
                 case 1:
-                    mapCamera.GetComponent<Camera>().rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+                    mapCamera.GetComponent<Camera>().rect = new Rect(0.5f, 0.5f, 0.2f, 0.2f);
                     break;
                 case 2:
-                    mapCamera.GetComponent<Camera>().rect = new Rect(0,0, 0.5f, 0.5f);
+                    mapCamera.GetComponent<Camera>().rect = new Rect(0.3f,0.3f, 0.2f, 0.2f);
                     break;
                 case 3:
-                    mapCamera.GetComponent<Camera>().rect = new Rect(0.5f,0, 0.5f, 0.5f);
+                    mapCamera.GetComponent<Camera>().rect = new Rect(0.5f,0.3f, 0.2f, 0.2f);
                     break;                    
             }
             // GameObject mapCamera = new GameObject("MapCamera" + ship.ctrlControlIndex);
-            mapCamera.GetComponent<Camera>().enabled = false;
+            mapCamera.GetComponent<Camera>().enabled = true;
             mapCamera.AddComponent<T6PlantesRotateMapCamera>().ship = ship;
-            ship.gameObject.AddComponent<LineRenderer>();
+			Material mat = Resources.Load<Material>("T6Additional/Line"+ship.ctrlControlIndex);
+
+            ship.gameObject.AddComponent<LineRenderer>().material = mat;
             ship.gameObject.AddComponent<T6ViewController>().enabled = false;
             ship.gameObject.GetComponent<T6ViewController>().setCameras(mapCamera.GetComponent<Camera>(), ship.ctrlAttachedCamera);
             ship.gameObject.AddComponent<T6Trajectory>();
@@ -91,8 +65,12 @@ public class T6PlantesLogic : MonoBehaviour {
             GameObject positionOrb = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             positionOrb.transform.position = ship.transform.position;
             positionOrb.transform.localScale = new Vector3(1000, 1000, 1000);
-            positionOrb.transform.parent = ship.transform;
+			positionOrb.AddComponent<T6UpdateShipPosition>().ship = ship.transform;
+			positionOrb.GetComponent<MeshRenderer>().material = mat;
+           // positionOrb.transform.parent = ship.transform;
             Destroy(positionOrb.GetComponent<SphereCollider>());
+
+
             positionOrb.layer = 5;
         }
     }

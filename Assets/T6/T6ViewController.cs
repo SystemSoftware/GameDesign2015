@@ -24,15 +24,7 @@ public class T6ViewController : MonoBehaviour {
         gameCamera = game;
         this.enabled = true;
      }
-
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            mapCamera.enabled = !mapCamera.enabled;
-            gameCamera.enabled = !gameCamera.enabled;
-        }
-	}
+	
 
     public LineRenderer getLineRenderer()
     {
