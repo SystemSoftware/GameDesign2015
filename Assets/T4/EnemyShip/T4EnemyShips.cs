@@ -31,7 +31,7 @@ public class T4EnemyShips : MonoBehaviour {
     public void launchNext()
     {
         enemies[next].SetActive(true);
-        enemies[next].GetComponent<T4EnemyAI>().launch();
+        enemies[next].transform.GetChild(0).GetComponent<T4EnemyAI>().launch();
         next++;
     }
 }

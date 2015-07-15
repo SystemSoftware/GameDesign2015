@@ -21,6 +21,10 @@ public class T4EnPath : MonoBehaviour {
         return path_objects;
     }
 
+    public Vector3[] getPathPoints() {
+        return path_points;
+    }
+
     public void collectPathObjects() {
         Transform[] childs = transform.GetComponentsInChildren<Transform>();
         path_objects = new GameObject[childs.Length];
@@ -35,12 +39,12 @@ public class T4EnPath : MonoBehaviour {
 
         List<Vector3> path_points_list = new List<Vector3>();
         // calc the points inbetween the path_objects
-        for (int k = 1; k < object_count; k++)
+        for (int k = 2; k < object_count; k++)
         {
             Vector3 prev = path_objects[k - 1].transform.position;
             Vector3 pos = path_objects[k].transform.position;
 
-            Vector3 toAdd = (pos - prev).normalized * 8;
+            Vector3 toAdd = (pos - prev).normalized * 40;
             // set starting point
             Vector3 current_point_between_objects = prev;
             while (Vector3.Distance(prev, pos) > Vector3.Distance(prev, current_point_between_objects))
