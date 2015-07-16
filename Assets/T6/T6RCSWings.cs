@@ -26,7 +26,7 @@ public class T6RCSWings : MonoBehaviour {
         }
         else
         {
-            setForce(roll * 500 * flag);
+            setForce(roll * 400 * flag);
         }
 
 	}

@@ -3,7 +3,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class T6UIController : MonoBehaviour
 {
-    const float maxFuel = 25;
+    public const float maxFuel = 20;
     float currentFuel;
     int id;
 
@@ -12,6 +12,7 @@ public class T6UIController : MonoBehaviour
     {
         currentFuel = maxFuel;
         id = this.GetComponent<Controller>().ctrlControlIndex;
+		setFuel (currentFuel);
     }
 
     // Update is called once per frame
@@ -19,19 +20,25 @@ public class T6UIController : MonoBehaviour
     {
          float thrust = Mathf.Max(0,Input.GetAxis(this.GetComponent<Controller>().ctrlAxisAccelerate));
          currentFuel -= thrust * Time.deltaTime;
-         setFuel(currentFuel);
+		T6RaceLogic.setDeltaV (id, currentFuel);
+		if (currentFuel <= 0) {
+			GameObject.Find("LevelLogic").GetComponent<T6PlantesLogic>().end();
+		} else {
+			setFuel (currentFuel);
+		}
     }
 
     void setFuel(float val)
     {
         GameObject slider = GameObject.Find("Fuel" + id);
-        Debug.Log(val);
-        Debug.Log(slider);
+
         val = val / maxFuel * 200;
         slider.GetComponent<RectTransform>().sizeDelta = new Vector2(val,10);
-        
-        Debug.Log(val);
     }
+
+	public void reset(){
+		this.Start ();
+	}
 
 }
 

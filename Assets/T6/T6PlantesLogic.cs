@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using UnityEngine.UI;
 
 public class T6PlantesLogic : MonoBehaviour {
 
@@ -88,6 +90,35 @@ public class T6PlantesLogic : MonoBehaviour {
         Level.DefineStartPoints(spawns);
 
         Level.InitializationDone();   
+	}
+
+	public void end(){
+		Level.EnableMotion(false);
+		string s = "" ;
+		int[] turns = T6RaceLogic.getRounds();
+		int[] pos = new int[4];
+		float[] points = new float[4];
+		int[] ships = {0,1,2,3};
+		float[] dv = T6RaceLogic.getDeltaV ();
+		foreach(Controller ship in Level.ActiveShips){
+			pos[ship.ctrlControlIndex] = ship.GetComponent<T6RaceLogic>().getPosition();
+		}
+		//1st:
+		for (int i=0; i<4; i++) {
+			points[i] = (turns[i]+1) * (T6UIController.maxFuel+1) * 5 + (pos[i]+1) * (T6UIController.maxFuel+1) + dv[i];
+		}
+
+		Array.Sort (points, ships);
+		foreach(Controller ship in Level.ActiveShips){
+			ship.GetComponent<T6UIController>().reset();
+		}
+
+		for (int i=3; i<=0; i++) {
+			Debug.Log(points[i] + "   " + ships[i]);
+			s += (i+1)+". Spieler "+ships[i] +" mit "+turns[ships[i]] +" Runden, "+pos[ships[i]]+" Teilen und "+(int) dv[ships[i]]+" Tank übrig\n";
+		}
+		GameObject.Find ("AwesomeText").GetComponent<Text> ().text = s;
+		//GUI.TextField (new Rect (10, 10, 50, 50), s);
 	}
 
 }
