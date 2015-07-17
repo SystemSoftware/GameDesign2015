@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 
 public class T4TurretTrigger : MonoBehaviour {
-    private Transform bullet;
+    public Transform bullet;
 
     private bool should_shoot, delay_active;
     private GameObject ship;
@@ -21,7 +21,6 @@ public class T4TurretTrigger : MonoBehaviour {
         delay = 500;
 
         stopwatch = new Stopwatch();
-        bullet = Resources.Load("TurretBullet") as Transform;
 	}
 	
 	// Update is called once per frame
