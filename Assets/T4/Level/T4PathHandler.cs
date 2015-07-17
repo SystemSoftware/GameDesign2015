@@ -11,9 +11,9 @@ public class T4PathHandler : MonoBehaviour {
     private int radius = 80;
     private Vector3 prev_pos;
     private T4GUISpeedbarHandler spbar;
-    private string prev_tag;
     private GameObject world;
     private T4EnemyShips enemy_ships;
+    private GameObject prev_patho;
  
 	// Use this for initialization
 	void Start () {
@@ -24,7 +24,6 @@ public class T4PathHandler : MonoBehaviour {
         logic = GameObject.Find("Logic").GetComponent<T4Logic>();
         spbar = this.GetComponent<T4GUISpeedbarHandler>();
         prev_pos = transform.position;
-        prev_tag = "Untagged";
 
         world = GameObject.Find("World"+this.GetComponent<Controller>().ctrlControlIndex);
 
@@ -35,7 +34,6 @@ public class T4PathHandler : MonoBehaviour {
 
 
         }
-
 	}
 	
 	// Update is called once per frame
@@ -52,7 +50,7 @@ public class T4PathHandler : MonoBehaviour {
                     cPP_i++;
                     
                     //  launch event if passing pathobject with the right tag
-                    if (!pc.getPathObject(cPP_i).tag.Equals(prev_tag)) {
+                    if (pc.getPathObject(cPP_i) != prev_patho) {
                         //Debug.Log(pc.getPathObject(cPP_i).tag);
                         switch (pc.getPathObject(cPP_i).tag) {
                             case "T4NextEnemy":
@@ -63,7 +61,7 @@ public class T4PathHandler : MonoBehaviour {
                                 break;
                         }
                     }
-                    prev_tag = pc.getPathObject(cPP_i).tag;
+                    prev_patho = pc.getPathObject(cPP_i);
                 }
             }
 

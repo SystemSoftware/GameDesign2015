@@ -145,18 +145,21 @@ public class T4Logic : MonoBehaviour {
 
             // 3 > 2 (wait 3 sec at begin)
             if ((timePassed >= 1) && (timePassed < 2)) {
+                // PLAY COUNTDOWN SOUND
+
                 Sprite cd_2 = Resources.Load<Sprite>("cd_2");
                 countdown.GetComponent<Image>().sprite = cd_2;
             }
             // 2 > 1
             if ((timePassed >= 2) && (timePassed < 3)) {
+                // PLAY COUNTDOWN SOUND
+
                 Sprite cd_1 = Resources.Load<Sprite>("cd_1");
                 countdown.GetComponent<Image>().sprite = cd_1;
-                //countdownSound.GetComponent<AudioSource>().PlayOneShot(countdownSound.GetComponent<AudioSource>().clip);
-                //countdownSound.GetComponent<AudioSource>().clip.Play();
             }
             // 1 > GO!
             if ((timePassed >= 3) && (timePassed < 4)) {
+                // PLAY START SOUND!
                 
                 Sprite cd_go = Resources.Load<Sprite>("cd_go");
                 countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(1024, 256);
