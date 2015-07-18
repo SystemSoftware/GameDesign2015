@@ -58,6 +58,13 @@ public class T4PathHandler : MonoBehaviour {
                                 enemy_ships.launchNext();
                                 break;
                             case "T4RemoveFog":
+                                Debug.Log("remove fog");
+                                Transform ctrl = GetComponent<Controller>().ctrlAttachedCamera.transform;
+                                for (int i = 0; i < ctrl.childCount; i++) {
+                                    ctrl.GetChild(i).transform.GetChild(0).GetComponent<ParticleSystem>().enableEmission = false;
+                                    ctrl.GetChild(i).transform.GetChild(1).GetComponent<ParticleSystem>().enableEmission = false;   
+                                        
+                                }
                                 break;
                         }
                     }
@@ -74,7 +81,7 @@ public class T4PathHandler : MonoBehaviour {
             /** rotate ship towards current path_point+40 */
             if ((cPP_i + 40 < pc.getPathPointCount() - 1) && (logic.countdownOver)) {
                 // pid controller to adjust the torgue of the ship
-                // ref: http://webber.physik.uni-freiburg.de/~hon/vorlss02/Literatur/Ingenieurswiss/pid/pid+matlab/PID%20systems%20tutorial.htm
+                // ref to pid controller: http://webber.physik.uni-freiburg.de/~hon/vorlss02/Literatur/Ingenieurswiss/pid/pid+matlab/PID%20systems%20tutorial.htm
                 VectorPid angularVelocityController = new VectorPid(1.7766f, 0, 0.2553191f);
                 VectorPid headingController = new VectorPid(1.244681f, 0, 0.06382979f);
 

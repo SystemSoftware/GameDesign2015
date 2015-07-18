@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 
 public class T4EnemyAI : MonoBehaviour {
-    public Transform bullet;
+    private Transform bullet;
 
     private bool launched = false;
     private GameObject ship, target_ship;
@@ -37,6 +37,7 @@ public class T4EnemyAI : MonoBehaviour {
         delay = 250;
 
         stopwatch = new Stopwatch();
+        bullet = (Resources.Load("TurretBullet") as GameObject).transform;
     }
 
     // Update is called once per frame
@@ -85,6 +86,10 @@ public class T4EnemyAI : MonoBehaviour {
                 // end of path reached
                 deactivate();
             }
+
+            // adjust the lookat direction of the ship
+            Quaternion targetRotation = Quaternion.LookRotation(transform.position - pos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
         }
 	}
 

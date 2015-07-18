@@ -15,7 +15,7 @@ public class T4GUIScoreHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        score = 5555;
+        score = 0;
         seconds_passed = 683; // 11:23
 
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();

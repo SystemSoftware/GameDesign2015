@@ -115,7 +115,6 @@ GameObject:
   - 54: {fileID: 5421968}
   - 114: {fileID: 11468708}
   - 114: {fileID: 11483172}
-  - 64: {fileID: 6477910}
   m_Layer: 0
   m_Name: Viper
   m_TagString: Untagged
@@ -376,18 +375,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6477910
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176266}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_Mesh: {fileID: 0}
 --- !u!64 &6484168
 MeshCollider:
   m_ObjectHideFlags: 1

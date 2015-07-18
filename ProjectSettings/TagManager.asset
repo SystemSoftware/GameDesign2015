@@ -10,6 +10,9 @@ TagManager:
   - T4RemoveFog
   - Bullet
   - T4NextEnemy
+  - Target
+  - Rock
+  - T4NextGeysir
   layers:
   - Default
   - TransparentFX

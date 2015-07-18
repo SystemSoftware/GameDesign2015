@@ -31,12 +31,19 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4PathHandler>();
                     ship.gameObject.AddComponent<T4CullingMask>();
 
+                    int new_layer = (28 + ship.ctrlControlIndex);
                     // set layer of the ship to their worlds
-                    ship.gameObject.layer = (28+ship.ctrlControlIndex);
+                    ship.gameObject.layer = new_layer;
+                    Transform[] childs = ship.gameObject.GetComponentsInChildren<Transform>();
+                    for (int i = 0; i < childs.Length; i++) {
+                        childs[i].gameObject.layer = new_layer;
+                    }
 
                     // add fog to the camera
                     GameObject fog = Resources.Load("T4Fog") as GameObject;
                     GameObject g = Instantiate(fog, new Vector3(0, 0, 15), Quaternion.identity) as GameObject;
+                    g.layer = new_layer;
+
                     // make it a child of the playercamera
                     g.transform.SetParent(ship.ctrlAttachedCamera.transform, false);
 

@@ -62,40 +62,41 @@ public class T4E29_Driver : MonoBehaviour {
 
     Vector3 old_pos = new Vector3();
     void FixedUpdate(){
+        if ((Level.AllowMotion) && (ship.useGravity)) {
+            // BACK THRUSTER
+            float forward_thrust = 7000;
+            accl = Input.GetAxis(ctrl.ctrlAxisAccelerate);
+            Vector3 acc_force = Vector3.forward * forward_thrust * accl * Time.deltaTime;
+            back_engine.AddRelativeForce(acc_force, ForceMode.Impulse);
+            // turn on the spotlights
+            back_spotleft.intensity = 8 * accl;
+            back_spotright.intensity = 8 * accl;
+            // turn on particlesystems
+            back_psleft.enableEmission = (accl > 0) ? true : false;
+            back_psright.enableEmission = (accl > 0) ? true : false;
 
-        // BACK THRUSTER
-        float forward_thrust = 7000;
-        accl = Input.GetAxis(ctrl.ctrlAxisAccelerate);
-        Vector3 acc_force = Vector3.forward * forward_thrust * accl * Time.deltaTime;
-        back_engine.AddRelativeForce(acc_force, ForceMode.Impulse);
-        // turn on the spotlights
-        back_spotleft.intensity = 8 * accl;
-        back_spotright.intensity = 8 * accl;
-        // turn on particlesystems
-        back_psleft.enableEmission = (accl > 0) ? true : false;
-        back_psright.enableEmission = (accl > 0) ? true : false;
-
-        // WING THRUSTERS
-        horizontal = Input.GetAxis(ctrl.ctrlAxisHorizontal);
-        float wing_thrust = 150;
-        float angle = Vector3.Angle(Vector3.up, transform.up);
-        if (horizontal < 0) {// fly right
-            left_wing_engine.AddRelativeForce(-Vector3.up * wing_thrust, ForceMode.Force);
-            right_wing_engine.AddRelativeForce(Vector3.up * wing_thrust, ForceMode.Force);
-        } else if (horizontal > 0) // fly left
+            // WING THRUSTERS
+            horizontal = Input.GetAxis(ctrl.ctrlAxisHorizontal);
+            float wing_thrust = 150;
+            float angle = Vector3.Angle(Vector3.up, transform.up);
+            if (horizontal < 0) {// fly right
+                left_wing_engine.AddRelativeForce(-Vector3.up * wing_thrust, ForceMode.Force);
+                right_wing_engine.AddRelativeForce(Vector3.up * wing_thrust, ForceMode.Force);
+            } else if (horizontal > 0) // fly left
         {
-            left_wing_engine.AddRelativeForce(Vector3.up * wing_thrust, ForceMode.Force);
-            right_wing_engine.AddRelativeForce(-Vector3.up * wing_thrust, ForceMode.Force);
-        }
-        //ship.velocity = Vector3.Lerp(ship.velocity, Vector3.zero, Time.fixedDeltaTime);
+                left_wing_engine.AddRelativeForce(Vector3.up * wing_thrust, ForceMode.Force);
+                right_wing_engine.AddRelativeForce(-Vector3.up * wing_thrust, ForceMode.Force);
+            }
+            //ship.velocity = Vector3.Lerp(ship.velocity, Vector3.zero, Time.fixedDeltaTime);
 
-        // BOTTOM / TOP THRUSTERS
-        float updown_thrust = 200;
-        vertical = Input.GetAxis(ctrl.ctrlAxisVertical);
-        if (vertical < 0) {
-            front_engine.AddRelativeForce(Vector3.up * updown_thrust, ForceMode.Force);
-        } else if (vertical > 0) {
-            front_engine.AddRelativeForce(-Vector3.up * updown_thrust, ForceMode.Force);
+            // BOTTOM / TOP THRUSTERS
+            float updown_thrust = 200;
+            vertical = Input.GetAxis(ctrl.ctrlAxisVertical);
+            if (vertical < 0) {
+                front_engine.AddRelativeForce(Vector3.up * updown_thrust, ForceMode.Force);
+            } else if (vertical > 0) {
+                front_engine.AddRelativeForce(-Vector3.up * updown_thrust, ForceMode.Force);
+            }
         }
     }
 
