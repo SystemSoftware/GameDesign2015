@@ -6,16 +6,26 @@ using UnityEngine.UI;
 public class T6PlantesLogic : MonoBehaviour {
 
     static Vector3 gravity;
-
+    bool ended = false;
     void OnGUI()
     {
         if (!Level.AllowMotion)
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
+            if (!this.ended)
             {
-                init();
-                //TODO: Counter
-                Level.EnableMotion(true);
+                if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
+                {
+                    init();
+                    //TODO: Counter
+                    Level.EnableMotion(true);
+                }
+            }
+            else
+            {
+                if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Reset"))
+                {
+                    Application.LoadLevel(Application.loadedLevel);   
+                }
             }
         }
         else
@@ -112,12 +122,13 @@ public class T6PlantesLogic : MonoBehaviour {
 		foreach(Controller ship in Level.ActiveShips){
 			ship.GetComponent<T6UIController>().reset();
 		}
-
-		for (int i=3; i<=0; i++) {
-			Debug.Log(points[i] + "   " + ships[i]);
-			s += (i+1)+". Spieler "+ships[i] +" mit "+turns[ships[i]] +" Runden, "+pos[ships[i]]+" Teilen und "+(int) dv[ships[i]]+" Tank übrig\n";
+        Debug.Log("END OF GAME");
+		for (int i=3; i>=0; i--) {
+			s += (4-i)+".:   Spieler "+ships[i] +" mit "+turns[ships[i]] +" Runden, "+pos[ships[i]]+" Teilen und "+(int) dv[ships[i]]+" Energie übrig\n";
 		}
-		GameObject.Find ("AwesomeText").GetComponent<Text> ().text = s;
+        Text t = GameObject.Find("AwesomeText").GetComponent<Text>() ;
+        t.text = s;
+        ended = true;
 		//GUI.TextField (new Rect (10, 10, 50, 50), s);
 	}
 

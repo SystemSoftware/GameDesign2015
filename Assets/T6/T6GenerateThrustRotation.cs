@@ -3,7 +3,7 @@ using System.Collections;
 
 public class T6GenerateThrustRotation : MonoBehaviour {
 
-    public static bool done = false;
+    public bool done = false;
     public float count = 12;
     public float radius = 12.2f;
     public float offset = 90;
