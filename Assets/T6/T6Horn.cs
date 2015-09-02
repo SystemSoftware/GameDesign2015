@@ -12,7 +12,7 @@ public class T6Horn : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire" + c.ctrlControlIndex))
+        if (Input.GetButton("Fire" + c.ctrlControlIndex) && Level.AllowMotion)
         {
             this.GetComponent<AudioSource>().Play();
         }
