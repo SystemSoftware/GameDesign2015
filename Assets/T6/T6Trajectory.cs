@@ -74,7 +74,8 @@ public class T6Trajectory : MonoBehaviour {
         l.SetColors(Color.red, Color.red);
         l.SetVertexCount(points.Length);
         l.SetWidth(100, 100);
-        l.sortingLayerID = 5;
+		l.sortingLayerName = "Ship" + this.GetComponentInParent<Controller> ().ctrlControlIndex;
+
         for (int i = 0; i < points.Length; i++)
         {
             l.SetPosition(i, points[i]);

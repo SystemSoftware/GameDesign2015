@@ -28,7 +28,7 @@ public class T6ViewController : MonoBehaviour {
 
     public LineRenderer getLineRenderer()
     {
-        return this.GetComponent<LineRenderer>();
+		return this.GetComponentInChildren<LineRenderer>();
     }
 
 

@@ -45,7 +45,7 @@ public class T6PlantesLogic : MonoBehaviour {
         foreach (var ship in Level.ActiveShips)
         {
             ship.ctrlAttachedCamera.farClipPlane = 100000;
-            ship.ctrlAttachedCamera.cullingMask &= ~(1 << 5);
+			ship.ctrlAttachedCamera.cullingMask = 1 << 0 | 1 << 8 | 1 << 9| 1 << 10 | 1 << 11 | 1 << 24+ship.ctrlControlIndex;
 			GameObject mapCamera = Instantiate(Resources.Load<GameObject>("T6Additional/T6MapCamera"));
             mapCamera.name = "MapCamera" + ship.ctrlControlIndex;
             //Faster than bitsniffing
@@ -68,11 +68,16 @@ public class T6PlantesLogic : MonoBehaviour {
             mapCamera.GetComponent<Camera>().enabled = true;
             mapCamera.AddComponent<T6PlantesRotateMapCamera>().ship = ship;
 			Material mat = Resources.Load<Material>("T6Additional/Line"+ship.ctrlControlIndex);
+			//LineRenderer Object
+			GameObject line = new GameObject("LineRenderer");
+			line.AddComponent<LineRenderer>().material = mat;
+			line.transform.parent = ship.gameObject.transform;
+			line.layer = 24+ship.ctrlControlIndex;
 
-            ship.gameObject.AddComponent<LineRenderer>().material = mat;
+
             ship.gameObject.AddComponent<T6ViewController>().enabled = false;
-            ship.gameObject.GetComponent<T6ViewController>().setCameras(mapCamera.GetComponent<Camera>(), ship.ctrlAttachedCamera);
-            ship.gameObject.AddComponent<T6Trajectory>();
+			ship.gameObject.GetComponent<T6ViewController>().setCameras(mapCamera.GetComponent<Camera>(), ship.ctrlAttachedCamera);
+			ship.gameObject.AddComponent<T6Trajectory>();
             ship.gameObject.AddComponent<T6UIController>();
             T6RaceLogic.init();
             ship.gameObject.AddComponent<T6RaceLogic>();
@@ -83,6 +88,7 @@ public class T6PlantesLogic : MonoBehaviour {
 			positionOrb.GetComponent<MeshRenderer>().material = mat;
            // positionOrb.transform.parent = ship.transform;
             Destroy(positionOrb.GetComponent<SphereCollider>());
+
 
 
             positionOrb.layer = 5;
