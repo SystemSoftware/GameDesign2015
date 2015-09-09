@@ -9,8 +9,6 @@ public class T6PlantesLogic : MonoBehaviour {
     bool ended = false;
     void OnGUI()
     {
-        if (!Level.AllowMotion)
-        {
             if (!this.ended)
             {
                 if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
@@ -24,18 +22,9 @@ public class T6PlantesLogic : MonoBehaviour {
             {
                 if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Reset"))
                 {
-                    Application.LoadLevel(Application.loadedLevel);   
+                    Application.LoadLevel(Application.loadedLevel);
                 }
             }
-        }
-        else
-        {
-            foreach (var ship in Level.ActiveShips)
-            {
-                
-            }
-
-        }
     }
 
     void init()
@@ -109,7 +98,7 @@ public class T6PlantesLogic : MonoBehaviour {
 	}
 
 	public void end(){
-		Level.EnableMotion(false);
+		//Level.EnableMotion(false);
 		string s = "" ;
 		int[] turns = T6RaceLogic.getRounds();
 		int[] pos = new int[4];
@@ -117,6 +106,19 @@ public class T6PlantesLogic : MonoBehaviour {
 		int[] ships = {0,1,2,3};
 		float[] dv = T6RaceLogic.getDeltaV ();
 		foreach(Controller ship in Level.ActiveShips){
+            //Deactivate motion
+            var bodies = ship.transform.GetComponentsInChildren<Rigidbody>();
+            foreach (var body in bodies)
+            {
+                body.isKinematic = !enabled;
+                body.useGravity = enabled;
+            }
+            var forces = ship.transform.GetComponentsInChildren<ConstantForce>();
+            foreach (var force in forces)
+            {
+                force.enabled = enabled;
+            }
+            //Get position (round)
 			pos[ship.ctrlControlIndex] = ship.GetComponent<T6RaceLogic>().getPosition();
 		}
 		//1st:
@@ -132,10 +134,12 @@ public class T6PlantesLogic : MonoBehaviour {
 		for (int i=3; i>=0; i--) {
 			s += (4-i)+".:   Spieler "+ships[i] +" mit "+turns[ships[i]] +" Runden, "+pos[ships[i]]+" Teilen und "+(int) dv[ships[i]]+" Energie übrig\n";
 		}
+
         Text t = GameObject.Find("AwesomeText").GetComponent<Text>() ;
+        
         t.text = s;
         ended = true;
-		//GUI.TextField (new Rect (10, 10, 50, 50), s);
+        GUI.enabled = true;
 	}
 
 }

@@ -8,6 +8,7 @@ public class T6Controller : Controller {
     void Start()
     {
         base.Start();
+        base.cameraIdealDistance = 150f;
     }
 
 	// Update is called once per frame
@@ -24,7 +25,7 @@ public class T6Controller : Controller {
 
 
     //LateUpdate for smooth custom camera follow
-   void LateUpdate()
+   /*void LateUpdate()
     {
         Transform target = this.transform;
         Transform camera = ctrlAttachedCamera.transform;
@@ -36,5 +37,5 @@ public class T6Controller : Controller {
         camera.position = needPos;
         camera.rotation = target.rotation;
    }
-    }
+    }*/
 }

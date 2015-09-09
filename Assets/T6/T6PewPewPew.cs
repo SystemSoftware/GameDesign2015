@@ -27,7 +27,7 @@ public class T6PewPewPew : MonoBehaviour {
                 bullet.AddComponent<Rigidbody>();
                 bullet.GetComponent<Rigidbody>().mass = 100;
                 bullet.transform.position = this.transform.position;
-                bullet.GetComponent<Rigidbody>().velocity = ship.velocity * 2;
+                bullet.GetComponent<Rigidbody>().velocity = ship.velocity * 4;
                 bullet.AddComponent<T6BulletPortal>();
                 bullet.GetComponent<T6BulletPortal>().controller = controller;
                 bullet.GetComponent<T6BulletPortal>().source = this.gameObject;
