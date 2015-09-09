@@ -39,7 +39,7 @@ public class T4PathHandler : MonoBehaviour {
 	// Update is called once per frame
     void FixedUpdate() {
         if (Level.AllowMotion) {
-            /** calc closest poiunt on path */
+            /** calc closest point on path */
             if (cPP_i+1 < pc.getPathPointCount()-1) {
             
                 current_distance = Vector3.Distance(pc.getPathPoint(cPP_i), this.transform.position);
@@ -71,6 +71,14 @@ public class T4PathHandler : MonoBehaviour {
                     prev_patho = pc.getPathObject(cPP_i);
                 }
             }
+
+            /** debug fast forward */
+            if (Input.GetKeyDown("h")) {
+                Debug.Log("h pressed cpp="+cPP_i);
+                cPP_i=2000;
+                prev_patho = pc.getPathObject(cPP_i);
+            }
+
 
             /** push ship forward along the path */
             if ((cPP_i + 1 < pc.getPathPointCount() - 1) && (logic.countdownOver)) {
