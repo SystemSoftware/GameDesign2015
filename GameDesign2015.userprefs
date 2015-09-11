@@ -1,11 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\T2\T2Controller.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ShipSize.cs">
     <Files>
-      <File FileName="Assets\Standard Assets\Environment\Water\Water\Scripts\Water.cs" Line="396" Column="2" />
-      <File FileName="Assets\T4\Level\T4Path.cs" Line="230" Column="1" />
-      <File FileName="Assets\T4\Level\T4Logic.cs" Line="71" Column="6" />
-      <File FileName="Assets\T2\T2Controller.cs" Line="23" Column="1" />
+      <File FileName="Assets\T4\T4TurretTrigger.cs" Line="24" Column="75" />
+      <File FileName="Assets\T4\Level\T4Logic.cs" Line="105" Column="60" />
+      <File FileName="Assets\T4\T4BulletSound.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\Level\T4Sound3DLogic.cs" Line="87" Column="23" />
+      <File FileName="Assets\T4\T4PlayerCollision.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\T4ShootBullet.cs" Line="72" Column="1" />
+      <File FileName="Assets\ShipSize.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

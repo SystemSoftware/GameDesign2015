@@ -14,6 +14,10 @@ public class T4Logic : MonoBehaviour {
     public GameObject countdownSound, startSound;
     public bool countdownOver = false;
     private Stopwatch stopwatch;
+	T4Sound3DLogic soundLogic;
+	bool sound1Played = false;
+	bool sound2Played = false;
+	bool mainThemePlayed = false;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
@@ -96,6 +100,9 @@ public class T4Logic : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+		// get SoundLogic
+		GameObject soundContainer = GameObject.Find ("SoundContainer");
+		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
         // add render settings
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
         RenderSettings.ambientLight = new Color(255, 255, 152, 255); // rgb 0-255 NOT 0-1
@@ -149,10 +156,21 @@ public class T4Logic : MonoBehaviour {
         // count the time for handling the countdown
         if (timePassed < 14) {
             timePassed += Time.deltaTime;
-
+			if ((timePassed > 0) && (timePassed < 1)) {
+				// PLAY COUNTDOWN SOUND
+				if(!sound2Played){
+					soundLogic.playCountDownBeep();
+					sound2Played=true;
+				}
+			}
             // 3 > 2 (wait 3 sec at begin)
             if ((timePassed >= 1) && (timePassed < 2)) {
                 // PLAY COUNTDOWN SOUND
+				if(!sound1Played){
+				soundLogic.playCountDownBeep();
+					sound1Played=true;
+						sound2Played=false;
+				}
 
                 Sprite cd_2 = Resources.Load<Sprite>("cd_2");
                 countdown.GetComponent<Image>().sprite = cd_2;
@@ -160,6 +178,11 @@ public class T4Logic : MonoBehaviour {
             // 2 > 1
             if ((timePassed >= 2) && (timePassed < 3)) {
                 // PLAY COUNTDOWN SOUND
+				if(!sound2Played){
+					soundLogic.playCountDownBeep();
+					sound2Played=true;
+					sound1Played=false;
+				}
 
                 Sprite cd_1 = Resources.Load<Sprite>("cd_1");
                 countdown.GetComponent<Image>().sprite = cd_1;
@@ -167,6 +190,15 @@ public class T4Logic : MonoBehaviour {
             // 1 > GO!
             if ((timePassed >= 3) && (timePassed < 4)) {
                 // PLAY START SOUND!
+				if(!sound1Played){
+					soundLogic.playStartBeep();
+					sound1Played=true;
+				}
+				//PLAY MAIN THEME!
+				if(!mainThemePlayed){
+					soundLogic.playMainTheme();
+					mainThemePlayed=true;
+				}
                 
                 Sprite cd_go = Resources.Load<Sprite>("cd_go");
                 countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(1024, 256);
@@ -190,7 +222,7 @@ public class T4Logic : MonoBehaviour {
             // remove GO!
             if ((timePassed >= 4) && (timePassed < 5f)) {
                 countdown.active = false;
-            }
+			}
         }
     }
 

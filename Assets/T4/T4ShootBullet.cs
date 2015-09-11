@@ -8,10 +8,13 @@ public class T4ShootBullet : MonoBehaviour {
 	protected string fire;
 	private bool firePressed = false;
 	private bool allowfire = true;
+	T4Sound3DLogic soundLogic;
 	
 	//load the prefab of the bullet
 	void Start() {
 		bullet = Resources.Load ("LaserBullet")as GameObject;
+		GameObject soundContainer = GameObject.Find ("SoundContainer");
+		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
 	}
 	
 	void Update(){		
@@ -56,7 +59,7 @@ public class T4ShootBullet : MonoBehaviour {
 	void FixedUpdate(){		
 		//only fire if fire-button pressed and firerate allows for next shot
 		if (firePressed&&allowfire) {
-			
+			soundLogic.playPlayerShoot();
 			allowfire = false; //disable shooting for a set period
 			firePressed = false;
 			StartCoroutine(Fire());//shoot the laser
