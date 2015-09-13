@@ -44,7 +44,7 @@ InputManager:
     negativeButton: 
     positiveButton: left ctrl
     altNegativeButton: 
-    altPositiveButton: mouse 0
+    altPositiveButton: u
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
@@ -60,7 +60,7 @@ InputManager:
     negativeButton: 
     positiveButton: left alt
     altNegativeButton: 
-    altPositiveButton: mouse 1
+    altPositiveButton: i
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
@@ -76,7 +76,7 @@ InputManager:
     negativeButton: 
     positiveButton: left cmd
     altNegativeButton: 
-    altPositiveButton: mouse 2
+    altPositiveButton: o
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000

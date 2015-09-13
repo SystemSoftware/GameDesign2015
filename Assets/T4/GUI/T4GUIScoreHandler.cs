@@ -29,6 +29,7 @@ public class T4GUIScoreHandler : MonoBehaviour {
         score_num = Resources.LoadAll<Sprite>("Sprites/ScoreNumbers");
         time_num = Resources.LoadAll<Sprite>("Sprites/TimeNumbers");
 
+
         // get GameObjects
         star = GameObject.Find("ScoreTime" + ctrl.ctrlControlIndex).transform.Find("Star").gameObject;
         colon = GameObject.Find("ScoreTime" + ctrl.ctrlControlIndex).transform.Find("Colon").gameObject;
