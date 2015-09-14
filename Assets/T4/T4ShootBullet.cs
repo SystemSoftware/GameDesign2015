@@ -63,6 +63,9 @@ public class T4ShootBullet : MonoBehaviour {
 		//make a clone of the bullet prefab which will then get shot
 		GameObject bulletClone = Instantiate (bullet, transform.position, transform.rotation)as GameObject;
 		bulletClone.transform.Rotate (0, -90, 90);
+
+		//set the layer of the bullet to the same layer as the shooting ship to keep the different worlds seperated
+		bulletClone.layer = gameObject.layer;
 		//set the parent of the clone to the player, so that he can get attributed if he hits a target
 		bulletClone.transform.parent = transform;
 

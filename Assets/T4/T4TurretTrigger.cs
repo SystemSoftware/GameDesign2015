@@ -13,6 +13,9 @@ public class T4TurretTrigger : MonoBehaviour {
     private int delay;
     private float accuarcy_spread = 0.02f;
 
+	private T4RotateTurret rotate;
+
+
 	// Use this for initialization
 	void Start () {
         should_shoot = false;
@@ -22,10 +25,16 @@ public class T4TurretTrigger : MonoBehaviour {
 
         stopwatch = new Stopwatch();
         bullet = (Resources.Load("TurretBullet") as GameObject).transform;
+
+		rotate = transform.parent.GetComponent<T4RotateTurret>();
 	}
-	
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		//rotate Turret to face the players ship
+
         if (should_shoot) {
             // did shoot before?
             if (delay_active){
@@ -64,12 +73,15 @@ public class T4TurretTrigger : MonoBehaviour {
             ship = other.gameObject;
             direction = (ship.transform.position - this.transform.position).normalized;
             should_shoot = true;
+			rotate.face_target=true;
+			rotate.ship=ship;
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
             should_shoot = false;
+			rotate.face_target=false;
             UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
             
             ship = null;

@@ -13,6 +13,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 	AudioSource startBeep;
 	AudioSource powerUp;
 	AudioSource playerShoot;
+	AudioSource explosion;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();
@@ -22,6 +23,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 		bossTheme = audios [4];
 		powerUp = audios [5];
 		playerShoot = audios [6];
+		explosion = audios [7];
 	}
 	
 	// Update is called once per frame
@@ -41,6 +43,8 @@ public class T4Sound3DLogic : MonoBehaviour {
 		if (rocket_cur_highest > 0) {
 			rocket.volume = rocket_cur_highest;
 			rocket_cur_highest = 0;
+		} else {
+			rocket.volume=0;
 		}
 	}
 
@@ -48,8 +52,8 @@ public class T4Sound3DLogic : MonoBehaviour {
 		if (ship_init) {
 			float distance = ComputeDistance (pos);
 			float volume;
-			if (distance<=500 && distance>1){ 
-				volume = 1f-distance/500f;
+			if (distance<=250 && distance>1){ 
+				volume = 1f-distance/250f;
 			}else if(distance <=1){
 				volume = 1;
 			}else{
@@ -75,6 +79,10 @@ public class T4Sound3DLogic : MonoBehaviour {
 
 	public void playPowerUp(){
 		powerUp.Play ();
+	}
+
+	public void playExplosion(){
+		explosion.Play ();
 	}
 
 	public void stopBossTheme(){

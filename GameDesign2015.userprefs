@@ -1,14 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ShipSize.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\T4\T4TurretHitTrigger.cs">
     <Files>
-      <File FileName="Assets\T4\T4TurretTrigger.cs" Line="24" Column="75" />
-      <File FileName="Assets\T4\Level\T4Logic.cs" Line="105" Column="60" />
+      <File FileName="Assets\T4\Level\T4Sound3DLogic.cs" Line="85" Column="21" />
+      <File FileName="Assets\T4\T4TurretTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\Level\T4Logic.cs" Line="1" Column="1" />
       <File FileName="Assets\T4\T4BulletSound.cs" Line="1" Column="1" />
-      <File FileName="Assets\T4\Level\T4Sound3DLogic.cs" Line="87" Column="23" />
       <File FileName="Assets\T4\T4PlayerCollision.cs" Line="1" Column="1" />
-      <File FileName="Assets\T4\T4ShootBullet.cs" Line="72" Column="1" />
-      <File FileName="Assets\ShipSize.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\T4ShootBullet.cs" Line="23" Column="66" />
+      <File FileName="Assets\T4RotateTurret.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\T4TurretHitTrigger.cs" Line="29" Column="31" />
+      <File FileName="Assets\T4\T4PowerUpTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\Level\T4Gravity.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
