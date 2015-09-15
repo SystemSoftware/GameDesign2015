@@ -2784,6 +2784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49e91219ef422547849866d64dc6833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimVelocityInfluence: 80
 --- !u!135 &307412383
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3268,35 +3269,35 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalPosition.x
       value: 551
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalPosition.y
       value: 768
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalPosition.z
       value: -4689
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalRotation.x
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_LocalRotation.w
       value: -1.62920685e-07
       objectReference: {fileID: 0}
-    - target: {fileID: 484584, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+    - target: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
@@ -29018,6 +29019,18 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 2.49176884
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 1816feebf2bfe5b42ae220cf515c5cf3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: 1816feebf2bfe5b42ae220cf515c5cf3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1816feebf2bfe5b42ae220cf515c5cf3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1816feebf2bfe5b42ae220cf515c5cf3, type: 3}
   m_IsPrefabParent: 0
@@ -32728,7 +32741,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a3ea6b0ddb30b4b96f0f2326b67f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireball: {fileID: 0}
+  fireball: {fileID: 438770, guid: 5fc90612482c84e4a88400525388aab2, type: 2}
+  direction: {x: 0, y: 0, z: 0}
+  fireballSpeed: 20000
+  aimVelocityInfluence: 200
+  fireballCD: 5
 --- !u!1 &1875300998
 GameObject:
   m_ObjectHideFlags: 0

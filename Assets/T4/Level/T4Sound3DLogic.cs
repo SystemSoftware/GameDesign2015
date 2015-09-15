@@ -140,7 +140,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 		int i = 0;
 
 		foreach (Rigidbody rigid in rb) {
-			if(Level.ActiveShips[i].gameObject.layer==tag){
+			if(Level.ActiveShips[i].gameObject.layer==tag && rigid != null){
 				tmpDistance=Vector3.Distance(rigid.transform.position, pos);
 				if(tmpDistance < distance)
 					distance= tmpDistance;

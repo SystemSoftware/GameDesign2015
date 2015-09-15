@@ -3,6 +3,8 @@ using System.Collections;
 using System.Diagnostics;
 
 public class T4TurretTrigger : MonoBehaviour {
+    public int aimVelocityInfluence = 80;
+
     private Transform bullet;
 
     private bool should_shoot, delay_active;
@@ -24,7 +26,7 @@ public class T4TurretTrigger : MonoBehaviour {
 
         should_shoot = false;
         delay_active = false;
-        bullet_speed = 20000;
+        bullet_speed = 15000;
         delay = 500;
 
         stopwatch = new Stopwatch();
@@ -54,9 +56,9 @@ public class T4TurretTrigger : MonoBehaviour {
                 Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_bullet = tmp.gameObject;
                 spawned_bullet.layer = this.gameObject.layer;
-                
 
-                direction = (ship.transform.position - this.transform.position).normalized;
+
+                direction = ((ship.transform.position + Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity) * aimVelocityInfluence) - this.transform.position).normalized;
                 /*
                 // add spread
                 direction = new Vector3(direction.x + Random.Range(-accuarcy_spread, accuarcy_spread), 

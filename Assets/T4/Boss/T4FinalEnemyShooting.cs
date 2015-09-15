@@ -3,14 +3,15 @@ using System.Collections;
 
 public class T4FinalEnemyShooting : MonoBehaviour {
     public Transform fireball;
-    private GameObject ship;
-    private Vector3 direction;
-    private int fireball_speed = 2000;
+    public Vector3 direction;
+    public int fireballSpeed = 20000;
+    public int aimVelocityInfluence = 200;
 
+    private GameObject ship;
     // delay between shots
     private float nextFireball = 0.0f;
     // 1f = 1sec
-    private float fireballCD = 5.0f;
+    public float fireballCD = 5.0f;
 
     // Use this for initialization
     void Start() {
@@ -31,14 +32,21 @@ public class T4FinalEnemyShooting : MonoBehaviour {
 
 
                 direction = (ship.transform.position - this.transform.position).normalized;
+                direction = ((ship.transform.position+Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity)*aimVelocityInfluence) - this.transform.position).normalized;
                 /*
                 // add spread
                 direction = new Vector3(direction.x + Random.Range(-accuarcy_spread, accuarcy_spread), 
                                         direction.y + Random.Range(-accuarcy_spread, accuarcy_spread), 
                                         direction.z + Random.Range(-accuarcy_spread, accuarcy_spread));
 */
+                // let the fireball face the direction of the target
                 spawned_fireball.transform.rotation = Quaternion.LookRotation(direction);
-                spawned_fireball.GetComponent<Rigidbody>().AddForce(direction * fireball_speed);
+                // turn by 180 degrees
+                Vector3 tmp2 = spawned_fireball.transform.rotation.eulerAngles;
+                tmp2.y = tmp2.y+ 180;
+                spawned_fireball.transform.rotation = Quaternion.Euler(tmp2);
+                // finally shoot into the direction
+                spawned_fireball.GetComponent<Rigidbody>().AddForce(direction * fireballSpeed);
             }
         }
     }
