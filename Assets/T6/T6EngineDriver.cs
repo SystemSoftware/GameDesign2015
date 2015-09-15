@@ -36,7 +36,6 @@ public class T6EngineDriver : EngineDriver {
             if (force != null)
             {
                force.relativeForce = new Vector3(0, 0, maxForce * f);
-               Debug.DrawRay(this.force.transform.position, this.force.transform.forward * 50);
 
             }
         }

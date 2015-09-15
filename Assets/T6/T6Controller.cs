@@ -4,11 +4,16 @@ using System.Collections;
 public class T6Controller : Controller {
 
     public bool cameraLock = true;
+    
+
+
+
 
     void Start()
     {
         base.Start();
         base.cameraIdealDistance = 150f;
+        
     }
 
 	// Update is called once per frame
@@ -21,6 +26,7 @@ public class T6Controller : Controller {
         {
             s.Rotate(acceleration, vertical, yaw);
         }
+       
 	}
 
 

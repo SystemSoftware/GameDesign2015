@@ -77,7 +77,7 @@ public class T6PlantesLogic : MonoBehaviour {
 			positionOrb.GetComponent<MeshRenderer>().material = mat;
            // positionOrb.transform.parent = ship.transform;
             Destroy(positionOrb.GetComponent<SphereCollider>());
-
+            Destroy(GameObject.Find("Camera00").GetComponent<AudioListener>());
 
 
             positionOrb.layer = 5;

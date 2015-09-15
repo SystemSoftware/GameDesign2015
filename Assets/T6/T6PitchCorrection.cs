@@ -21,13 +21,13 @@ public class T6PitchCorrection : MonoBehaviour
     {
         Vector3 localAngularVelocity = ship.transform.InverseTransformDirection(ship.angularVelocity);
         yaw = Input.GetAxis(controller.ctrlAxisOther);
-        if (yaw == 0)
+        if (yaw < 0.5 && yaw > -0.5)
         {
             setForce(localAngularVelocity.y * -5000);
         }
         else
         {
-            setForce(yaw * 2000);
+            setForce(yaw * 1800);
         }
 
     }
