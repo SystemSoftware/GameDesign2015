@@ -25,9 +25,6 @@ public class T4FinalEnemyRotation : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
-            UnityEngine.Debug.Log("entered TREXRADIUS" + other.gameObject);
-
-            
             ship = other.gameObject;
         }
     }
