@@ -16,6 +16,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 	AudioSource explosion;
 	AudioSource turretShoot;
 	AudioSource enemyPlaneShoot;
+	AudioSource explosionBullet;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();
@@ -28,6 +29,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 		explosion = audios [7];
 		turretShoot = audios [8];
 		enemyPlaneShoot = audios [9];
+		explosionBullet = audios [10];
 	}
 	
 	// Update is called once per frame
@@ -52,9 +54,9 @@ public class T4Sound3DLogic : MonoBehaviour {
 		}
 	}
 
-	public void regulateVolume(/*AudioSource audio,*/ Vector3 pos){
+	public void regulateVolume(/*AudioSource audio,*/ Vector3 pos, int tag){
 		if (ship_init) {
-			float distance = ComputeDistance (pos);
+			float distance = ComputeDistance (pos, tag);
 			float volume;
 			if (distance<=250 && distance>1){ 
 				volume = 1f-distance/250f;
@@ -111,6 +113,10 @@ public class T4Sound3DLogic : MonoBehaviour {
 		explosion.Play ();
 	}
 
+	public void playExplosionBullet(){
+		explosionBullet.Play ();
+	}
+
 	public void stopBossTheme(){
 		if(bossTheme.isPlaying){
 			bossTheme.Stop();
@@ -128,15 +134,19 @@ public class T4Sound3DLogic : MonoBehaviour {
 		startBeep.Play ();
 	}
 
-	float ComputeDistance(Vector3 pos){
+	float ComputeDistance(Vector3 pos, int tag){
 		float distance = 100000;
 		float tmpDistance;
+		int i = 0;
 
 		foreach (Rigidbody rigid in rb) {
-			tmpDistance=Vector3.Distance(rigid.transform.position, pos);
-			if(tmpDistance < distance)
-				distance= tmpDistance;
-		}
+			if(Level.ActiveShips[i].gameObject.layer==tag){
+				tmpDistance=Vector3.Distance(rigid.transform.position, pos);
+				if(tmpDistance < distance)
+					distance= tmpDistance;
+			}
+			i++;
+		}	
 		return distance;
 	}
 }

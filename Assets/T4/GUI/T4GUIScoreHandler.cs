@@ -110,6 +110,15 @@ public class T4GUIScoreHandler : MonoBehaviour {
         score += toAdd;
     }
 
+	public void subScore(int toSub) {
+		if (score - toSub >= 0) {
+			score -= toSub;
+		} else {
+			score = 0;
+		}
+	}
+
+
     public int getScore() {
         return score;
     }

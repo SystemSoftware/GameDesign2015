@@ -12,6 +12,6 @@ public class T4BulletSound : MonoBehaviour {
 		
 		// Update is called once per frame
 		void Update () {
-			soundLogic.regulateVolume (transform.position);
+			soundLogic.regulateVolume (transform.position, transform.gameObject.layer);
 		}
 }
