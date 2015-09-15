@@ -17,10 +17,13 @@ public class T4TurretTrigger : MonoBehaviour {
 
 	private T4RotateTurret rotate;
 	private T4Sound3DLogic soundLogic;
+    private T4CommonFunctions cf;
 
 
 	// Use this for initialization
 	void Start () {
+        cf = GameObject.Find("CommonFunctions").GetComponent<T4CommonFunctions>();
+
 		GameObject soundContainer = GameObject.Find ("SoundContainer");
 		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
 
@@ -51,7 +54,7 @@ public class T4TurretTrigger : MonoBehaviour {
                 }
             }else{
                 // shoot
-				soundLogic.playTurretShoot(transform.position, ship.transform.position);
+				//soundLogic.playTurretShoot(transform.position, ship.transform.position);
 
                 Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_bullet = tmp.gameObject;
@@ -75,14 +78,19 @@ public class T4TurretTrigger : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
+
+        if (cf.isShip(this.gameObject, other)) { // ship entered > begin shooting
             UnityEngine.Debug.Log("entered TURRETRADIUS" + other.gameObject);
-            
-            ship = other.gameObject;
-            direction = (ship.transform.position - this.transform.position).normalized;
-            should_shoot = true;
-			rotate.face_target=true;
-			rotate.ship=ship;
+
+            ship = cf.getShip(other);
+
+
+            if (ship != null) {
+                direction = (ship.transform.position - this.transform.position).normalized;
+                should_shoot = true;
+                rotate.face_target = true;
+                rotate.ship = ship;
+            }
         }
     }
 

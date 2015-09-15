@@ -35,6 +35,7 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4PathHandler>();
                     ship.gameObject.AddComponent<T4CullingMask>();
 					ship.gameObject.AddComponent<T4ZeroHealthHandler>();
+                    ship.GetComponent<Rigidbody>().mass = 100;
 
                     int new_layer = (28 + ship.ctrlControlIndex);
                     // set layer of the ship to their worlds
