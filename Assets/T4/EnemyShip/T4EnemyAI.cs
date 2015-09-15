@@ -21,7 +21,12 @@ public class T4EnemyAI : MonoBehaviour {
     private int delay;
     private Stopwatch stopwatch;
 
+	private T4Sound3DLogic soundLogic;
+
     void Start() {
+		GameObject soundContainer = GameObject.Find ("SoundContainer");
+		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
+
         // get A and B
         for (int i = 0; i < transform.childCount; i++) {
             if (transform.GetChild(i).name.Equals("A")) {
@@ -65,6 +70,8 @@ public class T4EnemyAI : MonoBehaviour {
                         direction = (target_ship.transform.position - this.transform.position).normalized;
                         spawned_bullet.transform.rotation = Quaternion.LookRotation(direction);
                         spawned_bullet.GetComponent<Rigidbody>().AddForce(direction * bullet_speed);
+
+						soundLogic.playEnemyPlaneShoot(transform.position, target_ship.transform.position);
 
                         stopwatch.Start();
                         delay_active = true;

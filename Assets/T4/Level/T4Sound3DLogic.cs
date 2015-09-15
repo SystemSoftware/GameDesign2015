@@ -14,6 +14,8 @@ public class T4Sound3DLogic : MonoBehaviour {
 	AudioSource powerUp;
 	AudioSource playerShoot;
 	AudioSource explosion;
+	AudioSource turretShoot;
+	AudioSource enemyPlaneShoot;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();
@@ -24,6 +26,8 @@ public class T4Sound3DLogic : MonoBehaviour {
 		powerUp = audios [5];
 		playerShoot = audios [6];
 		explosion = audios [7];
+		turretShoot = audios [8];
+		enemyPlaneShoot = audios [9];
 	}
 	
 	// Update is called once per frame
@@ -62,6 +66,28 @@ public class T4Sound3DLogic : MonoBehaviour {
 			if (volume>rocket_cur_highest)rocket_cur_highest=volume;
 		}
 	}
+
+	public void playTurretShoot(Vector3 pos1, Vector3 pos2){
+		float distance=Vector3.Distance(pos1, pos2);
+		if (distance <= 400 && distance > 1) {
+			turretShoot.volume = 1f - distance / 400f;
+			turretShoot.Play ();
+		}else if(distance <=1){
+				turretShoot.volume=1;
+				turretShoot.Play ();
+		}
+	}
+
+	public void playEnemyPlaneShoot(Vector3 pos1, Vector3 pos2){
+		float distance=Vector3.Distance(pos1, pos2);
+		if (distance <= 1000 && distance > 1) {
+			enemyPlaneShoot.volume = 1f - distance / 1000f;
+			enemyPlaneShoot.Play ();
+		}else if(distance <=1){
+			enemyPlaneShoot.volume=1;
+			enemyPlaneShoot.Play ();
+	}
+}
 
 	public void playMainTheme(){
 		mainTheme.Play ();

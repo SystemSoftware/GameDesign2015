@@ -14,10 +14,14 @@ public class T4TurretTrigger : MonoBehaviour {
     private float accuarcy_spread = 0.02f;
 
 	private T4RotateTurret rotate;
+	private T4Sound3DLogic soundLogic;
 
 
 	// Use this for initialization
 	void Start () {
+		GameObject soundContainer = GameObject.Find ("SoundContainer");
+		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
+
         should_shoot = false;
         delay_active = false;
         bullet_speed = 20000;
@@ -45,6 +49,8 @@ public class T4TurretTrigger : MonoBehaviour {
                 }
             }else{
                 // shoot
+				soundLogic.playTurretShoot(transform.position, ship.transform.position);
+
                 Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_bullet = tmp.gameObject;
                 spawned_bullet.layer = this.gameObject.layer;
