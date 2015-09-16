@@ -44,6 +44,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _OcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
@@ -59,13 +66,6 @@ Material:
       data:
         first:
           name: _DetailAlbedoMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _OcclusionMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -101,7 +101,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: .55400002
       data:
         first:
           name: _BumpScale
@@ -120,16 +120,16 @@ Material:
         second: 0
       data:
         first:
-          name: _Mode
-        second: 0
-      data:
-        first:
           name: _EmissionScaleUI
         second: 0
       data:
         first:
+          name: _Mode
+        second: 0
+      data:
+        first:
           name: _Metallic
-        second: 1
+        second: .75
     m_Colors:
       data:
         first:
@@ -138,7 +138,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .569404542, g: .669117689, b: .501838267, a: 1}
+        second: {r: .565639138, g: .772058845, b: .42576775, a: 1}
       data:
         first:
           name: _EmissionColorUI

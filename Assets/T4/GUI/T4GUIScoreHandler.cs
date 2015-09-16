@@ -29,6 +29,7 @@ public class T4GUIScoreHandler : MonoBehaviour {
         score_num = Resources.LoadAll<Sprite>("Sprites/ScoreNumbers");
         time_num = Resources.LoadAll<Sprite>("Sprites/TimeNumbers");
 
+
         // get GameObjects
         star = GameObject.Find("ScoreTime" + ctrl.ctrlControlIndex).transform.Find("Star").gameObject;
         colon = GameObject.Find("ScoreTime" + ctrl.ctrlControlIndex).transform.Find("Colon").gameObject;
@@ -108,6 +109,15 @@ public class T4GUIScoreHandler : MonoBehaviour {
     public void addScore(int toAdd) {
         score += toAdd;
     }
+
+	public void subScore(int toSub) {
+		if (score - toSub >= 0) {
+			score -= toSub;
+		} else {
+			score = 0;
+		}
+	}
+
 
     public int getScore() {
         return score;

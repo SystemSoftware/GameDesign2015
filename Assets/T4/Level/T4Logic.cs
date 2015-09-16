@@ -14,6 +14,10 @@ public class T4Logic : MonoBehaviour {
     public GameObject countdownSound, startSound;
     public bool countdownOver = false;
     private Stopwatch stopwatch;
+	T4Sound3DLogic soundLogic;
+	bool sound1Played = false;
+	bool sound2Played = false;
+	bool mainThemePlayed = false;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
@@ -30,6 +34,8 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4GUIScoreHandler>();
                     ship.gameObject.AddComponent<T4PathHandler>();
                     ship.gameObject.AddComponent<T4CullingMask>();
+					ship.gameObject.AddComponent<T4ZeroHealthHandler>();
+                    
 
                     int new_layer = (28 + ship.ctrlControlIndex);
                     // set layer of the ship to their worlds
@@ -43,9 +49,61 @@ public class T4Logic : MonoBehaviour {
                     GameObject fog = Resources.Load("T4Fog") as GameObject;
                     GameObject g = Instantiate(fog, new Vector3(0, 0, 15), Quaternion.identity) as GameObject;
                     g.layer = new_layer;
+                    // switch layer of fog childs
+                    Transform[] fogChilds = g.GetComponentsInChildren<Transform>();
+                    for (int i = 0; i < fogChilds.Length; i++) {
+                        fogChilds[i].gameObject.layer = new_layer;
+                    }
+                    ship.ctrlAttachedCamera.gameObject.layer = new_layer;
 
                     // make it a child of the playercamera
                     g.transform.SetParent(ship.ctrlAttachedCamera.transform, false);
+
+                    // T1 Ship Simple force fix
+                    if (ship.gameObject.name.Equals("Simple(Clone)")) {
+                        // fix here
+                        ship.GetComponent<Rigidbody>().mass = 100;
+                        /** Todo-List
+                         * iterate over childs and manipulate the scripts to a higher force influence cause we set the mass to 100
+                         * but the ships forces of thrusters and engine are adjusted to a mass of 1
+                         * */
+                        Transform[] t1SimpleChilds = ship.gameObject.GetComponentsInChildren<Transform>();
+                        for (int i = 0; i < t1SimpleChilds.Length; i++) {
+                            EngineDriver simpleTmp1;
+                            VEngineDriver simpleTmp2;
+                            HEngineDriver simpleTmp3;
+
+                            int enhanceForcesBy = 100;
+                            // Accel > reconfig EngineDriver
+                            if(t1SimpleChilds[i].gameObject.name.Equals("Accel")){
+                                t1SimpleChilds[i].gameObject.GetComponent<EngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<EngineDriver>().maxForce * (enhanceForcesBy+20);
+                            }
+                            // DirectionalThruster Down > reconfig VEngineDriver
+                            if (t1SimpleChilds[i].gameObject.name.Equals("DirectionalThruster Down")) {
+                                t1SimpleChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce * enhanceForcesBy;
+                            }
+                            // DirectionalThruster Up > reconfig VEngineDriver
+                            if (t1SimpleChilds[i].gameObject.name.Equals("DirectionalThruster Up")) {
+                                t1SimpleChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce * enhanceForcesBy;
+                            }
+                            // DirectionalThruster Left Left > reconfig HEngineDriver
+                            if (t1SimpleChilds[i].gameObject.name.Equals("DirectionalThruster Left Left")) {
+                                t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce * enhanceForcesBy;
+                            }
+                            // DirectionalThruster Left Right > reconfig HEngineDriver
+                            if (t1SimpleChilds[i].gameObject.name.Equals("DirectionalThruster Left Right")) {
+                                t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce * enhanceForcesBy;
+                            }
+                            // DirectionalThruster Right Right > reconfig HEngineDriver
+                            if (t1SimpleChilds[i].gameObject.name.Equals("DirectionalThruster Right Right")) {
+                                t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce * enhanceForcesBy;
+                            }
+                            // DirectionalThruster Right Left > reconfig HEngineDriver
+                            if (t1SimpleChilds[i].gameObject.name.Equals("DirectionalThruster Right Left")) {
+                                t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = t1SimpleChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce * enhanceForcesBy;
+                            }
+                        }
+                    }
 
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects
@@ -96,6 +154,9 @@ public class T4Logic : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+		// get SoundLogic
+		GameObject soundContainer = GameObject.Find ("SoundContainer");
+		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
         // add render settings
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
         RenderSettings.ambientLight = new Color(255, 255, 152, 255); // rgb 0-255 NOT 0-1
@@ -149,10 +210,21 @@ public class T4Logic : MonoBehaviour {
         // count the time for handling the countdown
         if (timePassed < 14) {
             timePassed += Time.deltaTime;
-
+			if ((timePassed > 0) && (timePassed < 1)) {
+				// PLAY COUNTDOWN SOUND
+				if(!sound2Played){
+					soundLogic.playCountDownBeep();
+					sound2Played=true;
+				}
+			}
             // 3 > 2 (wait 3 sec at begin)
             if ((timePassed >= 1) && (timePassed < 2)) {
                 // PLAY COUNTDOWN SOUND
+				if(!sound1Played){
+				soundLogic.playCountDownBeep();
+					sound1Played=true;
+						sound2Played=false;
+				}
 
                 Sprite cd_2 = Resources.Load<Sprite>("cd_2");
                 countdown.GetComponent<Image>().sprite = cd_2;
@@ -160,6 +232,11 @@ public class T4Logic : MonoBehaviour {
             // 2 > 1
             if ((timePassed >= 2) && (timePassed < 3)) {
                 // PLAY COUNTDOWN SOUND
+				if(!sound2Played){
+					soundLogic.playCountDownBeep();
+					sound2Played=true;
+					sound1Played=false;
+				}
 
                 Sprite cd_1 = Resources.Load<Sprite>("cd_1");
                 countdown.GetComponent<Image>().sprite = cd_1;
@@ -167,6 +244,15 @@ public class T4Logic : MonoBehaviour {
             // 1 > GO!
             if ((timePassed >= 3) && (timePassed < 4)) {
                 // PLAY START SOUND!
+				if(!sound1Played){
+					soundLogic.playStartBeep();
+					sound1Played=true;
+				}
+				//PLAY MAIN THEME!
+				if(!mainThemePlayed){
+					soundLogic.playMainTheme();
+					mainThemePlayed=true;
+				}
                 
                 Sprite cd_go = Resources.Load<Sprite>("cd_go");
                 countdown.GetComponent<RectTransform>().sizeDelta = new Vector2(1024, 256);
@@ -190,7 +276,7 @@ public class T4Logic : MonoBehaviour {
             // remove GO!
             if ((timePassed >= 4) && (timePassed < 5f)) {
                 countdown.active = false;
-            }
+			}
         }
     }
 

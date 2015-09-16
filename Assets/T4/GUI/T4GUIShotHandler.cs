@@ -39,7 +39,7 @@ public class T4GUIShotHandler : MonoBehaviour {
         shotC.GetComponent<Image>().sprite = full;
         shotD.GetComponent<Image>().sprite = full;
 
-        shots_left = 4;
+        shots_left = 0;
         float cam_width = Screen.width / 2;
         float cam_height = Screen.height / 2;
         switch (ctrl.ctrlControlIndex) {
@@ -59,6 +59,22 @@ public class T4GUIShotHandler : MonoBehaviour {
                 split_anchor = new Vector2(Screen.width - 105, cam_height - cam_height * 0.95f);
 
                 break;
+        }
+    }
+
+    public int getShotsLeft(){
+        return shots_left;
+    }
+
+    public void addShot() {
+        if (shots_left < 4) {
+            shots_left++;
+        }
+    }
+
+    public void removeShot() {
+        if (shots_left > 0) {
+            shots_left--;
         }
     }
 

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Diagnostics;
 
 public class T4TurretTrigger : MonoBehaviour {
+    public int aimVelocityInfluence = 80;
+
     private Transform bullet;
 
     private bool should_shoot, delay_active;
@@ -13,19 +15,35 @@ public class T4TurretTrigger : MonoBehaviour {
     private int delay;
     private float accuarcy_spread = 0.02f;
 
+	private T4RotateTurret rotate;
+	private T4Sound3DLogic soundLogic;
+    private T4CommonFunctions cf;
+
+
 	// Use this for initialization
 	void Start () {
+        cf = GameObject.Find("CommonFunctions").GetComponent<T4CommonFunctions>();
+
+		GameObject soundContainer = GameObject.Find ("SoundContainer");
+		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
+
         should_shoot = false;
         delay_active = false;
-        bullet_speed = 20000;
+        bullet_speed = 15000;
         delay = 500;
 
         stopwatch = new Stopwatch();
         bullet = (Resources.Load("TurretBullet") as GameObject).transform;
+
+		rotate = transform.parent.GetComponent<T4RotateTurret>();
 	}
-	
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		//rotate Turret to face the players ship
+
         if (should_shoot) {
             // did shoot before?
             if (delay_active){
@@ -36,12 +54,14 @@ public class T4TurretTrigger : MonoBehaviour {
                 }
             }else{
                 // shoot
+				//soundLogic.playTurretShoot(transform.position, ship.transform.position);
+
                 Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_bullet = tmp.gameObject;
                 spawned_bullet.layer = this.gameObject.layer;
-                
 
-                direction = (ship.transform.position - this.transform.position).normalized;
+
+                direction = ((ship.transform.position + Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity) * aimVelocityInfluence) - this.transform.position).normalized;
                 /*
                 // add spread
                 direction = new Vector3(direction.x + Random.Range(-accuarcy_spread, accuarcy_spread), 
@@ -58,18 +78,26 @@ public class T4TurretTrigger : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
+
+        if (cf.isShip(this.gameObject.layer, other)) { // ship entered > begin shooting
             UnityEngine.Debug.Log("entered TURRETRADIUS" + other.gameObject);
-            
-            ship = other.gameObject;
-            direction = (ship.transform.position - this.transform.position).normalized;
-            should_shoot = true;
+
+            ship = cf.getShip(other);
+
+
+            if (ship != null) {
+                direction = (ship.transform.position - this.transform.position).normalized;
+                should_shoot = true;
+                rotate.face_target = true;
+                rotate.ship = ship;
+            }
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
             should_shoot = false;
+			rotate.face_target=false;
             UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
             
             ship = null;

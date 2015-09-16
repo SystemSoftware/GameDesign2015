@@ -71,12 +71,26 @@ public class T4PathHandler : MonoBehaviour {
                     prev_patho = pc.getPathObject(cPP_i);
                 }
             }
-
+            //Debug.Log("connected to pathpoint=" + cPP_i);
             /** debug fast forward */
             if (Input.GetKeyDown("h")) {
                 Debug.Log("h pressed cpp="+cPP_i);
                 cPP_i=2000;
+                cPP_i = 2300;
+
                 prev_patho = pc.getPathObject(cPP_i);
+                // remove fog
+                Transform ctrl = GetComponent<Controller>().ctrlAttachedCamera.transform;
+                for (int i = 0; i < ctrl.childCount; i++) {
+                    ctrl.GetChild(i).transform.GetChild(0).GetComponent<ParticleSystem>().enableEmission = false;
+                    ctrl.GetChild(i).transform.GetChild(1).GetComponent<ParticleSystem>().enableEmission = false;
+
+                }
+            }
+            
+            // reached the end of the bossloop? reset to the start of the bossloop
+            if (cPP_i >= 3250) {
+                cPP_i = 2650;
             }
 
 
