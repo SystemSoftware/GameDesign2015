@@ -44,9 +44,13 @@ public class T6PitchCorrection : MonoBehaviour {
         //Generate rotation towards target
         else
         {
-            if (!(controller.pitch > 0 && angle > 0) && !(controller.pitch < 0 && angle < 0)) 
+            if ((controller.pitch > 0 && angle < 0) || (controller.pitch < 0 && angle > 0))
             {
-                pitchCorrectionAngle = angle*5;
+                
+            }
+            else
+            {
+                pitchCorrectionAngle = angle;
             }
             
         }

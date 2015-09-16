@@ -46,9 +46,13 @@ public class T6YawCorrection : MonoBehaviour
         //Generate rotation towards target
         else
         {
-            if (!(controller.yaw > 0 && angle > 0) && !(controller.pitch < 0 && yaw < 0))
+            if ((controller.yaw > 0 && angle < 0) || (controller.yaw < 0 && angle > 0))
             {
-                yawCorrection = angle * 5;
+
+            }
+            else
+            {
+                yawCorrection = angle;
             }
 
         }

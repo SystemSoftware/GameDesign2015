@@ -5,7 +5,7 @@ public class T6Controller : Controller {
 
     public bool cameraLock = true;
     public Vector3 lookAt; //world space
-    public Vector3 lookAtLocal; //local space
+    public Vector3 lookAtLocal;
     public Vector3 target;
     public Vector3 targetLocal;
     public float acceleration;
@@ -14,10 +14,7 @@ public class T6Controller : Controller {
     public float roll;
     public float strafeVertical;
     public float strafeHorizontal;
-    private float pitchSum;
-    private float yawSum;
-    private float rollSum;
-    GameObject g;
+    private GameObject targetObject;
     /*
      * New Control system:
      * The players input controls the position of a point on a spere around the ship. 
@@ -35,35 +32,27 @@ public class T6Controller : Controller {
         lookAt = transform.TransformPoint(lookAtLocal);
         
         target = lookAt;
-        g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        Destroy(g.GetComponent<SphereCollider>());
-        g.transform.position = transform.position + target;
-        pitchSum = 0;
-        yawSum = 0;
-        rollSum = 0;
+        targetLocal = lookAtLocal;
+        targetObject = new GameObject();
+        targetObject.transform.position = lookAtLocal;
     }
 
 	// Update is called once per frame
 	void Update () {
         acceleration = Mathf.Max(0,Input.GetAxis(ctrlAxisAccelerate));
         roll = Input.GetAxis(ctrlAxisHorizontal);
-        pitch = Input.GetAxis(ctrlAxisVertical);
+        pitch = -Input.GetAxis(ctrlAxisVertical);
         yaw = Input.GetAxis(ctrlAxisOther);
         strafeHorizontal = Input.GetAxis("T6StrafeHorizontal");
         strafeVertical = Input.GetAxis("T6StrafeVertical");
-        pitchSum += pitch/50 % (2 * Mathf.PI);
-        yawSum += yaw/100 % (2 * Mathf.PI);
-        rollSum += -roll % 360;
         lookAt = transform.TransformPoint(new Vector3(0, 0, 200));
-        Vector3 pitchPoint = new Vector3(0,200* Mathf.Sin(pitchSum),200* Mathf.Cos(pitchSum));
-        Vector3 yawPoint = new Vector3(200*Mathf.Sin(yawSum), 0, 200*Mathf.Cos(yawSum));
-        
-        targetLocal = new Vector3(yawPoint.x, pitchPoint.y,Mathf.Min(pitchPoint.z,yawPoint.z));
-        targetLocal = Quaternion.Euler(new Vector3(0, 0, rollSum)) * targetLocal;
-        target = transform.position + targetLocal;
-        g.transform.position = target;
-        Debug.DrawLine(transform.position, g.transform.position);
+
+        targetObject.transform.RotateAround(transform.position, transform.up, yaw);
+        targetObject.transform.RotateAround(transform.position, transform.right, -pitch);
+
+        target = targetObject.transform.position;
         Debug.DrawLine(transform.position, lookAt);
+        Debug.DrawLine(transform.position, target);
         foreach (T6RotateThrustFlaps s in this.GetComponentsInChildren<T6RotateThrustFlaps>())
         {
             s.Rotate(acceleration, pitch, yaw);
