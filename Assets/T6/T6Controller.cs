@@ -31,7 +31,9 @@ public class T6Controller : Controller {
     {
         base.Start();
         base.cameraIdealDistance = 150f;
-        lookAt = transform.TransformPoint(new Vector3(0, 0, 200));
+        lookAtLocal = new Vector3(0, 0, 200);
+        lookAt = transform.TransformPoint(lookAtLocal);
+        
         target = lookAt;
         g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         Destroy(g.GetComponent<SphereCollider>());
@@ -49,10 +51,10 @@ public class T6Controller : Controller {
         yaw = Input.GetAxis(ctrlAxisOther);
         strafeHorizontal = Input.GetAxis("T6StrafeHorizontal");
         strafeVertical = Input.GetAxis("T6StrafeVertical");
-        pitchSum += pitch/100 % (2 * Mathf.PI);
+        pitchSum += pitch/50 % (2 * Mathf.PI);
         yawSum += yaw/100 % (2 * Mathf.PI);
         rollSum += -roll % 360;
-        lookAt = transform.TransformPoint(new Vector3(0, 0, 1));
+        lookAt = transform.TransformPoint(new Vector3(0, 0, 200));
         Vector3 pitchPoint = new Vector3(0,200* Mathf.Sin(pitchSum),200* Mathf.Cos(pitchSum));
         Vector3 yawPoint = new Vector3(200*Mathf.Sin(yawSum), 0, 200*Mathf.Cos(yawSum));
         
@@ -61,6 +63,7 @@ public class T6Controller : Controller {
         target = transform.position + targetLocal;
         g.transform.position = target;
         Debug.DrawLine(transform.position, g.transform.position);
+        Debug.DrawLine(transform.position, lookAt);
         foreach (T6RotateThrustFlaps s in this.GetComponentsInChildren<T6RotateThrustFlaps>())
         {
             s.Rotate(acceleration, pitch, yaw);
