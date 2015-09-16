@@ -17,9 +17,9 @@ public class T6RCSWings : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        roll = Input.GetAxis(controller.ctrlAxisHorizontal);
-        strafeUp = Input.GetAxis("T6StrafeVertical");
-        strafeLeft = Input.GetAxis("T6StrafeHorizontal");
+        roll = controller.roll;
+        strafeUp = controller.strafeVertical;
+        strafeLeft = controller.strafeHorizontal;
         flag = 1;
         if (this.transform.parent.name == "LRCS") {flag = -1; }
         Vector3 localAngularVelocity = ship.transform.InverseTransformDirection(ship.angularVelocity);
@@ -58,9 +58,7 @@ public class T6RCSWings : MonoBehaviour {
     void setForce(float f, float h)
     {
         this.GetComponent<ConstantForce>().relativeForce = new Vector3(h, 0, f);
-        Debug.DrawLine(this.transform.position, this.transform.position + transform.TransformVector( new Vector3(h, 0, f)));
         this.GetComponent<ParticleSystem>().startSpeed = f/-6;
-        Debug.Log(h);
     }
 
 
