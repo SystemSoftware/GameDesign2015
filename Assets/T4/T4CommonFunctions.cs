@@ -3,7 +3,7 @@ using System.Collections;
 
 public class T4CommonFunctions : MonoBehaviour {
 
-    public bool isShip(GameObject caller, Collider other) {
+    public bool isShip(int callerLayer, Collider other) {
         if (other == null || other.gameObject == null || other.gameObject.tag == null) {
             return false;
         }
@@ -20,7 +20,7 @@ public class T4CommonFunctions : MonoBehaviour {
             objParHasShipTag = true;
         }
 
-        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == caller.layer)) {
+        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == callerLayer)) {
             // is a ship
             return true;
         }

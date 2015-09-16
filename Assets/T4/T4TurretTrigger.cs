@@ -79,7 +79,7 @@ public class T4TurretTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
 
-        if (cf.isShip(this.gameObject, other)) { // ship entered > begin shooting
+        if (cf.isShip(this.gameObject.layer, other)) { // ship entered > begin shooting
             UnityEngine.Debug.Log("entered TURRETRADIUS" + other.gameObject);
 
             ship = cf.getShip(other);

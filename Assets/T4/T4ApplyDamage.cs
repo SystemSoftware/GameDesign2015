@@ -11,25 +11,44 @@ public class T4ApplyDamage : MonoBehaviour{
     public int damage = 5;
 	private bool justHit =false;
 	public ParticleSystem explosion;
-
-    private T4CommonFunctions cf;
+    private int layer;
 
     // Use this for initialization
     void Start(){
-        cf = GameObject.Find("CommonFunctions").GetComponent<T4CommonFunctions>();
-
 		GameObject soundContainer = GameObject.Find ("SoundContainer");
 		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
+
+        layer = gameObject.layer;
     }
 
     void OnTriggerEnter(Collider other){
-        if (other == null || other.gameObject == null) { return; }
-        Debug.Log("cf="+cf);
         // did the object hit a ship on the same layer?
-        if(cf.isShip(this.gameObject, other)){
-            // get the ship
-            ship = cf.getShip(other);
+        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
+            return;
+        }
 
+        // has the object the ship tag?
+        bool objHasShipTag = false;
+        if (other.gameObject.tag.Equals("Ship")) {
+            objHasShipTag = true;
+        }
+
+        // has parent object the ship tag?
+        bool objParHasShipTag = false;
+        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
+            objParHasShipTag = true;
+        }
+
+        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == this.layer)) {
+            // find the rigidbody
+            if (other.GetComponent<Rigidbody>() != null) {
+                // trigger object has the rigidbody?
+                ship = other.gameObject;
+            } else if (other.transform.parent.GetComponent<Rigidbody>() != null) {
+                ship = other.transform.parent.gameObject;
+            }
+
+            // is a ship
             if (ship != null) {
                 healthbar = ship.GetComponent<T4GUIHealthbarHandler>();
                 score = ship.GetComponent<T4GUIScoreHandler>();
@@ -52,7 +71,6 @@ public class T4ApplyDamage : MonoBehaviour{
 
                 Destroy(gameObject);
             }
-
         }
     }
 }

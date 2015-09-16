@@ -53,6 +53,8 @@ public class T4Logic : MonoBehaviour {
                     // make it a child of the playercamera
                     g.transform.SetParent(ship.ctrlAttachedCamera.transform, false);
 
+                    // T1 Ship Simple force fix
+
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects
                 foreach (var ship_object in ship_objects) { //add the following 2 Scripts to each of them
