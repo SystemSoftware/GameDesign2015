@@ -20,9 +20,10 @@ public class T2Controller : Controller {
 		Rect pos = new Rect(ctrlAttachedCamera.rect.center.x-w/2,ctrlAttachedCamera.rect.min.y,w,h);
 
 		//if (shipTransform != null)
-		this.GetComponentInChildren<Camera>().rect = pos;
-        this.GetComponentInChildren<Camera>().enabled = ctrlAttachedCamera.enabled;
-	
+        if (this.GetComponentInChildren<Camera>() != null) { // by T4 added nullcheck
+            this.GetComponentInChildren<Camera>().rect = pos;
+            this.GetComponentInChildren<Camera>().enabled = ctrlAttachedCamera.enabled;
+        }
 	}
 	
 	// Update is called once per frame
