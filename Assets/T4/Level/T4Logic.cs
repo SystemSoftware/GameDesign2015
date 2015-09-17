@@ -124,10 +124,37 @@ public class T4Logic : MonoBehaviour {
                     /* T2 Team 3/BountyOne */
                     if (ship.gameObject.name.StartsWith("Team 3/BountyOne")) {
                         // resize the ship 
-                        ship.gameObject.transform.localScale = new Vector3((ship.gameObject.transform.localScale.x / 2), 
-                                                                            (ship.gameObject.transform.localScale.y / 2), 
-                                                                            (ship.gameObject.transform.localScale.z / 2));
-                        // slow down
+                        ship.gameObject.transform.localScale = new Vector3((ship.gameObject.transform.localScale.x / 3), 
+                                                                            (ship.gameObject.transform.localScale.y / 3), 
+                                                                            (ship.gameObject.transform.localScale.z / 3));
+                        // lower max speed
+                        Transform[] t3BountyOneChilds = ship.gameObject.GetComponentsInChildren<Transform>();
+                        for (int i = 0; i < t3BountyOneChilds.Length; i++) {
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("Thruster")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<EngineDriver>().maxForce = 6500;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("Thruster1")) {
+                                // remove the particlesys
+                                Destroy(t3BountyOneChilds[i].gameObject.GetComponent<ParticleSystem>());
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("Thruster2")) {
+                                // remove the particlesys
+                                Destroy(t3BountyOneChilds[i].gameObject.GetComponent<ParticleSystem>());
+                            }
+                            // adjust the forces
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("HThrusterDown")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce = 15;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("HThrusterUp")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce = 15;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("DirectionalThruster")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = 28;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("DirectionalThruster 1")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = 28;
+                            }
+                        }
                     }
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects

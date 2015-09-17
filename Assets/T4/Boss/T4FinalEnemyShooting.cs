@@ -13,11 +13,11 @@ public class T4FinalEnemyShooting : MonoBehaviour {
     // 1f = 1sec
     public float fireballCD = 5.0f;
     public SphereCollider sc;
-    public GameObject Rex;
+    private GameObject Rex;
 
     // Use this for initialization
     void Start() {
-
+        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93");
     }
 
     // Update is called once per frame
