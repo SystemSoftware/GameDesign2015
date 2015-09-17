@@ -27,7 +27,8 @@ public class Controller : MonoBehaviour {
                     ctrlAxisCustom,         //!< Axis name used to issue a custom command
 					ctrlAxisHorizontal, //!< Axis name used to query the horizontal axis of the local joystick
                     ctrlAxisVertical,   //!< Axis name used to query the vertical axis of the local joystick
-                    ctrlAxisOther;      //!< Axis name used to query the rotational axis of the local joystick (if supported)
+                    ctrlAxisOther,      //!< Axis name used to query the rotational axis of the local joystick (if supported)
+					ctrlAxisFire;
 
     public bool setMassTo100 = true;
 
@@ -90,6 +91,7 @@ public class Controller : MonoBehaviour {
         ctrlAxisVertical = "Vertical" + controlIndex;
         ctrlAxisAccelerate = "Accelerate" + controlIndex;
         ctrlAxisOther = "Other" + controlIndex;
+		ctrlAxisFire = "Fire" + controlIndex;
 
 		ctrlAttachedCamera = camera;
         this.ctrlControlIndex = controlIndex;
@@ -188,7 +190,24 @@ public class Controller : MonoBehaviour {
 
     public float    cameraIdealDistance = 50.0f,
                     cameraIdealYOffset = 0.0f;
-	
+
+    public int      cameraCollisionLayer = 20;
+    public float    cameraWallOffset = 2f;
+
+
+    private Vector3 RetractFromWall(Vector3 p)
+    {
+        RaycastHit hitinfo;
+        float dist = Vector3.Distance(transform.position, p);
+        int layer = 1 << cameraCollisionLayer;
+
+        if (Physics.Raycast(new Ray(transform.position, (p - transform.position).normalized),
+                                out hitinfo, dist, layer))
+        {
+            p = Vector3.MoveTowards(hitinfo.point, transform.position, cameraWallOffset);
+        }
+        return p;
+    }
 
     /**
      * This is the default camera behavior. If you want to implement your own, define your own LateUpdate()
@@ -200,17 +219,19 @@ public class Controller : MonoBehaviour {
             //Vector3 delta = target.position - this.transform.position;
 
             Vector3 idealLocation =
-                transform.position - transform.forward * cameraIdealDistance + transform.up * cameraIdealYOffset;
+                RetractFromWall(transform.position - transform.forward * cameraIdealDistance + transform.up * cameraIdealYOffset);
             //target.position - delta.normalized * idealDistance;
             //(delta - target.up * Vector3.Dot(delta, target.up)).normalized * idealDistance + target.up * idealYOffset;
             Vector3 deltaToIdeal = idealLocation - ctrlAttachedCamera.transform.position;
             ctrlAttachedCamera.transform.transform.position += deltaToIdeal * (1.0f - Mathf.Pow(0.02f, Time.deltaTime));
+            ctrlAttachedCamera.transform.position = RetractFromWall(ctrlAttachedCamera.transform.position);
+
+
+
 
             
             Quaternion targetRotation = transform.rotation;
             targetRotation = Quaternion.Lerp(targetRotation, Quaternion.LookRotation((transform.position - ctrlAttachedCamera.transform.position), transform.up), 0.5f);
-            
-
 
             ctrlAttachedCamera.transform.rotation = Quaternion.Lerp(ctrlAttachedCamera.transform.rotation, targetRotation, (1.0f - Mathf.Pow(0.02f, Time.deltaTime)));
             ;
