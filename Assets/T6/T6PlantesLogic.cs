@@ -77,7 +77,7 @@ public class T6PlantesLogic : MonoBehaviour {
 			positionOrb.GetComponent<MeshRenderer>().material = mat;
            // positionOrb.transform.parent = ship.transform;
             Destroy(positionOrb.GetComponent<SphereCollider>());
-            Destroy(GameObject.Find("Camera00").GetComponent<AudioListener>());
+         
 
 
             positionOrb.layer = 5;
@@ -92,6 +92,7 @@ public class T6PlantesLogic : MonoBehaviour {
         {
             spawns[i] = spawnObjects[i].transform;
         }
+        Destroy(GameObject.Find("Camera00").GetComponent<AudioListener>());
         Level.DefineStartPoints(spawns);
 
         Level.InitializationDone();   

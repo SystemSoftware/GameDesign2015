@@ -24,33 +24,35 @@ public class T6RCSWings : MonoBehaviour {
         if (this.transform.parent.name == "LRCS") {flag = -1; }
         Vector3 localAngularVelocity = ship.transform.InverseTransformDirection(ship.angularVelocity);
         Vector3 localVelocity = ship.transform.InverseTransformDirection(ship.velocity);
-        float vertical;
-        float horizontal;
+        float vertical=0;
+        float horizontal=0;
         if (roll == 0)
         {
-            vertical = localAngularVelocity.z * 500 * flag;
+            vertical = localAngularVelocity.z * 1500 * flag;
         }
         else
         {
             vertical = roll * 400 * flag;
         }
-        if (strafeUp == 0)
+        if (controller.decoupled == false)
         {
-            vertical += localVelocity.y * -200;
+            if (strafeUp == 0)
+            {
+                vertical += localVelocity.y * -200;
+            }
+            else
+            {
+                vertical += strafeUp * 2000;
+            }
+            if (strafeLeft == 0)
+            {
+                horizontal = localVelocity.x * -200;
+            }
+            else
+            {
+                horizontal = strafeLeft * 2000;
+            }
         }
-        else
-        {
-            vertical += strafeUp * 2000;
-        }
-        if (strafeLeft == 0)
-        {
-            horizontal = localVelocity.x * -200;
-        }
-        else
-        {
-            horizontal = strafeLeft * 2000 ;
-        }
-
         setForce(vertical, horizontal);
 
 	}

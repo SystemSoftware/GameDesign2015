@@ -934,6 +934,16 @@ MonoBehaviour:
   cameraCollisionLayer: 20
   cameraWallOffset: 2
   cameraLock: 1
+  lookAt: {x: 0, y: 0, z: 0}
+  lookAtLocal: {x: 0, y: 0, z: 0}
+  target: {x: 0, y: 0, z: 0}
+  targetLocal: {x: 0, y: 0, z: 0}
+  acceleration: 0
+  pitch: 0
+  yaw: 0
+  roll: 0
+  strafeVertical: 0
+  strafeHorizontal: 0
 --- !u!114 &11410418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -981,7 +991,7 @@ MonoBehaviour:
   triangleCount: 6906
   showCentersOfGravity: 1
   markerSize: 20
-  currentSize: {x: 440.311401, y: 1959.48071, z: 1335.94067}
+  currentSize: {x: 440.311401, y: 1959.48071, z: 1346.16479}
   wantSize: {x: 0, y: 0, z: 0}
   applySize: 0
 --- !u!114 &11434956
@@ -1014,7 +1024,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 133516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1ec01588db13641b4c0fa03e6e2ac4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c69956b712cea44d893b556111f3201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11473694
@@ -1060,7 +1070,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 122588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c69956b712cea44d893b556111f3201, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c1ec01588db13641b4c0fa03e6e2ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11499206
