@@ -26,7 +26,7 @@ public class T4FinalEnemyShooting : MonoBehaviour {
             if (Time.time > nextFireball) {
                 nextFireball += fireballCD;
 
-                Debug.Log("Rex shoot fire.");
+                //Debug.Log("Rex shoot fire.");
                 // shoot fireball
                 Transform tmp = Instantiate(fireball, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_fireball = tmp.gameObject;

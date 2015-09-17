@@ -62,7 +62,7 @@ public class T4Logic : MonoBehaviour {
 
                     /*-------------------------------Ship Fixes-------------------------------------------*/
                     /* T1 Simple */
-                    if (ship.gameObject.name.Equals("Simple(Clone)")) {
+                    if (ship.gameObject.name.StartsWith("Team 1/Simple")) {
                         // fix here
                         ship.GetComponent<Rigidbody>().mass = 100;
                         /** Todo-List
@@ -106,7 +106,7 @@ public class T4Logic : MonoBehaviour {
                         }
                     }
                     /* T2 Delusion */
-                    if (ship.gameObject.name.Equals("Delusion(Clone)")) {
+                    if (ship.gameObject.name.Equals("Team 2/Delusion")) {
                         // slightly increase the moveability by 20%
                         Transform[] t2DelusionChilds = ship.gameObject.GetComponentsInChildren<Transform>();
                         for (int i = 0; i < t2DelusionChilds.Length; i++) {
@@ -120,6 +120,14 @@ public class T4Logic : MonoBehaviour {
                                 t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce = t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce * 1.2f;
                             } 
                         }
+                    }
+                    /* T2 Team 3/BountyOne */
+                    if (ship.gameObject.name.StartsWith("Team 3/BountyOne")) {
+                        // resize the ship 
+                        ship.gameObject.transform.localScale = new Vector3((ship.gameObject.transform.localScale.x / 2), 
+                                                                            (ship.gameObject.transform.localScale.y / 2), 
+                                                                            (ship.gameObject.transform.localScale.z / 2));
+                        // slow down
                     }
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects

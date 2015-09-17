@@ -17,6 +17,8 @@ public class T4Sound3DLogic : MonoBehaviour {
 	AudioSource turretShoot;
 	AudioSource enemyPlaneShoot;
 	AudioSource explosionBullet;
+    AudioSource bossHit;
+    AudioSource endTheme;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();
@@ -30,6 +32,8 @@ public class T4Sound3DLogic : MonoBehaviour {
 		turretShoot = audios [8];
 		enemyPlaneShoot = audios [9];
 		explosionBullet = audios [10];
+        bossHit = audios[11];
+        endTheme = audios[12];
 	}
 	
 	// Update is called once per frame
@@ -117,6 +121,14 @@ public class T4Sound3DLogic : MonoBehaviour {
 		explosionBullet.Play ();
 	}
 
+    public void playBossHit() {
+        bossHit.Play();
+    }
+
+    public void playEndTheme() {
+        endTheme.Play();
+    }
+
 	public void stopBossTheme(){
 		if(bossTheme.isPlaying){
 			bossTheme.Stop();
@@ -124,6 +136,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 	}
 
 	public void playPlayerShoot(){
+        //Debug.Log("ABOUT TO PLAY PLAYERSHOOT");
 		playerShoot.Play ();
 	}
 
