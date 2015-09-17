@@ -95,7 +95,7 @@ public class T4TurretTrigger : MonoBehaviour {
     }
 
     void OnTriggerExit(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
+        if (cf.isShip(this.gameObject.layer, other)) { // ship left > stop shooting
             should_shoot = false;
 			rotate.face_target=false;
             UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);

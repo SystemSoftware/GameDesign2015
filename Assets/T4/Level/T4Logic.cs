@@ -59,14 +59,15 @@ public class T4Logic : MonoBehaviour {
                     // make it a child of the playercamera
                     g.transform.SetParent(ship.ctrlAttachedCamera.transform, false);
 
-                    // T1 Ship Simple force fix
+
+                    /*-------------------------------Ship Fixes-------------------------------------------*/
+                    /* T1 Simple */
                     if (ship.gameObject.name.Equals("Simple(Clone)")) {
                         // fix here
                         ship.GetComponent<Rigidbody>().mass = 100;
                         /** Todo-List
                          * iterate over childs and manipulate the scripts to a higher force influence cause we set the mass to 100
-                         * but the ships forces of thrusters and engine are adjusted to a mass of 1
-                         * */
+                         * but the ships forces of thrusters and engine are adjusted to a mass of 1 */
                         Transform[] t1SimpleChilds = ship.gameObject.GetComponentsInChildren<Transform>();
                         for (int i = 0; i < t1SimpleChilds.Length; i++) {
                             EngineDriver simpleTmp1;
@@ -104,7 +105,22 @@ public class T4Logic : MonoBehaviour {
                             }
                         }
                     }
-
+                    /* T2 Delusion */
+                    if (ship.gameObject.name.Equals("Delusion(Clone)")) {
+                        // slightly increase the moveability by 20%
+                        Transform[] t2DelusionChilds = ship.gameObject.GetComponentsInChildren<Transform>();
+                        for (int i = 0; i < t2DelusionChilds.Length; i++) {
+                            if (t2DelusionChilds[i].gameObject.name.Equals("Accel")) {
+                                t2DelusionChilds[i].gameObject.GetComponent<EngineDriver>().maxForce = t2DelusionChilds[i].gameObject.GetComponent<EngineDriver>().maxForce * 1.2f;
+                            }
+                            if (t2DelusionChilds[i].gameObject.name.Equals("Accel 3")) {
+                                t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce = t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce * 1.2f;
+                            }
+                            if (t2DelusionChilds[i].gameObject.name.Equals("Accel 4")) {
+                                t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce = t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce * 1.2f;
+                            } 
+                        }
+                    }
                 }
                 var ship_objects = GameObject.FindGameObjectsWithTag("Ship"); //get all ship-objects
                 foreach (var ship_object in ship_objects) { //add the following 2 Scripts to each of them
@@ -286,4 +302,6 @@ public class T4Logic : MonoBehaviour {
         }
         return 0;
     }
+
+
 }
