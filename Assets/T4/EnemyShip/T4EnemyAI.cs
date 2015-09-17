@@ -59,6 +59,7 @@ public class T4EnemyAI : MonoBehaviour {
                         delay_active = false;
                     }
                 } else {
+                    if((A == null) && (B == null)){ return; }
                     // if orientation -1, the enemy is behind the ship > DONT SHOOT
                     if (orientation(new Vector2(A.transform.position.x, A.transform.position.z),
                                    new Vector2(B.transform.position.x, B.transform.position.z),
@@ -134,17 +135,59 @@ public class T4EnemyAI : MonoBehaviour {
 
     // shooting radius trigger
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
+        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
+            return;
+        }
+
+        // has the object the ship tag?
+        bool objHasShipTag = false;
+        if (other.gameObject.tag.Equals("Ship")) {
+            objHasShipTag = true;
+        }
+
+        // has parent object the ship tag?
+        bool objParHasShipTag = false;
+        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
+            objParHasShipTag = true;
+        }
+
+        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
+            // is a ship
             UnityEngine.Debug.Log("entered ENEMYRADIUS" + other.gameObject);
 
-            target_ship = other.gameObject;
-            direction = (target_ship.transform.position - this.transform.position).normalized;
-            should_shoot = true;
+            if (other.GetComponent<Rigidbody>() != null) {
+                // trigger object has the rigidbody?
+                target_ship = other.gameObject;
+            } else if (other.transform.parent.GetComponent<Rigidbody>() != null) {
+                target_ship = other.transform.parent.gameObject;
+            }
+
+            if (target_ship != null) {
+                target_ship = other.gameObject;
+                direction = (target_ship.transform.position - this.transform.position).normalized;
+                should_shoot = true;
+            }
         }
     }
 
     void OnTriggerExit(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
+        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
+            return;
+        }
+
+        // has the object the ship tag?
+        bool objHasShipTag = false;
+        if (other.gameObject.tag.Equals("Ship")) {
+            objHasShipTag = true;
+        }
+
+        // has parent object the ship tag?
+        bool objParHasShipTag = false;
+        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
+            objParHasShipTag = true;
+        }
+
+        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
             should_shoot = false;
             UnityEngine.Debug.Log("leave ENEMYRADIUS" + other.gameObject);
 
