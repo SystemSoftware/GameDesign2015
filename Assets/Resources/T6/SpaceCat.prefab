@@ -259,7 +259,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 402546}
-  - 114: {fileID: 11478472}
   m_Layer: 0
   m_Name: cannon
   m_TagString: Untagged
@@ -315,7 +314,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162524}
-  m_LocalRotation: {x: .00380813144, y: 0, z: 0, w: .999992788}
+  m_LocalRotation: {x: .0038088467, y: 0, z: 0, w: .999992788}
   m_LocalPosition: {x: 0, y: -.699999988, z: -30}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
@@ -438,8 +437,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -390.311401, y: 1937.2157, z: -1301.58923}
-  m_LocalScale: {x: .943396211, y: .943396211, z: .943396211}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .471698105, y: .471698105, z: .471698105}
   m_Children:
   - {fileID: 496596}
   - {fileID: 449248}
@@ -944,6 +943,7 @@ MonoBehaviour:
   roll: 0
   strafeVertical: 0
   strafeHorizontal: 0
+  decoupled: 0
 --- !u!114 &11410418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -991,7 +991,7 @@ MonoBehaviour:
   triangleCount: 6906
   showCentersOfGravity: 1
   markerSize: 20
-  currentSize: {x: 440.311401, y: 1959.48071, z: 1346.16479}
+  currentSize: {x: 50, y: 21.337265, z: 38.2931595}
   wantSize: {x: 0, y: 0, z: 0}
   applySize: 0
 --- !u!114 &11434956
@@ -1040,17 +1040,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLifetime: .100000001
   maxForce: 10000
---- !u!114 &11478472
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bafca43cf4a0e7c44ad68970b33e6941, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11478888
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,6 +4,7 @@ using System.Collections;
 public class T6Controller : Controller {
 
     public bool cameraLock = true;
+    private static int count =0;
     public Vector3 lookAt; //world space
     public Vector3 lookAtLocal;
     public Vector3 target;
@@ -31,6 +32,7 @@ public class T6Controller : Controller {
     void Start()
     {
         base.Start();
+        T6Controller.count++;
         base.cameraIdealDistance = 150f;
         lookAtLocal = new Vector3(0, 0, 200);
         lookAt = transform.TransformPoint(lookAtLocal);
@@ -46,7 +48,7 @@ public class T6Controller : Controller {
 
 	// Update is called once per frame
 	void Update () {
-        if (GetComponentsInParent<T6Controller>().Length == 1)
+        if (T6Controller.count ==1)
         {
             if (Input.GetAxis("T6StrafeHorizontal") == -1 && Input.GetButton("T6Fire") && timeout == 0)
             {
