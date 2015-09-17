@@ -12,6 +12,8 @@ public class T4FinalEnemyShooting : MonoBehaviour {
     private float nextFireball = 0.0f;
     // 1f = 1sec
     public float fireballCD = 5.0f;
+    public SphereCollider sc;
+    public GameObject Rex;
 
     // Use this for initialization
     void Start() {
@@ -28,11 +30,11 @@ public class T4FinalEnemyShooting : MonoBehaviour {
                 // shoot fireball
                 Transform tmp = Instantiate(fireball, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_fireball = tmp.gameObject;
-                spawned_fireball.layer = this.gameObject.layer;
+                spawned_fireball.layer = Rex.layer;
 
 
-                direction = (ship.transform.position - this.transform.position).normalized;
-                direction = ((ship.transform.position+Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity)*aimVelocityInfluence) - this.transform.position).normalized;
+                direction = (ship.transform.position - Rex.transform.position).normalized;
+                direction = ((ship.transform.position+Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity)*aimVelocityInfluence) - Rex.transform.position).normalized;
                 /*
                 // add spread
                 direction = new Vector3(direction.x + Random.Range(-accuarcy_spread, accuarcy_spread), 
@@ -52,15 +54,52 @@ public class T4FinalEnemyShooting : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
-            UnityEngine.Debug.Log("entered TREXRADIUS[shooting]" + other.gameObject);
+        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
+            return;
+        }
 
-            ship = other.gameObject;
+        // has the object the ship tag?
+        bool objHasShipTag = false;
+        if (other.gameObject.tag.Equals("Ship")) {
+            objHasShipTag = true;
+        }
+
+        // has parent object the ship tag?
+        bool objParHasShipTag = false;
+        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
+            objParHasShipTag = true;
+        }
+
+        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == Rex.gameObject.layer)) {
+            // is a ship
+            if (other.GetComponent<Rigidbody>() != null) {
+                // trigger object has the rigidbody?
+                ship = other.gameObject;
+            } else if (other.transform.parent.GetComponent<Rigidbody>() != null) {
+                ship = other.transform.parent.gameObject;
+            }
+            UnityEngine.Debug.Log("entered TREXRADIUS[shooting]" + other.gameObject);
         }
     }
 
     void OnTriggerExit(Collider other) {
-        if (other.gameObject.tag.Equals("Ship") && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
+        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
+            return;
+        }
+
+        // has the object the ship tag?
+        bool objHasShipTag = false;
+        if (other.gameObject.tag.Equals("Ship")) {
+            objHasShipTag = true;
+        }
+
+        // has parent object the ship tag?
+        bool objParHasShipTag = false;
+        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
+            objParHasShipTag = true;
+        }
+        
+        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == Rex.gameObject.layer)) {
             UnityEngine.Debug.Log("left TREXRADIUS[shooting]" + other.gameObject);
             ship = null;
         }
