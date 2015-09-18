@@ -35,27 +35,24 @@ public class T6PitchCorrection : MonoBehaviour
         {
             angle = 360 - angles.x;
         }
-        //Try to stop current rotation
-    if (((angle < 5 && angle > 0) || angle > 355) || (controller.yaw ==0 && Mathf.Sign(angle)==Mathf.Sign(rotation) && Mathf.Abs(angle)>20))
+        //If ship has no rotation towards target or negative rotation: apply force towards target
+        //If ship has slow rotation towards targetand is further away than 20°: speed rotation up
+        //If ship has fast rotation towards target and is closer than 20°: reduce rotation
+        if (rotation == 0 || Mathf.Sign(rotation) != Mathf.Sign(angle))
         {
-            if (controller.yaw > -0.05 && controller.yaw < 0.05)
-            {
-                yawCorrection = rotation * -700;
-            }
 
+            yawCorrection = angle * 10;
+            //apply force towards target
         }
-        //Generate rotation towards target
+        else if (Mathf.Abs(rotation) < 5 && Mathf.Abs(angle) > 20 && Mathf.Sign(rotation)==Mathf.Sign(angle))
+        {
+            yawCorrection = angle * 2;
+            //apply MOAR FORCE
+        }
         else
         {
-            if ((controller.yaw > 0 && angle < 0) || (controller.yaw < 0 && angle > 0))
-            {
-                yawCorrection = rotation * -20;
-            }
-            else
-            {
-                yawCorrection = angle*2;
-            }
-
+            yawCorrection = angle * -5;
+            //decrease rotationspeed
         }
         setForce(yawCorrection * 10);
     }

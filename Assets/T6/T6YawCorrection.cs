@@ -31,30 +31,26 @@ public class T6YawCorrection : MonoBehaviour {
         }
         else
         {
+            Debug.Log("OH HI");
             angle= 360 - angles.y;
         }
-        //Try to stop current rotation
-        if (((angle < 5 && angle > 0) || angle > 355) || (controller.pitch ==0 && Mathf.Sign(angle)==Mathf.Sign(rotation) && Mathf.Abs(angle)>20))
+       if (rotation == 0 || Mathf.Sign(rotation) == Mathf.Sign(angle))
         {
-            if (controller.pitch > -0.05 && controller.pitch < 0.05)
-            {
-                pitchCorrectionAngle = rotation * 1000;
-            }
 
+            pitchCorrectionAngle = angle * 10;
+            //apply force towards target
         }
-        //Generate rotation towards target
+        else if (Mathf.Abs(rotation) < 5 && Mathf.Abs(angle) > 20 && Mathf.Sign(rotation)!=Mathf.Sign(angle))
+        {
+            pitchCorrectionAngle = angle * 2;
+            //apply MOAR FORCE
+        }
         else
         {
-            if ((controller.pitch > 0 && angle < 0) || (controller.pitch < 0 && angle > 0))
-            {
-                pitchCorrectionAngle = rotation * 25;
-            }
-            else
-            {
-                pitchCorrectionAngle = angle * 2;
-            }
-
+            pitchCorrectionAngle = angle * -5;
+            //decrease rotationspeed
         }
+
         setForce(pitchCorrectionAngle*10);
 
 	}
