@@ -151,7 +151,6 @@ public class T4Sound3DLogic : MonoBehaviour {
 	}
 
 	public void playPlayerShoot(){
-        //Debug.Log("ABOUT TO PLAY PLAYERSHOOT");
 		playerShoot.Play ();
 	}
 

@@ -25,6 +25,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 477220}
+  - 65: {fileID: 6506906}
+  - 114: {fileID: 11489356}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -430,6 +432,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130744}
   m_Mesh: {fileID: 4300006, guid: f55824c6e8033a74987f71a04acda35b, type: 3}
+--- !u!65 &6506906
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.70000005, y: 10, z: 2.79999995}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11487328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,6 +455,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9baef580887724a833d01bf4cf1c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11489356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bda907ece323104693e7477d4b35887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreGain: 5
+  explosion: {fileID: 19896350, guid: de8af5d703bced941868411db9863a93, type: 2}
 --- !u!135 &13545350
 SphereCollider:
   m_ObjectHideFlags: 1
