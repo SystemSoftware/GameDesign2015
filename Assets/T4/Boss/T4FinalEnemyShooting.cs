@@ -13,11 +13,14 @@ public class T4FinalEnemyShooting : MonoBehaviour {
     // 1f = 1sec
     public float fireballCD = 5.0f;
     public SphereCollider sc;
-    private GameObject Rex;
+    private GameObject Rex, attackSpawn;
+    private T4Sound3DLogic soundLogic;
 
     // Use this for initialization
     void Start() {
         Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93");
+        attackSpawn = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93/AttackSpawn");
+        soundLogic = GameObject.Find("SoundContainer").GetComponent<T4Sound3DLogic>();
     }
 
     // Update is called once per frame
@@ -31,10 +34,11 @@ public class T4FinalEnemyShooting : MonoBehaviour {
                 Transform tmp = Instantiate(fireball, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_fireball = tmp.gameObject;
                 spawned_fireball.layer = Rex.layer;
+                // set position of spawned fireball
+                spawned_fireball.transform.position = attackSpawn.transform.position;
 
-
-                direction = (ship.transform.position - Rex.transform.position).normalized;
-                direction = ((ship.transform.position+Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity)*aimVelocityInfluence) - Rex.transform.position).normalized;
+                //direction = (ship.transform.position - RexHead.transform.position).normalized;
+                direction = ((ship.transform.position + Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity) * aimVelocityInfluence) - attackSpawn.transform.position).normalized;
                 /*
                 // add spread
                 direction = new Vector3(direction.x + Random.Range(-accuarcy_spread, accuarcy_spread), 
@@ -49,6 +53,7 @@ public class T4FinalEnemyShooting : MonoBehaviour {
                 spawned_fireball.transform.rotation = Quaternion.Euler(tmp2);
                 // finally shoot into the direction
                 spawned_fireball.GetComponent<Rigidbody>().AddForce(direction * fireballSpeed);
+                soundLogic.playBossAttack();
             }
         }
     }

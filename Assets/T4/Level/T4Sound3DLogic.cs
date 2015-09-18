@@ -19,6 +19,9 @@ public class T4Sound3DLogic : MonoBehaviour {
 	AudioSource explosionBullet;
     AudioSource bossHit;
     AudioSource endTheme;
+    AudioSource bossAttack;
+
+    private bool bossThemeAlreadyPlayed = false;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();
@@ -34,6 +37,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 		explosionBullet = audios [10];
         bossHit = audios[11];
         endTheme = audios[12];
+        bossAttack = audios[13];
 	}
 	
 	// Update is called once per frame
@@ -106,7 +110,14 @@ public class T4Sound3DLogic : MonoBehaviour {
 	}
 
 	public void playBossTheme(){
-		bossTheme.Play ();
+        if (!bossThemeAlreadyPlayed) {
+            bossThemeAlreadyPlayed = true;
+            // boss theme not playing already?
+            // stop main theme
+            stopMainTheme();
+            // play boss theme
+            bossTheme.Play();
+        }
 	}
 
 	public void playPowerUp(){
@@ -127,6 +138,10 @@ public class T4Sound3DLogic : MonoBehaviour {
 
     public void playEndTheme() {
         endTheme.Play();
+    }
+
+    public void playBossAttack() {
+        bossAttack.Play();
     }
 
 	public void stopBossTheme(){
