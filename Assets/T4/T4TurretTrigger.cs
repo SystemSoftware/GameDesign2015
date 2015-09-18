@@ -79,28 +79,68 @@ public class T4TurretTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
 
-        if (cf.isShip(this.gameObject.layer, other)) { // ship entered > begin shooting
-            UnityEngine.Debug.Log("entered TURRETRADIUS" + other.gameObject);
-
-            ship = cf.getShip(other);
-
-
-            if (ship != null) {
-                direction = (ship.transform.position - this.transform.position).normalized;
-                should_shoot = true;
-                rotate.face_target = true;
-                rotate.ship = ship;
-            }
-        }
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			ship=other.gameObject;
+			direction = (ship.transform.position - this.transform.position).normalized;
+			should_shoot = true;
+			rotate.face_target = true;
+			rotate.ship = ship;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {	
+					
+					ship=parent.gameObject;
+					direction = (ship.transform.position - this.transform.position).normalized;
+					should_shoot = true;
+					rotate.face_target = true;
+					rotate.ship = ship;
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}
     }
 
     void OnTriggerExit(Collider other) {
-        if (cf.isShip(this.gameObject.layer, other)) { // ship left > stop shooting
-            should_shoot = false;
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			should_shoot = false;
 			rotate.face_target=false;
-            UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
-            
-            ship = null;
-        }
+			UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
+			
+			ship = null;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {						
+					should_shoot = false;
+					rotate.face_target=false;
+					UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
+					
+					ship = null;
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}
+
     }
 }

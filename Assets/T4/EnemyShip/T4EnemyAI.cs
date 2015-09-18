@@ -135,63 +135,56 @@ public class T4EnemyAI : MonoBehaviour {
 
     // shooting radius trigger
     void OnTriggerEnter(Collider other) {
-        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
-            return;
-        }
-
-        // has the object the ship tag?
-        bool objHasShipTag = false;
-        if (other.gameObject.tag.Equals("Ship")) {
-            objHasShipTag = true;
-        }
-
-        // has parent object the ship tag?
-        bool objParHasShipTag = false;
-        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
-            objParHasShipTag = true;
-        }
-
-        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == this.gameObject.layer)) { // ship entered > begin shooting
-            // is a ship
-            UnityEngine.Debug.Log("entered ENEMYRADIUS" + other.gameObject);
-
-            if (other.GetComponent<Rigidbody>() != null) {
-                // trigger object has the rigidbody?
-                target_ship = other.gameObject;
-            } else if (other.transform.parent.GetComponent<Rigidbody>() != null) {
-                target_ship = other.transform.parent.gameObject;
-            }
-
-            if (target_ship != null) {
-                target_ship = other.gameObject;
-                direction = (target_ship.transform.position - this.transform.position).normalized;
-                should_shoot = true;
-            }
-        }
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			target_ship = other.gameObject;
+			direction = (target_ship.transform.position - this.transform.position).normalized;
+			should_shoot = true;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {	
+					
+					target_ship = parent.gameObject;
+					direction = (target_ship.transform.position - this.transform.position).normalized;
+					should_shoot = true;
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}         
+        
     }
 
     void OnTriggerExit(Collider other) {
-        if (other == null || other.gameObject == null || other.gameObject.tag == null) {
-            return;
-        }
-
-        // has the object the ship tag?
-        bool objHasShipTag = false;
-        if (other.gameObject.tag.Equals("Ship")) {
-            objHasShipTag = true;
-        }
-
-        // has parent object the ship tag?
-        bool objParHasShipTag = false;
-        if (other.transform.parent != null && other.transform.parent.gameObject.tag != null && !other.gameObject.tag.Equals("Bullet") && other.transform.parent.gameObject.tag.Equals("Ship")) {
-            objParHasShipTag = true;
-        }
-
-        if ((objHasShipTag || objParHasShipTag) && (other.gameObject.layer == this.gameObject.layer)) { // ship left > stop shooting
-            should_shoot = false;
-            UnityEngine.Debug.Log("leave ENEMYRADIUS" + other.gameObject);
-
-            target_ship = null;
-        }
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			should_shoot = false;			
+			target_ship = null;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {	
+					should_shoot = false;			
+					target_ship = null;					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}   
     }
 }
