@@ -35,6 +35,7 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4PathHandler>();
                     ship.gameObject.AddComponent<T4CullingMask>();
 					ship.gameObject.AddComponent<T4ZeroHealthHandler>();
+                    ship.gameObject.AddComponent<T4GUICamEndHandler>();
                     
 
                     int new_layer = (28 + ship.ctrlControlIndex);
@@ -257,6 +258,7 @@ public class T4Logic : MonoBehaviour {
         }
 
         handleCountdown();
+
 	}
 
 

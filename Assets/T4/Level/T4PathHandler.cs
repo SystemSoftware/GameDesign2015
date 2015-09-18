@@ -94,6 +94,12 @@ public class T4PathHandler : MonoBehaviour {
 
                 }
             }
+
+            // at 1 debug buttons
+            if (Input.GetKeyDown("1")) {
+                this.GetComponent<T4GUICamEndHandler>().playEnd();
+            }
+
             
             // reached the end of the bossloop? reset to the start of the bossloop
             if (cPP_i >= 3250) {
