@@ -99,6 +99,9 @@ public class T4PathHandler : MonoBehaviour {
             if (Input.GetKeyDown("1")) {
                 this.GetComponent<T4GUICamEndHandler>().playEnd();
             }
+            if (Input.GetKeyDown("2")) {
+                GameObject.Find("Logic").GetComponent<T4GUIGlobalEndHandler>().playEnd();
+            }
 
             
             // reached the end of the bossloop? reset to the start of the bossloop

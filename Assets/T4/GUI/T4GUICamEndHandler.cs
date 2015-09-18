@@ -51,7 +51,7 @@ public class T4GUICamEndHandler : MonoBehaviour {
                 bg.GetComponent<RectTransform>().position = new Vector2(-200, -200);
                 text.GetComponent<RectTransform>().position = new Vector2(-200, -200);
             } else {
-                
+
             }
         }
 	}
