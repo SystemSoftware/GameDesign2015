@@ -123,6 +123,12 @@ public class T4Logic : MonoBehaviour {
                     }
                     /* T2 Team 3/BountyOne */
                     if (ship.gameObject.name.StartsWith("Team 3/BountyOne")) {
+						CapsuleCollider bountyCol = ship.gameObject.AddComponent<CapsuleCollider>() as CapsuleCollider;
+						bountyCol.height=90;
+						bountyCol.radius=30;
+						bountyCol.center=new Vector3(0,0,10);
+						bountyCol.direction=2;
+						bountyCol.isTrigger=true;
                         // resize the ship 
                         ship.gameObject.transform.localScale = new Vector3((ship.gameObject.transform.localScale.x / 3), 
                                                                             (ship.gameObject.transform.localScale.y / 3), 
