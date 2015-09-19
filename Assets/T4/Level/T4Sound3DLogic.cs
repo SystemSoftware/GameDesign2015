@@ -22,6 +22,7 @@ public class T4Sound3DLogic : MonoBehaviour {
     AudioSource bossAttack;
 
     private bool bossThemeAlreadyPlayed = false;
+    private bool endThemeAlreadyPlayed = false;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();

@@ -25,7 +25,8 @@ public class T4Logic : MonoBehaviour {
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start")) {
                 foreach (var ship in Level.ActiveShips) {
 					ship.transform.position = path.transform.position;
-                    ship.ctrlAttachedCamera.farClipPlane = 6000f;
+                    //ship.ctrlAttachedCamera.farClipPlane = 6000f;
+                    ship.ctrlAttachedCamera.farClipPlane = 3300f;
                     // add scripts
                     ship.gameObject.AddComponent<T4GUICrosshairHandler>();
                     ship.gameObject.AddComponent<T4GUIHealthbarHandler>();
