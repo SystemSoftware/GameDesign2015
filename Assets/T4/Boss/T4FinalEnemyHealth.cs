@@ -4,15 +4,12 @@ using System.Collections;
 public class T4FinalEnemyHealth : MonoBehaviour {
     public int bossHealth = 20;
     private T4Sound3DLogic soundLogic;
-
+    private T4GUICamEndHandler camEnd;
+    private T4Logic logic;
 	// Use this for initialization
 	void Start () {
         soundLogic = GameObject.Find("SoundContainer").GetComponent<T4Sound3DLogic>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        logic = GameObject.Find("Logic").GetComponent<T4Logic>();
 	}
 
     public void applyDamage(int amount) {
@@ -20,9 +17,11 @@ public class T4FinalEnemyHealth : MonoBehaviour {
         soundLogic.playBossHit();
 
         if (bossHealth <= 0) { // boss dead
+            bossHealth = 20;
             // play endscreen, port away, stop sounds
             Debug.Log("BOSS"+(this.gameObject.layer-28)+" DEAD!");
-            soundLogic.playEndTheme();
+            //camEnd.playEnd();
+            logic.playerFinished(this.gameObject.layer);
         }
     }
 }

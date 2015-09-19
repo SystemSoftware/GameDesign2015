@@ -32,8 +32,6 @@ public class T4PathHandler : MonoBehaviour {
             if (world.transform.GetChild(h).name.Equals("EnemyShips")) {
                 enemy_ships = world.transform.GetChild(h).gameObject.GetComponent<T4EnemyShips>();
             }
-
-
         }
 
         soundLogic = GameObject.Find("SoundContainer").GetComponent<T4Sound3DLogic>();

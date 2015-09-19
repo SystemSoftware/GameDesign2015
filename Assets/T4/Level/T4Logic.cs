@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
+using System;
 using UnityEngine.UI;
 
 public class T4Logic : MonoBehaviour {
@@ -18,12 +19,17 @@ public class T4Logic : MonoBehaviour {
 	bool sound1Played = false;
 	bool sound2Played = false;
 	bool mainThemePlayed = false;
+    int numOfPlayers = 0;
+    int numOfFinishedPlayers = 0;
+    T4GUIGlobalEndHandler gend;
+    GameObject p1Ship, p2Ship, p3Ship, p4Ship;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
             // no motion
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start")) {
                 foreach (var ship in Level.ActiveShips) {
+                    numOfPlayers++;
 					ship.transform.position = path.transform.position;
                     //ship.ctrlAttachedCamera.farClipPlane = 6000f;
                     ship.ctrlAttachedCamera.farClipPlane = 3300f;
@@ -37,7 +43,21 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4CullingMask>();
 					ship.gameObject.AddComponent<T4ZeroHealthHandler>();
                     ship.gameObject.AddComponent<T4GUICamEndHandler>();
-                    
+
+                    switch(ship.ctrlControlIndex) {
+                        case 0:
+                            p1Ship = ship.gameObject;
+                            break;
+                        case 1:
+                            p2Ship = ship.gameObject;
+                            break;
+                        case 2:
+                            p3Ship = ship.gameObject;
+                            break;
+                        case 3:
+                            p4Ship = ship.gameObject;
+                            break;
+                    }
 
                     int new_layer = (28 + ship.ctrlControlIndex);
                     // set layer of the ship to their worlds
@@ -245,6 +265,8 @@ public class T4Logic : MonoBehaviour {
         gui.active = false;
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         lastMState = m.maximized;
+
+        gend = GameObject.Find("Logic").GetComponent<T4GUIGlobalEndHandler>();
 	}
 
     bool lastMState;
@@ -347,5 +369,34 @@ public class T4Logic : MonoBehaviour {
         return 0;
     }
 
+    public void playerFinished(int layer) {
+        switch ((layer - 28)) {
+            case 0:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p1Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow1(p1Ship.name.Substring(Math.Max(0, p1Ship.name.Length - 5)), p1Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+            case 1:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p2Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow2(p2Ship.name.Substring(Math.Max(0, p2Ship.name.Length - 5)), p2Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+            case 2:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p3Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow3(p3Ship.name.Substring(Math.Max(0, p3Ship.name.Length - 5)), p3Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+            case 3:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p4Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow4(p4Ship.name.Substring(Math.Max(0, p4Ship.name.Length - 5)), p4Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+        }
 
+        numOfFinishedPlayers++;
+        if (numOfPlayers == numOfFinishedPlayers) {
+            gend.playEnd();
+        }
+
+    }
 }

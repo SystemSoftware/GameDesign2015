@@ -19,7 +19,7 @@ public class T4FinalEnemyHitTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if(other.name.StartsWith("LaserBullet") && other.gameObject.layer == this.gameObject.layer){
             // hit the boss -> lower his hp
-            hp.applyDamage(10); // also plays the sound
+            hp.applyDamage(2); // also plays the sound
 
             // delete the bullet
             DestroyObject(other.gameObject);
