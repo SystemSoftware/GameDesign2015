@@ -9,8 +9,6 @@ public class T6RaceLogic : MonoBehaviour {
     int lastGateID;
     int last2GateID;
     int currentState;
-    float usedV;
-
     public static void init()
     {
         deltaV = new float[4];
@@ -24,22 +22,6 @@ public class T6RaceLogic : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-        float currentThrust = 0;
-        foreach (ConstantForce f in this.gameObject.GetComponentsInChildren<ConstantForce>())
-        {
-            currentThrust += f.relativeForce.magnitude;
-        }
-        float mass = 0;
-        foreach (Rigidbody r in this.gameObject.GetComponentsInChildren<Rigidbody>())
-        {
-            mass += r.mass;
-        }
-        currentThrust = currentThrust / Time.fixedDeltaTime / mass;
-        usedV += currentThrust;
-      //  Debug.Log(usedV);
-	}
 
     public void passedGate(GameObject gate)
     {
@@ -54,6 +36,10 @@ public class T6RaceLogic : MonoBehaviour {
         }
 
         if ((currentState == 0 && newGateID == 0) || (currentState == 1 && newGateID == 1) || (currentState == 2 && newGateID == 0) || (currentState ==3 && newGateID == 2))
+        {
+            currentState++;
+        }
+        else if ((currentState == 0 && newGateID == 0) || (currentState == 1 && newGateID == 2) || (currentState == 2 && newGateID == 0) || (currentState == 3 && newGateID == 1))
         {
             currentState++;
         }
