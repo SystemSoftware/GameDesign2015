@@ -34,6 +34,9 @@ public class T4FinalEnemyShooting : MonoBehaviour {
                 Transform tmp = Instantiate(fireball, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_fireball = tmp.gameObject;
                 spawned_fireball.layer = Rex.layer;
+                foreach (Transform child in spawned_fireball.transform) {
+                    child.gameObject.layer = Rex.layer;
+                }
                 // set position of spawned fireball
                 spawned_fireball.transform.position = attackSpawn.transform.position;
 

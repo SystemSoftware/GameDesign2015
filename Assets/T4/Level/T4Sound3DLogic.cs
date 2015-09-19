@@ -68,9 +68,9 @@ public class T4Sound3DLogic : MonoBehaviour {
 			float distance = ComputeDistance (pos, tag);
 			float volume;
 			if (distance<=250 && distance>1){ 
-				volume = 1f-distance/250f;
+				volume = 1f-(distance/250f);
 			}else if(distance <=1){
-				volume = 1;
+				volume = 1f;
 			}else{
 				volume = 0;
 			}
@@ -138,6 +138,14 @@ public class T4Sound3DLogic : MonoBehaviour {
     }
 
     public void playEndTheme() {
+        // turn all other soundsources off
+        AudioSource[] audios = GetComponents<AudioSource>();
+        for (int i = 0; i <= 13; i++) {
+            if (i != 12) {
+                audios[i].mute = true;
+            }
+        }
+        // play endtheme
         endTheme.Play();
     }
 

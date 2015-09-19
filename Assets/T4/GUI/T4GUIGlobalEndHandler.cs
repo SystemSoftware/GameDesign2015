@@ -138,4 +138,21 @@ public class T4GUIGlobalEndHandler : MonoBehaviour {
         soundLogic.playEndTheme();
         // todo turn all sounds beside endtheme off
     }
+
+    public void setRow1(string pShipName, int pPoints) {
+        r1SName = pShipName;
+        r1Score = pPoints;
+    }
+    public void setRow2(string pShipName, int pPoints) {
+        r2SName = pShipName;
+        r2Score = pPoints;
+    }
+    public void setRow3(string pShipName, int pPoints) {
+        r3SName = pShipName;
+        r3Score = pPoints;
+    }
+    public void setRow4(string pShipName, int pPoints) {
+        r4SName = pShipName;
+        r4Score = pPoints;
+    }
 }

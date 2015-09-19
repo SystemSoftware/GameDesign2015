@@ -54,12 +54,14 @@ public class T4TurretTrigger : MonoBehaviour {
                 }
             }else{
                 // shoot
-				//soundLogic.playTurretShoot(transform.position, ship.transform.position);
+				soundLogic.playTurretShoot(transform.position, ship.transform.position);
 
                 Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_bullet = tmp.gameObject;
                 spawned_bullet.layer = this.gameObject.layer;
-
+                foreach (Transform child in spawned_bullet.transform) {
+                    child.gameObject.layer = this.gameObject.layer;
+                }
 
                 direction = ((ship.transform.position + Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity) * aimVelocityInfluence) - this.transform.position).normalized;
                 /*
