@@ -5,7 +5,7 @@ public class T4PowerUpTrigger : MonoBehaviour {
 	private T4GUIScoreHandler score;
 	private int ControlID;
 	private GameObject ship;
-	public int scoreGain = 5;
+	int scoreGain = 50;
 	T4Sound3DLogic soundLogic;
 	
 	// Use this for initialization

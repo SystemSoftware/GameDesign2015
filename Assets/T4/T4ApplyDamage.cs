@@ -36,7 +36,7 @@ public class T4ApplyDamage : MonoBehaviour{
 				if (healthbar.getHealth () - damage <= 0) {
 					if (shipRoutine.startHealthRoutines ()) {
 						healthbar.setHealth (100);
-						score.subScore (5);
+						score.subScore (50);
 						soundLogic.playExplosionBullet ();
 						Instantiate (explosion, transform.position, transform.rotation);
 					}
@@ -67,7 +67,7 @@ public class T4ApplyDamage : MonoBehaviour{
 						if (healthbar.getHealth () - damage <= 0) {
 							if (shipRoutine.startHealthRoutines ()) {
 								healthbar.setHealth (100);
-								score.subScore (5);
+								score.subScore (50);
 								soundLogic.playExplosionBullet ();
 								Instantiate (explosion, transform.position, transform.rotation);
 							}

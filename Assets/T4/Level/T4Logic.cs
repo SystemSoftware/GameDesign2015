@@ -23,6 +23,7 @@ public class T4Logic : MonoBehaviour {
     int numOfFinishedPlayers = 0;
     T4GUIGlobalEndHandler gend;
     GameObject p1Ship, p2Ship, p3Ship, p4Ship;
+	int PointDifferenceForBoss =60;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
@@ -184,6 +185,11 @@ public class T4Logic : MonoBehaviour {
                             }
                         }
                     }
+					/* T6 SpaceCat */
+					if (ship.gameObject.name.StartsWith("Team 6/SpaceCat")) {
+						T6Horn hornscript = ship.GetComponentsInChildren<T6Horn>()[0];
+						hornscript.enabled=false;
+					}
                     /* T7 DOSE */
                     if (ship.gameObject.name.StartsWith("Team 7/DOSE")) {
                         // freeze position cause this ship doesnt react to Level.EnableMotion
@@ -405,24 +411,26 @@ public class T4Logic : MonoBehaviour {
     }
 
     public void playerFinished(int layer) {
+		int points = PointDifferenceForBoss * (numOfPlayers-numOfFinishedPlayers); //points for killing the boss
+		UnityEngine.Debug.Log("points =" + points );
         switch ((layer - 28)) {
             case 0:
-                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
                 p1Ship.GetComponent<T4GUICamEndHandler>().playEnd();
                 gend.setRow1(p1Ship.name.Substring(Math.Max(0, p1Ship.name.Length - 5)), p1Ship.GetComponent<T4GUIScoreHandler>().getScore());
                 break;
             case 1:
-                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
                 p2Ship.GetComponent<T4GUICamEndHandler>().playEnd();
                 gend.setRow2(p2Ship.name.Substring(Math.Max(0, p2Ship.name.Length - 5)), p2Ship.GetComponent<T4GUIScoreHandler>().getScore());
                 break;
             case 2:
-                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
                 p3Ship.GetComponent<T4GUICamEndHandler>().playEnd();
                 gend.setRow3(p3Ship.name.Substring(Math.Max(0, p3Ship.name.Length - 5)), p3Ship.GetComponent<T4GUIScoreHandler>().getScore());
                 break;
             case 3:
-                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(20);
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
                 p4Ship.GetComponent<T4GUICamEndHandler>().playEnd();
                 gend.setRow4(p4Ship.name.Substring(Math.Max(0, p4Ship.name.Length - 5)), p4Ship.GetComponent<T4GUIScoreHandler>().getScore());
                 break;
