@@ -11,11 +11,14 @@ public class T6PlantesLogic : MonoBehaviour {
     {
             if (!this.ended)
             {
-                if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
+                if (!Level.AllowMotion)
                 {
-                    init();
-                    //TODO: Counter
-                    Level.EnableMotion(true);
+                    if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
+                    {
+                        init();
+                        //TODO: Counter
+                        Level.EnableMotion(true);
+                    }
                 }
             }
             else
