@@ -48,17 +48,14 @@ public class T6Controller : Controller {
 
 	// Update is called once per frame
 	void Update () {
-        if (T6Controller.count ==1)
-        {
-            if (Input.GetAxis("T6StrafeHorizontal") == -1 && Input.GetButton("T6Fire") && timeout == 0)
+            if (Input.GetAxis("StrafeHorizontal"+ctrlControlIndex) == -1 && Input.GetButton("Fire"+ctrlControlIndex) && timeout == 0)
             {
                 decoupled = !decoupled;
                 timeout = 100;
                 Debug.Log("Switched Decoupled");
             }
-            strafeHorizontal = Input.GetAxis("T6StrafeHorizontal");
-            strafeVertical = Input.GetAxis("T6StrafeVertical");
-        }
+            strafeHorizontal = Input.GetAxis("StrafeHorizontal"+ctrlControlIndex);
+            strafeVertical = Input.GetAxis("StrafeVertical"+ctrlControlIndex);
         timeout = Mathf.Max(timeout - 1, 0);
         acceleration = Mathf.Max(0,Input.GetAxis(ctrlAxisAccelerate));
         roll = Input.GetAxis(ctrlAxisHorizontal);
