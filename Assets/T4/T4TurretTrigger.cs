@@ -118,7 +118,7 @@ public class T4TurretTrigger : MonoBehaviour {
 		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
 			should_shoot = false;
 			rotate.face_target=false;
-			UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
+			//UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
 			
 			ship = null;
 		}
@@ -132,7 +132,7 @@ public class T4TurretTrigger : MonoBehaviour {
 				if (parent.tag == "Ship") {						
 					should_shoot = false;
 					rotate.face_target=false;
-					UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
+					//UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
 					
 					ship = null;
 					
