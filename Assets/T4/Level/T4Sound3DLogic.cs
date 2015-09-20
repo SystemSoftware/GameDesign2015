@@ -50,7 +50,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 				rb[i] = Level.ActiveShips[i].gameObject.GetComponent<Rigidbody>();
 				ship_init = true;
 			}
-			Debug.Log ("Ships initiated and numberShips = " + numberShips, transform.gameObject);
+			//Debug.Log ("Ships initiated and numberShips = " + numberShips, transform.gameObject);
 		}
 	}
 

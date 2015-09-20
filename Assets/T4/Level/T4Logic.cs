@@ -29,6 +29,11 @@ public class T4Logic : MonoBehaviour {
         if (!Level.AllowMotion) {
             // no motion
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start")) {
+
+                if (GameObject.Find("UI/WaterDisableBtn")!=null) {
+                    GameObject.Find("UI/WaterDisableBtn").active = false;
+                }
+
                 foreach (var ship in Level.ActiveShips) {
                     numOfPlayers++;
 					ship.transform.position = path.transform.position;
@@ -304,6 +309,10 @@ public class T4Logic : MonoBehaviour {
         lastMState = m.maximized;
 
         gend = GameObject.Find("Logic").GetComponent<T4GUIGlobalEndHandler>();
+
+        // position water disable btn
+        RectTransform waterDisableBtn = GameObject.Find("UI/WaterDisableBtn").GetComponent<RectTransform>();
+        waterDisableBtn.position = new Vector2(Screen.width-100, 40);
 	}
 
     bool lastMState;

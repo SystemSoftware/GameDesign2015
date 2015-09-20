@@ -5,7 +5,7 @@ public class T4FinalEnemyShooting : MonoBehaviour {
     public Transform fireball;
     public Vector3 direction;
     public int fireballSpeed = 20000;
-    public int aimVelocityInfluence = 200;
+    public int aimVelocityInfluence = 100;
 
     private GameObject ship;
     // delay between shots

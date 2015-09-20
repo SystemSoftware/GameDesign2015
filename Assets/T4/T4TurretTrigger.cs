@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 
 public class T4TurretTrigger : MonoBehaviour {
-    public int aimVelocityInfluence = 80;
+    public int aimVelocityInfluence = 20;
 
     private Transform bullet;
 
@@ -12,17 +12,18 @@ public class T4TurretTrigger : MonoBehaviour {
     private Vector3 direction;
     private int bullet_speed;
     private Stopwatch stopwatch;
-    private int delay;
+    public int delay;
     private float accuarcy_spread = 0.02f;
 
 	private T4RotateTurret rotate;
 	private T4Sound3DLogic soundLogic;
     private T4CommonFunctions cf;
-
+    private T4Logic logic;
 
 	// Use this for initialization
 	void Start () {
         cf = GameObject.Find("CommonFunctions").GetComponent<T4CommonFunctions>();
+        logic = GameObject.Find("Logic").GetComponent<T4Logic>();
 
 		GameObject soundContainer = GameObject.Find ("SoundContainer");
 		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
