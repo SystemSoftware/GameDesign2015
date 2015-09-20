@@ -67,11 +67,13 @@ public class T6Controller : Controller {
         
         lookAt = transform.TransformPoint(new Vector3(0, 0, 200));
         Vector3 rotation = transform.InverseTransformVector(GetComponent<Rigidbody>().angularVelocity);
-        yawSum += (yaw*5f - rotation.y)% 360;
-        pitchSum += (pitch*4f+rotation.x) % 360;
+        yawSum += (yaw*5f - rotation.y*2)% 360;
+        pitchSum += (pitch*4f+rotation.x*2) % 360;
+
         targetObject.transform.position = lookAt;
         targetObject.transform.RotateAround(transform.position, transform.up, yawSum);
         targetObject.transform.RotateAround(transform.position, transform.right, -pitchSum);
+        
         target = targetObject.transform.position;
         Debug.DrawLine(transform.position, targetObject.transform.position);
         Debug.DrawLine(transform.position, lookAt);
