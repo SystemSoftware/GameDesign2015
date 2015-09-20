@@ -43,7 +43,7 @@ public class T6Controller : Controller {
         targetObject.transform.position = target;
         yawSum = 0;
         pitchSum = 0;
-        decoupled = false;
+        decoupled = true;
     }
 
 	// Update is called once per frame

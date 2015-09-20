@@ -23,6 +23,11 @@ public class T6UIController : MonoBehaviour
         foreach(EngineDriver e in this.GetComponentsInChildren<EngineDriver>()){
             maxThrust += e.maxForce;
         }
+        //ugly but works
+        if (name.Contains("DOSE"))
+        {
+            maxThrust = 20000;
+        }
          currentFuel -= thrust * Time.deltaTime * maxThrust;
 		T6RaceLogic.setDeltaV (id, currentFuel);
 		if (currentFuel <= 0) {
