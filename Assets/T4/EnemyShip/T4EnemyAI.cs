@@ -59,24 +59,28 @@ public class T4EnemyAI : MonoBehaviour {
                         delay_active = false;
                     }
                 } else {
+                    // easier by moving the collider
+                    /*
                     if((A == null) && (B == null)){ return; }
                     // if orientation -1, the enemy is behind the ship > DONT SHOOT
                     if (orientation(new Vector2(A.transform.position.x, A.transform.position.z),
                                    new Vector2(B.transform.position.x, B.transform.position.z),
                                    new Vector2(target_ship.transform.position.x, target_ship.transform.position.z)) >= 0) {
 
-                        Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
-                        GameObject spawned_bullet = tmp.gameObject;
-                        spawned_bullet.layer = this.gameObject.layer;
-                        direction = (target_ship.transform.position - this.transform.position).normalized;
-                        spawned_bullet.transform.rotation = Quaternion.LookRotation(direction);
-                        spawned_bullet.GetComponent<Rigidbody>().AddForce(direction * bullet_speed);
-
-						soundLogic.playEnemyPlaneShoot(transform.position, target_ship.transform.position);
-
-                        stopwatch.Start();
-                        delay_active = true;
+                        
                     }
+                     * */
+                    Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
+                    GameObject spawned_bullet = tmp.gameObject;
+                    spawned_bullet.layer = this.gameObject.layer;
+                    direction = (target_ship.transform.position - this.transform.position).normalized;
+                    spawned_bullet.transform.rotation = Quaternion.LookRotation(direction);
+                    spawned_bullet.GetComponent<Rigidbody>().AddForce(direction * bullet_speed);
+
+                    soundLogic.playEnemyPlaneShoot(transform.position, target_ship.transform.position);
+
+                    stopwatch.Start();
+                    delay_active = true;
                 }
             }
 
