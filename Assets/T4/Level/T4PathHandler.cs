@@ -81,7 +81,7 @@ public class T4PathHandler : MonoBehaviour {
             if (Input.GetKeyDown("h")) {
                 Debug.Log("h pressed cpp="+cPP_i);
                 cPP_i=2000;
-                //cPP_i = 2300;
+                cPP_i = 2400;
 
                 prev_patho = pc.getPathObject(cPP_i);
                 // remove fog

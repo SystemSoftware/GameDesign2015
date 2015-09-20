@@ -22,6 +22,7 @@ public class T4EnemyAI : MonoBehaviour {
     private Stopwatch stopwatch;
 
 	private T4Sound3DLogic soundLogic;
+    public int aimVelocityInfluence = 20;
 
     void Start() {
 		GameObject soundContainer = GameObject.Find ("SoundContainer");
@@ -74,6 +75,7 @@ public class T4EnemyAI : MonoBehaviour {
                     GameObject spawned_bullet = tmp.gameObject;
                     spawned_bullet.layer = this.gameObject.layer;
                     direction = (target_ship.transform.position - this.transform.position).normalized;
+
                     spawned_bullet.transform.rotation = Quaternion.LookRotation(direction);
                     spawned_bullet.GetComponent<Rigidbody>().AddForce(direction * bullet_speed);
 

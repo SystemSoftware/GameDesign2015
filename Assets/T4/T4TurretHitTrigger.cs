@@ -4,7 +4,7 @@ using System.Collections;
 public class T4TurretHitTrigger : MonoBehaviour {
 	GameObject ship;
 	T4GUIScoreHandler score;
-	public int scoreGain = 5;
+	int scoreGain = 50;
 	public ParticleSystem explosion;
 	T4Sound3DLogic soundLogic;
 

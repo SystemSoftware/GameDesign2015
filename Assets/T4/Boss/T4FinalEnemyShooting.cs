@@ -4,8 +4,8 @@ using System.Collections;
 public class T4FinalEnemyShooting : MonoBehaviour {
     public Transform fireball;
     public Vector3 direction;
-    public int fireballSpeed = 20000;
-    public int aimVelocityInfluence = 200;
+    public int fireballSpeed = 22000;
+    public int aimVelocityInfluence = 150;
 
     private GameObject ship;
     // delay between shots
