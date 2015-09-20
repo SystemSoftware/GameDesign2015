@@ -143,7 +143,7 @@ public class T4Logic : MonoBehaviour {
                             } 
                         }
                     }
-                    /* T2 Team 3/BountyOne */
+                    /* T3 BountyOne */
                     if (ship.gameObject.name.StartsWith("Team 3/BountyOne")) {
 						CapsuleCollider bountyCol = ship.gameObject.AddComponent<CapsuleCollider>() as CapsuleCollider;
 						bountyCol.height=90;
@@ -181,6 +181,37 @@ public class T4Logic : MonoBehaviour {
                             }
                             if (t3BountyOneChilds[i].gameObject.name.Equals("DirectionalThruster 1")) {
                                 t3BountyOneChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = 28;
+                            }
+                        }
+                    }
+                    /* T7 DOSE */
+                    if (ship.gameObject.name.StartsWith("Team 7/DOSE")) {
+                        // freeze position cause this ship doesnt react to Level.EnableMotion
+                        ship.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
+
+                        // lower max speed
+                        Transform[] t7DOSEChilds = ship.gameObject.GetComponentsInChildren<Transform>();
+                        for (int i = 0; i < t7DOSEChilds.Length; i++) {
+                            if(t7DOSEChilds[i].gameObject.name.Equals("Thruster")){
+                                t7DOSEChilds[i].gameObject.GetComponent<T7SignaledDirectEngineDriver>().maxForce = 300000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterRightTH")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7HEDrive>().maxForce = 20000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterLeftTH")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7HEDrive>().maxForce = 20000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterUpRight")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = -100000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterDownRight")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = 100000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterUpLeft")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = -100000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterDownLeft")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = 100000;
                             }
                         }
                     }
@@ -348,6 +379,10 @@ public class T4Logic : MonoBehaviour {
                     var forces = ship.transform.GetComponentsInChildren<ConstantForce>();
                     foreach (var force in forces) {
                         force.enabled = true;
+                    }
+
+                    if (ship.gameObject.name.StartsWith("Team 7/DOSE")) {
+                        ship.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                     }
                 }
                 countdownOver = true;
