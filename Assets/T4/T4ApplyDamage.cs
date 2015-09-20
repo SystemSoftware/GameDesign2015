@@ -23,8 +23,9 @@ public class T4ApplyDamage : MonoBehaviour{
     }
 
     void OnTriggerEnter(Collider other){
+		//sometimes a bullet seems to hit multiple colliders of ship delusion and too much damage is taken.
+		//ugly multiple tests if alrdyhit  should stop this behaviour
 		if(!alrdyHit){
-			 //sometimes a bullet seems to hit multiple colliders of ship delusion and too much damage is taken, this should stop this behaviour
 			if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer && !alrdyHit) {
 				alrdyHit=true;
 				ship = other.gameObject;

@@ -25,6 +25,30 @@ public class T4FinalEnemyRotation : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other) {
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			ship = other.gameObject;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {	
+					
+					ship = parent.gameObject;
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}
+
+
         if (other == null || other.gameObject == null || other.gameObject.tag == null) {
             return;
         }
