@@ -18,15 +18,16 @@ public class T4FPSBooster : MonoBehaviour {
 
         // lower firespeed of turrets > less explosions
         GameObject worldTurrets;
-        if ((worldTurrets = GameObject.Find("World0/EnemyTurrets")) != null) {
-            Transform[] childs = worldTurrets.gameObject.GetComponentsInChildren<Transform>();
-            for (int i = 0; i < childs.Length; i++) {
-                if(childs[i].GetComponent<T4TurretTrigger>() != null){
-                    childs[i].GetComponent<T4TurretTrigger>().delay = 1000;
+        for (int k = 0; k <= 3; k++) {
+            if ((worldTurrets = GameObject.Find("World"+k+"/EnemyTurrets")) != null) {
+                Transform[] childs = worldTurrets.gameObject.GetComponentsInChildren<Transform>();
+                for (int i = 0; i < childs.Length; i++) {
+                    if (childs[i].GetComponent<T4TurretTrigger>() != null) {
+                        childs[i].GetComponent<T4TurretTrigger>().delay = 1000;
+                    }
                 }
             }
         }
-
         // this object was clicked - do something
         Destroy(this.gameObject);
     }
