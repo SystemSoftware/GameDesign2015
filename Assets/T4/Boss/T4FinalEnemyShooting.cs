@@ -18,8 +18,8 @@ public class T4FinalEnemyShooting : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93");
-        attackSpawn = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93/AttackSpawn");
+        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexDae");
+        attackSpawn = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexDae/AttackSpawn");
         soundLogic = GameObject.Find("SoundContainer").GetComponent<T4Sound3DLogic>();
     }
 

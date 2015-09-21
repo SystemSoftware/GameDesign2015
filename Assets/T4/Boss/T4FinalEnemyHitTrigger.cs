@@ -7,7 +7,7 @@ public class T4FinalEnemyHitTrigger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93");
+        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexDae");
         hp = Rex.GetComponent<T4FinalEnemyHealth>();
 	}
 	
