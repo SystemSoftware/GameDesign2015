@@ -95,7 +95,7 @@ public class ListShips : MonoBehaviour {
                         {
                             selected[i] = ship;
 
-                            c.GetComponent<Assign>().Setup(ship, i);
+                            c.GetComponent<Assign>().Setup(ship, i, name);
                         }
                     }
                     i++;

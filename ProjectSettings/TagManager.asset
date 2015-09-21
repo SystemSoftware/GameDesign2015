@@ -13,6 +13,7 @@ TagManager:
   - Target
   - Rock
   - T4NextGeysir
+  - T4PlayBossTheme
   layers:
   - Default
   - TransparentFX

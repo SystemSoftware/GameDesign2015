@@ -3,7 +3,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class T6UIController : MonoBehaviour
 {
-    public const float maxFuel = 20;
+    public const float maxFuel = 80000;
     float currentFuel;
     int id;
 
@@ -19,7 +19,16 @@ public class T6UIController : MonoBehaviour
     void Update()
     {
          float thrust = Mathf.Max(0,Input.GetAxis(this.GetComponent<Controller>().ctrlAxisAccelerate));
-         currentFuel -= thrust * Time.deltaTime;
+        float maxThrust = 1;
+        foreach(EngineDriver e in this.GetComponentsInChildren<EngineDriver>()){
+            maxThrust += e.maxForce;
+        }
+        //ugly but works
+        if (name.Contains("DOSE"))
+        {
+            maxThrust = 20000;
+        }
+         currentFuel -= thrust * Time.deltaTime * maxThrust;
 		T6RaceLogic.setDeltaV (id, currentFuel);
 		if (currentFuel <= 0) {
 			GameObject.Find("LevelLogic").GetComponent<T6PlantesLogic>().end();

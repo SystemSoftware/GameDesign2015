@@ -43,22 +43,19 @@ public class T6Controller : Controller {
         targetObject.transform.position = target;
         yawSum = 0;
         pitchSum = 0;
-        decoupled = false;
+        decoupled = true;
     }
 
 	// Update is called once per frame
 	void Update () {
-        if (T6Controller.count ==1)
-        {
-            if (Input.GetAxis("T6StrafeHorizontal") == -1 && Input.GetButton("T6Fire") && timeout == 0)
+            if (Input.GetAxis("StrafeHorizontal"+ctrlControlIndex) == -1 && Input.GetButton("Fire"+ctrlControlIndex) && timeout == 0)
             {
                 decoupled = !decoupled;
                 timeout = 100;
                 Debug.Log("Switched Decoupled");
             }
-            strafeHorizontal = Input.GetAxis("T6StrafeHorizontal");
-            strafeVertical = Input.GetAxis("T6StrafeVertical");
-        }
+            strafeHorizontal = Input.GetAxis("StrafeHorizontal"+ctrlControlIndex);
+            strafeVertical = Input.GetAxis("StrafeVertical"+ctrlControlIndex);
         timeout = Mathf.Max(timeout - 1, 0);
         acceleration = Mathf.Max(0,Input.GetAxis(ctrlAxisAccelerate));
         roll = Input.GetAxis(ctrlAxisHorizontal);
@@ -67,15 +64,16 @@ public class T6Controller : Controller {
         
         lookAt = transform.TransformPoint(new Vector3(0, 0, 200));
         Vector3 rotation = transform.InverseTransformVector(GetComponent<Rigidbody>().angularVelocity);
-        yawSum += (yaw - rotation.y)% 360;
-        pitchSum += (pitch*1.5f+rotation.x) % 360;
+        yawSum += (yaw*5f - rotation.y*2)% 360;
+        pitchSum += (pitch*4f+rotation.x*2) % 360;
+
         targetObject.transform.position = lookAt;
         targetObject.transform.RotateAround(transform.position, transform.up, yawSum);
         targetObject.transform.RotateAround(transform.position, transform.right, -pitchSum);
+        
         target = targetObject.transform.position;
         Debug.DrawLine(transform.position, targetObject.transform.position);
         Debug.DrawLine(transform.position, lookAt);
-        if (target.magnitude < 100 && ((target - lookAt).x+(target - lookAt).y)<20) { target = lookAt; targetObject.transform.position = target; }
         foreach (T6RotateThrustFlaps s in this.GetComponentsInChildren<T6RotateThrustFlaps>())
         {
             s.Rotate(acceleration, pitch, yaw);

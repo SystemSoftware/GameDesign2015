@@ -17,6 +17,12 @@ public class T4Sound3DLogic : MonoBehaviour {
 	AudioSource turretShoot;
 	AudioSource enemyPlaneShoot;
 	AudioSource explosionBullet;
+    AudioSource bossHit;
+    AudioSource endTheme;
+    AudioSource bossAttack;
+
+    private bool bossThemeAlreadyPlayed = false;
+    private bool endThemeAlreadyPlayed = false;
 	// Use this for initialization
 	void Start () {
 		AudioSource[] audios = GetComponents<AudioSource> ();
@@ -30,6 +36,9 @@ public class T4Sound3DLogic : MonoBehaviour {
 		turretShoot = audios [8];
 		enemyPlaneShoot = audios [9];
 		explosionBullet = audios [10];
+        bossHit = audios[11];
+        endTheme = audios[12];
+        bossAttack = audios[13];
 	}
 	
 	// Update is called once per frame
@@ -41,7 +50,7 @@ public class T4Sound3DLogic : MonoBehaviour {
 				rb[i] = Level.ActiveShips[i].gameObject.GetComponent<Rigidbody>();
 				ship_init = true;
 			}
-			Debug.Log ("Ships initiated and numberShips = " + numberShips, transform.gameObject);
+			//Debug.Log ("Ships initiated and numberShips = " + numberShips, transform.gameObject);
 		}
 	}
 
@@ -59,9 +68,9 @@ public class T4Sound3DLogic : MonoBehaviour {
 			float distance = ComputeDistance (pos, tag);
 			float volume;
 			if (distance<=250 && distance>1){ 
-				volume = 1f-distance/250f;
+				volume = 1f-(distance/250f);
 			}else if(distance <=1){
-				volume = 1;
+				volume = 1f;
 			}else{
 				volume = 0;
 			}
@@ -102,7 +111,14 @@ public class T4Sound3DLogic : MonoBehaviour {
 	}
 
 	public void playBossTheme(){
-		bossTheme.Play ();
+        if (!bossThemeAlreadyPlayed) {
+            bossThemeAlreadyPlayed = true;
+            // boss theme not playing already?
+            // stop main theme
+            stopMainTheme();
+            // play boss theme
+            bossTheme.Play();
+        }
 	}
 
 	public void playPowerUp(){
@@ -116,6 +132,26 @@ public class T4Sound3DLogic : MonoBehaviour {
 	public void playExplosionBullet(){
 		explosionBullet.Play ();
 	}
+
+    public void playBossHit() {
+        bossHit.Play();
+    }
+
+    public void playEndTheme() {
+        // turn all other soundsources off
+        AudioSource[] audios = GetComponents<AudioSource>();
+        for (int i = 0; i <= 13; i++) {
+            if (i != 12) {
+                audios[i].mute = true;
+            }
+        }
+        // play endtheme
+        endTheme.Play();
+    }
+
+    public void playBossAttack() {
+        bossAttack.Play();
+    }
 
 	public void stopBossTheme(){
 		if(bossTheme.isPlaying){

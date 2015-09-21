@@ -23,10 +23,11 @@ public class T4CullingMask : MonoBehaviour {
         
         // apply culling mask for camera and water
         ctrl.ctrlAttachedCamera.cullingMask = cull_mask;
-        foreach (Transform child in GameObject.Find("Ocean").transform) {
-            child.GetComponent<Water>().reflectLayers = basic_cullm;
-            child.GetComponent<Water>().refractLayers = basic_cullm;
+        if (GameObject.Find("Ocean") != null) {
+            foreach (Transform child in GameObject.Find("Ocean").transform) {
+                child.GetComponent<Water>().reflectLayers = basic_cullm;
+                child.GetComponent<Water>().refractLayers = basic_cullm;
+            }
         }
-
 	}
 }

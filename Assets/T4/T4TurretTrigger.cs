@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 
 public class T4TurretTrigger : MonoBehaviour {
-    public int aimVelocityInfluence = 80;
+    public int aimVelocityInfluence = 20;
 
     private Transform bullet;
 
@@ -12,17 +12,18 @@ public class T4TurretTrigger : MonoBehaviour {
     private Vector3 direction;
     private int bullet_speed;
     private Stopwatch stopwatch;
-    private int delay;
+    public int delay;
     private float accuarcy_spread = 0.02f;
 
 	private T4RotateTurret rotate;
 	private T4Sound3DLogic soundLogic;
     private T4CommonFunctions cf;
-
+    private T4Logic logic;
 
 	// Use this for initialization
 	void Start () {
         cf = GameObject.Find("CommonFunctions").GetComponent<T4CommonFunctions>();
+        logic = GameObject.Find("Logic").GetComponent<T4Logic>();
 
 		GameObject soundContainer = GameObject.Find ("SoundContainer");
 		soundLogic=soundContainer.GetComponent<T4Sound3DLogic>();
@@ -54,12 +55,14 @@ public class T4TurretTrigger : MonoBehaviour {
                 }
             }else{
                 // shoot
-				//soundLogic.playTurretShoot(transform.position, ship.transform.position);
+				soundLogic.playTurretShoot(transform.position, ship.transform.position);
 
                 Transform tmp = Instantiate(bullet, transform.position, Quaternion.identity) as Transform;
                 GameObject spawned_bullet = tmp.gameObject;
                 spawned_bullet.layer = this.gameObject.layer;
-
+                foreach (Transform child in spawned_bullet.transform) {
+                    child.gameObject.layer = this.gameObject.layer;
+                }
 
                 direction = ((ship.transform.position + Vector3.Normalize(ship.GetComponent<Rigidbody>().velocity) * aimVelocityInfluence) - this.transform.position).normalized;
                 /*
@@ -79,28 +82,68 @@ public class T4TurretTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
 
-        if (cf.isShip(this.gameObject.layer, other)) { // ship entered > begin shooting
-            UnityEngine.Debug.Log("entered TURRETRADIUS" + other.gameObject);
-
-            ship = cf.getShip(other);
-
-
-            if (ship != null) {
-                direction = (ship.transform.position - this.transform.position).normalized;
-                should_shoot = true;
-                rotate.face_target = true;
-                rotate.ship = ship;
-            }
-        }
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			ship=other.gameObject;
+			direction = (ship.transform.position - this.transform.position).normalized;
+			should_shoot = true;
+			rotate.face_target = true;
+			rotate.ship = ship;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {	
+					
+					ship=parent.gameObject;
+					direction = (ship.transform.position - this.transform.position).normalized;
+					should_shoot = true;
+					rotate.face_target = true;
+					rotate.ship = ship;
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}
     }
 
     void OnTriggerExit(Collider other) {
-        if (cf.isShip(this.gameObject.layer, other)) { // ship left > stop shooting
-            should_shoot = false;
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			should_shoot = false;
 			rotate.face_target=false;
-            UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
-            
-            ship = null;
-        }
+			//UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
+			
+			ship = null;
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+				
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {						
+					should_shoot = false;
+					rotate.face_target=false;
+					//UnityEngine.Debug.Log("leave TURRETRADIUS" + other.gameObject);
+					
+					ship = null;
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}
+
     }
 }

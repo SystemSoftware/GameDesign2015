@@ -17,7 +17,7 @@ public class Assign : MonoBehaviour {
 	}
 
 
-	public void Setup(GameObject targetType, int inputNumber)
+	public void Setup(GameObject targetType, int inputNumber, string name)
 	{
         Controller exclude = null;
 		if (playerShip != null)
@@ -31,8 +31,15 @@ public class Assign : MonoBehaviour {
         Quaternion orientation;
         Level.GetSpawnPoint(inputNumber, out position, out orientation);
         playerShip = (GameObject)Instantiate(targetType, position, orientation);
+
+        AudioListener[] listeners = playerShip.GetComponentsInChildren<AudioListener>();
+        foreach (AudioListener l in listeners)
+            Destroy(l);
+
+
         playerShip.layer = 8 + inputNumber;
         playerShip.tag = "Ship";
+        playerShip.name = name+" "+inputNumber;
 
         lastInput = inputNumber;
 

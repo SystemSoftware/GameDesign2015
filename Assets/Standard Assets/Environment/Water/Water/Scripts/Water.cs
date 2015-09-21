@@ -125,7 +125,10 @@ namespace UnityStandardAssets.Water
                 refractionCamera.targetTexture = m_RefractionTexture;
                 refractionCamera.transform.position = cam.transform.position;
                 refractionCamera.transform.rotation = cam.transform.rotation;
-                refractionCamera.Render();
+
+                if(!Application.loadedLevelName.Equals("T4Level")){
+                    refractionCamera.Render();
+                }
                 GetComponent<Renderer>().sharedMaterial.SetTexture("_RefractionTex", m_RefractionTexture);
             }
 

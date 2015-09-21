@@ -19,3 +19,5 @@ EditorBuildSettings:
     path: Assets/T3/Space.unity
   - enabled: 1
     path: Assets/T6/Plantes.unity
+  - enabled: 1
+    path: Assets/T7/T7Level.unity

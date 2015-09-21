@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
+using System;
 using UnityEngine.UI;
 
 public class T4Logic : MonoBehaviour {
@@ -18,14 +19,26 @@ public class T4Logic : MonoBehaviour {
 	bool sound1Played = false;
 	bool sound2Played = false;
 	bool mainThemePlayed = false;
+    int numOfPlayers = 0;
+    int numOfFinishedPlayers = 0;
+    T4GUIGlobalEndHandler gend;
+    GameObject p1Ship, p2Ship, p3Ship, p4Ship;
+	int PointDifferenceForBoss =60;
 
     void OnGUI() {
         if (!Level.AllowMotion) {
             // no motion
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start")) {
+
+                if (GameObject.Find("UI/WaterDisableBtn")!=null) {
+                    GameObject.Find("UI/WaterDisableBtn").active = false;
+                }
+
                 foreach (var ship in Level.ActiveShips) {
+                    numOfPlayers++;
 					ship.transform.position = path.transform.position;
-                    ship.ctrlAttachedCamera.farClipPlane = 6000f;
+                    //ship.ctrlAttachedCamera.farClipPlane = 6000f;
+                    ship.ctrlAttachedCamera.farClipPlane = 3300f;
                     // add scripts
                     ship.gameObject.AddComponent<T4GUICrosshairHandler>();
                     ship.gameObject.AddComponent<T4GUIHealthbarHandler>();
@@ -35,7 +48,22 @@ public class T4Logic : MonoBehaviour {
                     ship.gameObject.AddComponent<T4PathHandler>();
                     ship.gameObject.AddComponent<T4CullingMask>();
 					ship.gameObject.AddComponent<T4ZeroHealthHandler>();
-                    
+                    ship.gameObject.AddComponent<T4GUICamEndHandler>();
+
+                    switch(ship.ctrlControlIndex) {
+                        case 0:
+                            p1Ship = ship.gameObject;
+                            break;
+                        case 1:
+                            p2Ship = ship.gameObject;
+                            break;
+                        case 2:
+                            p3Ship = ship.gameObject;
+                            break;
+                        case 3:
+                            p4Ship = ship.gameObject;
+                            break;
+                    }
 
                     int new_layer = (28 + ship.ctrlControlIndex);
                     // set layer of the ship to their worlds
@@ -62,7 +90,7 @@ public class T4Logic : MonoBehaviour {
 
                     /*-------------------------------Ship Fixes-------------------------------------------*/
                     /* T1 Simple */
-                    if (ship.gameObject.name.Equals("Simple(Clone)")) {
+                    if (ship.gameObject.name.StartsWith("Team 1/Simple")) {
                         // fix here
                         ship.GetComponent<Rigidbody>().mass = 100;
                         /** Todo-List
@@ -106,7 +134,7 @@ public class T4Logic : MonoBehaviour {
                         }
                     }
                     /* T2 Delusion */
-                    if (ship.gameObject.name.Equals("Delusion(Clone)")) {
+                    if (ship.gameObject.name.Equals("Team 2/Delusion")) {
                         // slightly increase the moveability by 20%
                         Transform[] t2DelusionChilds = ship.gameObject.GetComponentsInChildren<Transform>();
                         for (int i = 0; i < t2DelusionChilds.Length; i++) {
@@ -119,6 +147,83 @@ public class T4Logic : MonoBehaviour {
                             if (t2DelusionChilds[i].gameObject.name.Equals("Accel 4")) {
                                 t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce = t2DelusionChilds[i].gameObject.GetComponent<T2EngineDriver>().maxForce * 1.2f;
                             } 
+                        }
+                    }
+                    /* T3 BountyOne */
+                    if (ship.gameObject.name.StartsWith("Team 3/BountyOne")) {
+						CapsuleCollider bountyCol = ship.gameObject.AddComponent<CapsuleCollider>() as CapsuleCollider;
+						bountyCol.height=90;
+						bountyCol.radius=30;
+						bountyCol.center=new Vector3(0,0,10);
+						bountyCol.direction=2;
+						bountyCol.isTrigger=true;
+                        // resize the ship 
+                        ship.gameObject.transform.localScale = new Vector3((ship.gameObject.transform.localScale.x / 3), 
+                                                                            (ship.gameObject.transform.localScale.y / 3), 
+                                                                            (ship.gameObject.transform.localScale.z / 3));
+                        // lower max speed
+                        Transform[] t3BountyOneChilds = ship.gameObject.GetComponentsInChildren<Transform>();
+                        for (int i = 0; i < t3BountyOneChilds.Length; i++) {
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("Thruster")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<EngineDriver>().maxForce = 6500;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("Thruster1")) {
+                                // remove the particlesys
+                                Destroy(t3BountyOneChilds[i].gameObject.GetComponent<ParticleSystem>());
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("Thruster2")) {
+                                // remove the particlesys
+                                Destroy(t3BountyOneChilds[i].gameObject.GetComponent<ParticleSystem>());
+                            }
+                            // adjust the forces
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("HThrusterDown")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce = 15;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("HThrusterUp")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<VEngineDriver>().maxForce = 15;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("DirectionalThruster")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = 28;
+                            }
+                            if (t3BountyOneChilds[i].gameObject.name.Equals("DirectionalThruster 1")) {
+                                t3BountyOneChilds[i].gameObject.GetComponent<HEngineDriver>().maxForce = 28;
+                            }
+                        }
+                    }
+					/* T6 SpaceCat */
+					if (ship.gameObject.name.StartsWith("Team 6/SpaceCat")) {
+						T6Horn hornscript = ship.GetComponentsInChildren<T6Horn>()[0];
+						hornscript.enabled=false;
+					}
+                    /* T7 DOSE */
+                    if (ship.gameObject.name.StartsWith("Team 7/DOSE")) {
+                        // freeze position cause this ship doesnt react to Level.EnableMotion
+                        ship.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
+
+                        // lower max speed
+                        Transform[] t7DOSEChilds = ship.gameObject.GetComponentsInChildren<Transform>();
+                        for (int i = 0; i < t7DOSEChilds.Length; i++) {
+                            if(t7DOSEChilds[i].gameObject.name.Equals("Thruster")){
+                                t7DOSEChilds[i].gameObject.GetComponent<T7SignaledDirectEngineDriver>().maxForce = 300000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterRightTH")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7HEDrive>().maxForce = 20000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterLeftTH")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7HEDrive>().maxForce = 20000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterUpRight")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = -100000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterDownRight")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = 100000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterUpLeft")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = -100000;
+                            }
+                            if (t7DOSEChilds[i].gameObject.name.Equals("SideThrusterDownLeft")) {
+                                t7DOSEChilds[i].gameObject.GetComponent<T7VEDrive>().maxForce = 100000;
+                            }
                         }
                     }
                 }
@@ -202,6 +307,12 @@ public class T4Logic : MonoBehaviour {
         gui.active = false;
         m = GameObject.Find("GameLogic").GetComponent<Maximize>();
         lastMState = m.maximized;
+
+        gend = GameObject.Find("Logic").GetComponent<T4GUIGlobalEndHandler>();
+
+        // position water disable btn
+        RectTransform waterDisableBtn = GameObject.Find("UI/WaterDisableBtn").GetComponent<RectTransform>();
+        waterDisableBtn.position = new Vector2(Screen.width-100, 40);
 	}
 
     bool lastMState;
@@ -216,6 +327,7 @@ public class T4Logic : MonoBehaviour {
         }
 
         handleCountdown();
+
 	}
 
 
@@ -283,6 +395,10 @@ public class T4Logic : MonoBehaviour {
                     foreach (var force in forces) {
                         force.enabled = true;
                     }
+
+                    if (ship.gameObject.name.StartsWith("Team 7/DOSE")) {
+                        ship.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    }
                 }
                 countdownOver = true;
 
@@ -303,5 +419,36 @@ public class T4Logic : MonoBehaviour {
         return 0;
     }
 
+    public void playerFinished(int layer) {
+		int points = PointDifferenceForBoss * (numOfPlayers-numOfFinishedPlayers); //points for killing the boss
+		UnityEngine.Debug.Log("points =" + points );
+        switch ((layer - 28)) {
+            case 0:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
+                p1Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow1(p1Ship.name.Substring(Math.Max(0, p1Ship.name.Length - 5)), p1Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+            case 1:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
+                p2Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow2(p2Ship.name.Substring(Math.Max(0, p2Ship.name.Length - 5)), p2Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+            case 2:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
+                p3Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow3(p3Ship.name.Substring(Math.Max(0, p3Ship.name.Length - 5)), p3Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+            case 3:
+                p1Ship.GetComponent<T4GUIScoreHandler>().addScore(points);
+                p4Ship.GetComponent<T4GUICamEndHandler>().playEnd();
+                gend.setRow4(p4Ship.name.Substring(Math.Max(0, p4Ship.name.Length - 5)), p4Ship.GetComponent<T4GUIScoreHandler>().getScore());
+                break;
+        }
 
+        numOfFinishedPlayers++;
+        if (numOfPlayers == numOfFinishedPlayers) {
+            gend.playEnd();
+        }
+
+    }
 }

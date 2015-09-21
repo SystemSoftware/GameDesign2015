@@ -14,6 +14,7 @@ public class T4PathHandler : MonoBehaviour {
     private GameObject world;
     private T4EnemyShips enemy_ships;
     private GameObject prev_patho;
+    private T4Sound3DLogic soundLogic;
  
 	// Use this for initialization
 	void Start () {
@@ -31,9 +32,9 @@ public class T4PathHandler : MonoBehaviour {
             if (world.transform.GetChild(h).name.Equals("EnemyShips")) {
                 enemy_ships = world.transform.GetChild(h).gameObject.GetComponent<T4EnemyShips>();
             }
-
-
         }
+
+        soundLogic = GameObject.Find("SoundContainer").GetComponent<T4Sound3DLogic>();
 	}
 	
 	// Update is called once per frame
@@ -54,17 +55,21 @@ public class T4PathHandler : MonoBehaviour {
                         //Debug.Log(pc.getPathObject(cPP_i).tag);
                         switch (pc.getPathObject(cPP_i).tag) {
                             case "T4NextEnemy":
-                                Debug.Log("launch next enemy");
+                                Debug.Log("[PathEvent] Launch next Enemy.");
                                 enemy_ships.launchNext();
                                 break;
                             case "T4RemoveFog":
-                                Debug.Log("remove fog");
+                                Debug.Log("[PathEvent] Remove Fog.");
                                 Transform ctrl = GetComponent<Controller>().ctrlAttachedCamera.transform;
                                 for (int i = 0; i < ctrl.childCount; i++) {
                                     ctrl.GetChild(i).transform.GetChild(0).GetComponent<ParticleSystem>().enableEmission = false;
                                     ctrl.GetChild(i).transform.GetChild(1).GetComponent<ParticleSystem>().enableEmission = false;   
                                         
                                 }
+                                break;
+                            case "T4PlayBossTheme":
+                                Debug.Log("[PathEvent] Play Boss Theme");
+                                soundLogic.playBossTheme();
                                 break;
                         }
                     }
@@ -76,7 +81,7 @@ public class T4PathHandler : MonoBehaviour {
             if (Input.GetKeyDown("h")) {
                 Debug.Log("h pressed cpp="+cPP_i);
                 cPP_i=2000;
-                cPP_i = 2300;
+                cPP_i = 2400;
 
                 prev_patho = pc.getPathObject(cPP_i);
                 // remove fog
@@ -87,6 +92,15 @@ public class T4PathHandler : MonoBehaviour {
 
                 }
             }
+
+            // at 1 debug buttons
+            if (Input.GetKeyDown("1")) {
+                this.GetComponent<T4GUICamEndHandler>().playEnd();
+            }
+            if (Input.GetKeyDown("2")) {
+                GameObject.Find("Logic").GetComponent<T4GUIGlobalEndHandler>().playEnd();
+            }
+
             
             // reached the end of the bossloop? reset to the start of the bossloop
             if (cPP_i >= 3250) {

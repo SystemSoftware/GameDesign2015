@@ -5,7 +5,7 @@ public class T4PowerUpTrigger : MonoBehaviour {
 	private T4GUIScoreHandler score;
 	private int ControlID;
 	private GameObject ship;
-	public int scoreGain = 5;
+	int scoreGain = 50;
 	T4Sound3DLogic soundLogic;
 	
 	// Use this for initialization
@@ -15,14 +15,48 @@ public class T4PowerUpTrigger : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other){
+		/* OLD
 		if (other == null || other.gameObject == null || other.gameObject.tag == null) {
             return;
-        }
+        } OLD */
 
+		if (other.tag == "Ship" && other.gameObject.layer == this.gameObject.layer) {
+			score = other.GetComponent<T4GUIScoreHandler> ();
+			// play PowerUp sound
+			soundLogic.playPowerUp ();
+			// apply score
+			score.addScore (scoreGain);
+			Destroy (this.gameObject);
+		}
+		//ignore Bullets
+		else if (other.tag != "Bullet" && other.gameObject.layer == this.gameObject.layer) { 
+			Transform parent = other.transform.parent;
+			//traverse through parents hierachy to check if Collider is part of a ship
+			while (parent!=null) { 
+
+				//if parent is a ship and it is its first collision with the trigger
+				if (parent.tag == "Ship") {	
+					
+					score = parent.GetComponent<T4GUIScoreHandler>();
+					// play PowerUp sound
+					soundLogic.playPowerUp();
+					// apply score
+					score.addScore(scoreGain);
+					Destroy(this.gameObject);
+					
+					//break, as nothing interesting can happen now
+					break;
+				}else {
+					//go one step higher in the hierachy and check again for ship
+					parent=parent.parent;
+				}
+			}
+		}
+		/* OLD
         // has the object the ship tag?
         bool objHasShipTag = false;
         if (other.gameObject.tag.Equals("Ship")) {
-            objHasShipTag = true;
+           objHasShipTag = true;
         }
 
         // has parent object the ship tag?
@@ -49,5 +83,6 @@ public class T4PowerUpTrigger : MonoBehaviour {
                 Destroy(this.gameObject);
             }
 		}
+		OLD */
 	}
 }

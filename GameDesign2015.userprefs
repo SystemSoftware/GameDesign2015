@@ -1,10 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\T4\Level\T4Logic.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\T4\T4TurretHitTrigger.cs">
     <Files>
-      <File FileName="Assets\T4\T4ApplyDamage.cs" Line="64" Column="1" />
-      <File FileName="Assets\T4\T4PlayerCollision.cs" Line="59" Column="3" />
+      <File FileName="Assets\T4\T4ShootBullet.cs" Line="88" Column="21" />
+      <File FileName="Assets\T4\T4ApplyDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\T4PlayerCollision.cs" Line="1" Column="1" />
       <File FileName="Assets\T4\Level\T4Logic.cs" Line="37" Column="58" />
+      <File FileName="Assets\T4\Level\T4Sound3DLogic.cs" Line="153" Column="32" />
+      <File FileName="Assets\T4\Level\T4Gravity.cs" Line="1" Column="1" />
+      <File FileName="Assets\T4\T4TurretHitTrigger.cs" Line="30" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
