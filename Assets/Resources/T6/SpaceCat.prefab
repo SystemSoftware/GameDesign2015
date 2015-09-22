@@ -854,6 +854,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -991,7 +992,7 @@ MonoBehaviour:
   triangleCount: 6906
   showCentersOfGravity: 1
   markerSize: 20
-  currentSize: {x: 50, y: 21.337265, z: 38.2931595}
+  currentSize: {x: 50, y: 21.337265, z: 66.1632919}
   wantSize: {x: 0, y: 0, z: 0}
   applySize: 0
 --- !u!114 &11434956
