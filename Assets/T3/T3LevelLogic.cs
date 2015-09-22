@@ -27,20 +27,38 @@ public class T3LevelLogic : MonoBehaviour {
         Level.InitializationDone(); //Reassign values to ship that somehow already exist
 
     }
-
     void OnGUI()
     {
-
         if (!Level.AllowMotion)
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 125, Screen.height / 2, 250, 40), "Start"))
             {
+                foreach (Controller ship in Level.ActiveShips)
+                {
+                    ship.gameObject.AddComponent<T3Player>();
+                }
                 Level.EnableMotion(true);
+            }
+        }
+        else
+        {
+            foreach (Controller ship in Level.ActiveShips)
+            {
+                Camera c = ship.ctrlAttachedCamera;
+                Rect rect = c.pixelRect;
+                T3Player player = ship.GetComponent<T3Player>();
+                if (player.placed > 0)
+                {
+                    GUI.Label(new Rect(rect.x, Screen.height - rect.yMax, rect.width, rect.height), player.placed + ". Platz");
+                }
+                else
+                {
+                    GUI.Label(new Rect(rect.x, Screen.height - rect.yMax, rect.width, rect.height), player.checkpoint + " /" + T3Player.maxpoint);
+                }
             }
         }
     }
 
-    public GameObject bubbleSpawner;
 
     Controller[] lastShips;
 
@@ -55,7 +73,6 @@ public class T3LevelLogic : MonoBehaviour {
                 {
                     Transform shipTransform = ship.transform;
                     Debug.Log(shipTransform.name);
-                    ((GameObject)Instantiate(bubbleSpawner, shipTransform.position, Quaternion.identity)).transform.parent = shipTransform;
                 }
             }
 

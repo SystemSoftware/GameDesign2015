@@ -23,7 +23,7 @@ public class T3Laser : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 	    end = System.DateTime.Now;
-        if (end.Subtract(start).Seconds > timeoffset)
+        if (end.Subtract(start).Seconds > timeoffset + (new System.Random().Next(1,10))/10)
         {
             start = System.DateTime.Now;
 

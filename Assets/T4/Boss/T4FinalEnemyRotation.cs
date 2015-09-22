@@ -7,7 +7,7 @@ public class T4FinalEnemyRotation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexCharlY93");
+        Rex = GameObject.Find("World" + (this.gameObject.layer - 28) + "/FinalEnemy/TRexDae");
 	}
 	
 	// Update is called once per frame
